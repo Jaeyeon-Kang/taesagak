@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2026 최저임금 계산기 — 미달 여부 점검 · 퇴사각</title>
+    <meta name="description" content="2026 최저임금 계산기. 시급 또는 월급을 입력하면 2026년 최저임금(10,320원) 기준 충족 여부와 월 부족분을 바로 계산합니다." />
+    <meta name="theme-color" content="#0b1020" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./js/sw-register.js"></script>
+    <script type="module">
+      import { calculateMinimumWage, currency } from './js/calculators.js';
+      import { RULESET_2026 } from './js/rules.js';
+
+      function getInput() {
+        return {
+          hourlyWage: Number(document.getElementById('mw-hourly').value || 0),
+          monthlySalary: Number(document.getElementById('mw-monthly').value || 0),
+          weeklyHours: Number(document.getElementById('mw-weekly-hours').value || 0),
+          workdaysPerWeek: Number(document.getElementById('mw-workdays').value || 5),
+        };
+      }
+
+      function render(result) {
+        const out = document.getElementById('mw-result');
+        out.hidden = false;
+
+        const badge = result.compliant
+          ? '<span class="pill pill--success">최저임금 이상</span>'
+          : result.effectiveHourly > 0
+            ? '<span class="pill pill--warn">미달 가능성</span>'
+            : '<span class="pill pill--muted">입력값 없음</span>';
+
+        out.innerHTML = `
+          <div class="summary-cards">
+            <article class="metric-card">
+              <div class="metric-card__head">
+                <h3>환산 시급</h3>
+                ${badge}
+              </div>
+              <p class="metric-card__value">${result.effectiveHourly > 0 ? currency(result.effectiveHourly) + '원' : '-'}</p>
+              <p class="metric-card__hint">${result.note}</p>
+            </article>
+            <article class="metric-card">
+              <div class="metric-card__head">
+                <h3>2026년 최저시급</h3>
+                <span class="pill pill--muted">기준</span>
+              </div>
+              <p class="metric-card__value">${currency(RULESET_2026.minimumWage.hourly)}원</p>
+              <p class="metric-card__hint">시급 차이: ${result.hourlyGap >= 0 ? '+' : ''}${currency(result.hourlyGap)}원</p>
+            </article>
+            ${result.monthlyShortfall > 0 ? `
+            <article class="metric-card">
+              <div class="metric-card__head">
+                <h3>월 부족 추정</h3>
+                <span class="pill pill--warn">미달 금액</span>
+              </div>
+              <p class="metric-card__value">${currency(result.monthlyShortfall)}원</p>
+              <p class="metric-card__hint">유급시간 ${result.monthlyPaidHours.toFixed(1)}시간 기준 추정치</p>
+            </article>` : ''}
+          </div>
+        `;
+      }
+
+      document.getElementById('mw-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        render(calculateMinimumWage(getInput()));
+      });
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="./index.html">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">
+            <strong>퇴사각</strong>
+            <span>근로자용 돈찾기 계산기</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="주요">
+          <a href="./index.html">홈</a>
+          <a href="./app.html">계산기</a>
+          <a href="./sources.html">출처</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="section">
+        <div class="section__header">
+          <span class="eyebrow">calculator · 2026 기준</span>
+          <h1 class="page-title">2026 최저임금 계산기</h1>
+          <p class="page-lead">
+            시급 또는 월급을 입력하면 2026년 최저임금(시급 10,320원) 기준 충족 여부를 바로 점검합니다.
+            <span class="pill pill--accent" style="vertical-align:middle">2026 최저임금 10,320원</span>
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="panel__head"><div>
+            <h2>입력</h2>
+            <p>시급 또는 월급 중 하나만 입력해도 된다. 둘 다 있으면 시급을 우선 적용한다.</p>
+          </div></div>
+          <form id="mw-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="mw-hourly">시급 (있으면 우선 적용)</label>
+                <input id="mw-hourly" type="number" min="0" step="10" placeholder="예: 10000" />
+              </div>
+              <div class="field">
+                <label for="mw-monthly">세전 월급 (시급 없을 때 역산)</label>
+                <input id="mw-monthly" type="number" min="0" step="1000" placeholder="예: 2200000" />
+              </div>
+              <div class="field">
+                <label for="mw-weekly-hours">주당 근로시간</label>
+                <input id="mw-weekly-hours" type="number" min="0" step="0.5" placeholder="예: 40" />
+              </div>
+              <div class="field">
+                <label for="mw-workdays">주 근무일수</label>
+                <input id="mw-workdays" type="number" min="1" max="7" step="1" value="5" />
+              </div>
+            </div>
+            <div class="action-row" style="margin-top:1rem">
+              <button type="submit" class="primary-button">최저임금 점검</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="mw-result" hidden style="margin-top:1rem"></div>
+
+        <!-- AdSense: 결과 아래 광고 -->
+        <div class="ad-slot" aria-hidden="true">광고</div>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <h2>2026 최저임금 핵심 정보</h2>
+        </div>
+        <div class="value-grid">
+          <article class="value-card">
+            <h3>2026년 최저시급</h3>
+            <p>
+              10,320원. 2025년(10,030원)보다 2.9% 인상됐다.
+              주 40시간 기준 월 환산액은 2,156,880원 (월 209시간 기준)이다.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>월급으로 환산하는 법</h3>
+            <p>
+              시급 × 월 환산 유급시간(주간 근로시간 × 4.345 + 주휴 유급시간).
+              주 40시간이면 월 209시간, 주 15시간이면 월 약 86.5시간이다.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>최저임금 산입 범위 주의사항</h3>
+            <p>
+              식대·교통비 등 비과세 수당 중 일부는 최저임금 산입 범위에 포함된다.
+              반면 초과근무수당, 상여금(월 급여의 일정 비율 초과분)은 제외될 수 있다.
+            </p>
+          </article>
+          <article class="value-card">
+            <h3>미달 시 할 수 있는 것</h3>
+            <p>
+              최저임금법 위반은 고용노동부에 진정서를 제출할 수 있다.
+              미지급 차액은 청구 가능하며, 사업주는 3년 이하 징역 또는 2천만원 이하 벌금 대상이 될 수 있다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <h2>내 급여가 최저임금을 충족하는지 확인하는 순서</h2>
+        </div>
+        <div class="panel">
+          <ol class="plain-list">
+            <li>1. 근로계약서에서 기본시급 또는 세전 월급을 확인한다.</li>
+            <li>2. 월급이라면 식대·교통비 등 비과세 수당이 포함됐는지 구분한다.</li>
+            <li>3. 급여명세서에서 실제 지급 항목과 공제 내역을 대조한다.</li>
+            <li>4. 의심스럽다면 고용노동부 최저임금 계산기와 함께 교차 확인한다.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <h2>다른 계산기도 확인해보세요</h2>
+        </div>
+        <div class="feature-grid">
+          <a class="value-card" href="./weekly-holiday.html" style="text-decoration:none">
+            <h3>주휴수당 계산기</h3>
+            <p>주 15시간 이상 근무 시 받을 수 있는 주휴수당을 계산한다.</p>
+          </a>
+          <a class="value-card" href="./severance.html" style="text-decoration:none">
+            <h3>퇴직금 계산기</h3>
+            <p>1년 이상 근속 시 받을 수 있는 퇴직금을 계산한다.</p>
+          </a>
+          <a class="value-card" href="./net-salary.html" style="text-decoration:none">
+            <h3>실수령액 계산기</h3>
+            <p>세전 월급에서 4대보험·세금을 빼고 실제로 받는 금액을 계산한다.</p>
+          </a>
+          <a class="value-card" href="./app.html" style="text-decoration:none">
+            <h3>통합 계산기</h3>
+            <p>4개 계산을 한 번에 입력하고 결과를 한 화면에서 본다.</p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="footer-grid">
+          <section>
+            <h3>주의</h3>
+            <p class="footer-meta">
+              이 계산기는 법률·세무 자문이 아닌 정보 제공 도구입니다. 실제 지급액은 근로계약서, 단체협약,
+              비과세 처리, 회사 내규에 따라 달라질 수 있습니다.
+            </p>
+          </section>
+          <section>
+            <h3>퇴사각</h3>
+            <div class="footer-links">
+              <a href="./index.html">홈</a>
+              <a href="./sources.html">출처</a>
+              <a href="./privacy.html">개인정보</a>
+              <a href="./update-log.html">업데이트</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

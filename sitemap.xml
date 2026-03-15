@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/</loc></url>
-  <url><loc>/index.html</loc></url>
-  <url><loc>/app.html</loc></url>
-  <url><loc>/sources.html</loc></url>
-  <url><loc>/privacy.html</loc></url>
-  <url><loc>/update-log.html</loc></url>
+  <!-- 홈 -->
+  <url><loc>/</loc><priority>1.0</priority></url>
+  <url><loc>/index.html</loc><priority>1.0</priority></url>
+
+  <!-- 계산기 랜딩 -->
+  <url><loc>/weekly-holiday.html</loc><priority>0.9</priority></url>
+  <url><loc>/severance.html</loc><priority>0.9</priority></url>
+  <url><loc>/net-salary.html</loc><priority>0.9</priority></url>
+  <url><loc>/minimum-wage.html</loc><priority>0.9</priority></url>
+
+  <!-- 통합 계산기 -->
+  <url><loc>/app.html</loc><priority>0.8</priority></url>
+
+  <!-- 가이드 -->
+  <url><loc>/guide-weekly-holiday.html</loc><priority>0.8</priority></url>
+  <url><loc>/guide-payslip.html</loc><priority>0.8</priority></url>
+  <url><loc>/guide-resignation.html</loc><priority>0.8</priority></url>
+  <url><loc>/guide-severance.html</loc><priority>0.8</priority></url>
+
+  <!-- 신뢰/정보 페이지 -->
+  <url><loc>/about.html</loc><priority>0.6</priority></url>
+  <url><loc>/sources.html</loc><priority>0.6</priority></url>
+  <url><loc>/update-log.html</loc><priority>0.5</priority></url>
+  <url><loc>/privacy.html</loc><priority>0.4</priority></url>
 </urlset>

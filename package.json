@@ -1,9 +1,22 @@
 {
-  "name": "taesagak-code",
-  "version": "0.1.0",
+  "name": "taesagak",
+  "version": "0.2.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "test": "node --test"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
   }
 }

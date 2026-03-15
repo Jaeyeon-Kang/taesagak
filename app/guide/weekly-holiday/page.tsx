@@ -1,0 +1,156 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '주휴수당 조건 총정리 2026',
+  description: '2026년 주휴수당 지급 조건, 계산 방법, 급여명세서 확인법, 미지급 시 대응까지 실용적으로 정리했습니다.',
+};
+
+export default function GuideWeeklyHolidayPage() {
+  return (
+    <main className="page-shell">
+      <section className="section">
+        <div className="section__header">
+          <span className="eyebrow">guide · 2026</span>
+          <h1 className="page-title">주휴수당 조건 총정리</h1>
+          <p className="page-lead">
+            지급 조건과 계산 방법을 정확히 알아야 제대로 챙길 수 있습니다.
+          </p>
+        </div>
+
+        <div className="panel">
+          <div className="panel__head"><div><h2>핵심 요약</h2></div></div>
+          <ul className="plain-list">
+            <li><strong>조건 1:</strong> 1주 소정근로시간 15시간 이상</li>
+            <li><strong>조건 2:</strong> 해당 주 소정 근로일 개근</li>
+            <li><strong>지급액:</strong> 1일 소정근로시간 × 시급 (1주치)</li>
+            <li><strong>2026 최저시급 기준:</strong> 10,320원</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section__header">
+          <h2>주휴수당이란?</h2>
+        </div>
+        <div className="value-grid">
+          <article className="value-card">
+            <h3>법적 근거</h3>
+            <p>
+              근로기준법 제55조. &ldquo;사용자는 근로자에게 1주에 평균 1회 이상의 유급휴일을 보장해야 한다.&rdquo;
+              이 유급휴일에 지급되는 임금이 주휴수당이다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>누구에게 적용되나?</h3>
+            <p>
+              정규직·계약직·아르바이트·단시간 근로자 구분 없이 적용된다.
+              단, 주 15시간 미만 초단시간 근로자는 주휴수당 대상에서 제외된다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>&ldquo;개근&rdquo;의 기준</h3>
+            <p>
+              소정 근로일(계약상 출근하기로 한 날)을 모두 출근하면 개근이다.
+              연차휴가, 공휴일 등 유급휴가로 처리된 결근은 개근으로 인정된다.
+              지각·조퇴는 결근이 아니어서 주휴수당에 영향을 주지 않는다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>주 15시간 계산법</h3>
+            <p>
+              소정근로시간은 근로계약서에 명시된 근로시간이다.
+              실제로 더 일했더라도 계약서에 주 15시간 미만으로 돼 있으면
+              주휴수당 대상에서 제외될 수 있습니다. 계약서상 소정근로시간이 기준입니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <div className="ad-slot page-shell" aria-hidden="true">광고</div>
+
+      <section className="section">
+        <div className="section__header">
+          <h2>주휴수당 계산 방법</h2>
+        </div>
+        <div className="panel">
+          <div className="panel__head"><div><h3>공식</h3></div></div>
+          <p style={{ fontSize: '1.1rem', fontWeight: '600', margin: '0 0 1rem' }}>
+            1일 소정근로시간 × 시급 = 1주치 주휴수당
+          </p>
+          <p>1일 소정근로시간 = 주간 소정근로시간 ÷ 주 소정근로일수</p>
+          <hr className="divider" />
+          <p><strong>예시</strong> — 주 5일·하루 4시간 근무, 시급 11,000원</p>
+          <ul className="plain-list">
+            <li>1일 소정근로시간: 20시간 ÷ 5일 = 4시간</li>
+            <li>주 주휴수당: 4시간 × 11,000원 = 44,000원</li>
+            <li>월 주휴수당(×4.345주): 44,000 × 4.345 ≈ 191,180원</li>
+          </ul>
+        </div>
+
+        <div className="panel" style={{ marginTop: '1rem' }}>
+          <div className="panel__head"><div><h3>월급제라면?</h3></div></div>
+          <p>
+            월급제 근로자의 경우 주휴수당이 이미 월급에 포함된 경우가 대부분이다.
+            하지만 급여명세서에 주휴수당 항목이 없다면 포함 여부를 회사에 서면으로 확인해야 한다.
+          </p>
+          <p>
+            만약 월급에 주휴수당이 포함됐다는 명시가 없다면, 별도로 청구할 수 있다.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section__header">
+          <h2>급여명세서 확인 방법</h2>
+        </div>
+        <div className="panel">
+          <ul className="plain-list">
+            <li>급여명세서에 &ldquo;주휴수당&rdquo; 항목이 따로 있는지 확인한다.</li>
+            <li>없다면 기본급에 포함됐는지 계산해 본다. (기본급 ÷ 월 유급시간 = 시급 역산)</li>
+            <li>역산한 시급이 최저시급보다 낮다면 주휴수당이 미반영됐을 가능성이 있다.</li>
+            <li>회사에 주휴수당 포함 여부를 이메일이나 메신저로 남겨 증거를 남긴다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section__header">
+          <h2>주휴수당 미지급 시 대응</h2>
+        </div>
+        <div className="panel">
+          <ol className="plain-list">
+            <li>1. 고용노동부 임금체불 진정서 제출 (전화 1350 또는 온라인 민원24)</li>
+            <li>2. 3년 이내 청구 가능 (소멸시효 3년)</li>
+            <li>3. 소액사건심판 또는 지급명령 신청으로 법적 절차 진행 가능</li>
+            <li>4. 사업주는 3년 이하 징역 또는 2천만원 이하 벌금 대상</li>
+          </ol>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section__header">
+          <h2>바로 계산해보기</h2>
+        </div>
+        <div className="feature-grid">
+          <Link className="value-card" href="/weekly-holiday" style={{ textDecoration: 'none' }}>
+            <h3>주휴수당 계산기</h3>
+            <p>시급과 주당 근로시간을 입력하면 바로 계산됩니다.</p>
+          </Link>
+          <Link className="value-card" href="/guide/payslip" style={{ textDecoration: 'none' }}>
+            <h3>급여명세서 체크 가이드</h3>
+            <p>급여명세서 항목별 확인 방법을 정리했습니다.</p>
+          </Link>
+          <Link className="value-card" href="/minimum-wage" style={{ textDecoration: 'none' }}>
+            <h3>최저임금 계산기</h3>
+            <p>2026년 최저임금(10,320원) 기준으로 미달 여부를 점검한다.</p>
+          </Link>
+          <Link className="value-card" href="/calculator" style={{ textDecoration: 'none' }}>
+            <h3>통합 계산기</h3>
+            <p>주휴수당 포함 4개 계산을 한 번에 볼 수 있습니다.</p>
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
+}

@@ -27,8 +27,7 @@
         </a>
         <nav class="nav" aria-label="주요">
           <a href="./index.html">홈</a>
-          <a href="#calculator-form">입력</a>
-          <a href="#results">결과</a>
+          <a href="./app.html">계산기</a>
           <a href="./sources.html">출처</a>
           <button type="button" id="install-app" hidden>앱처럼 설치</button>
         </nav>
@@ -38,16 +37,16 @@
     <main class="page-shell section">
       <div class="section__header">
         <span class="eyebrow">calculator / worker first</span>
-        <h1 class="page-title">한 번에 계산하고, 바로 확인할 것까지 본다</h1>
+        <h1 class="page-title">퇴직금·주휴수당·실수령액·최저임금, 한 번에 계산</h1>
         <p class="page-lead">
-          입력은 적당히, 결과는 빡빡하게. 이 정도면 초기 MVP 치고는 꽤 성실하다.
-          물론 세상엔 늘 더 귀찮은 예외가 있지만, 그건 법이 그렇다.
+          필수 항목만 입력하면 4가지 결과를 한 화면에 확인할 수 있습니다.
+          계산 근거와 지금 확인해야 할 항목까지 함께 보여줍니다.
         </p>
       </div>
 
       <div class="status-banner">
         <p id="status-text">
-          입력값을 바꾸면 로컬에 자동 저장된다. 로그인은 없다. 쓸데없는 회원가입도 없다.
+          입력값은 브라우저에 자동 저장됩니다. 로그인 없이 사용할 수 있습니다.
         </p>
         <span class="pill pill--accent">2026 기준 룰셋</span>
       </div>
@@ -57,8 +56,8 @@
           <section class="panel">
             <div class="panel__head">
               <div>
-                <h3>빠른 입력 가이드</h3>
-                <p>정확도를 높이는 우선순위만 적었다.</p>
+                <h3>입력 우선순위 가이드</h3>
+                <p>정확도를 높이는 항목 순서입니다.</p>
               </div>
             </div>
             <ol class="plain-list">
@@ -69,14 +68,14 @@
               <li>5. 상여금 / 연차수당</li>
             </ol>
             <hr class="divider" />
-            <p class="helper-text" id="gross-preview">시급 또는 월급을 넣으면 월 환산 급여를 미리 보여준다.</p>
+            <p class="helper-text" id="gross-preview">시급 또는 월급을 입력하면 월 환산 급여를 미리 확인할 수 있습니다.</p>
           </section>
 
           <section class="panel">
             <div class="panel__head">
               <div>
                 <h3>저장된 계산</h3>
-                <p>브라우저 로컬 저장. 기기 바꾸면 같이 안 온다.</p>
+                <p>브라우저에 로컬 저장됩니다. 기기를 바꾸면 이어지지 않습니다.</p>
               </div>
             </div>
             <ul class="history-list" id="history-list"></ul>
@@ -88,14 +87,37 @@
             <div class="panel__head">
               <div>
                 <h2>입력</h2>
-                <p>모르는 값은 비워도 된다. 다만 비운 만큼 계산기는 얌전해진다.</p>
+                <p>모르는 값은 비워도 됩니다. 입력한 만큼 결과가 정확해집니다.</p>
               </div>
             </div>
 
             <form id="calculator-form" novalidate>
-              <div class="form-grid">
-                <fieldset class="fieldset field--wide">
-                  <legend>근무 기본 정보</legend>
+              <div id="form-step-1" class="form-step" data-step="1">
+                <fieldset class="fieldset">
+                  <legend>어떤 형태로 급여를 받나요?</legend>
+                  <div class="choice-group">
+                    <label class="choice-button">
+                      <input type="radio" name="salaryType" value="hourly" />
+                      <span>시급제</span>
+                    </label>
+                    <label class="choice-button">
+                      <input type="radio" name="salaryType" value="monthly" />
+                      <span>월급제</span>
+                    </label>
+                    <label class="choice-button">
+                      <input type="radio" name="salaryType" value="yearly" />
+                      <span>연봉제</span>
+                    </label>
+                  </div>
+                </fieldset>
+                <div class="action-row">
+                  <button type="button" class="primary-button" data-action="next-step">다음</button>
+                </div>
+              </div>
+
+              <div id="form-step-2" class="form-step" data-step="2" hidden>
+                <fieldset class="fieldset">
+                  <legend>근무 기간과 시간을 알려주세요.</legend>
                   <div class="form-grid">
                     <div class="field">
                       <label for="startDate">입사일</label>
@@ -107,78 +129,35 @@
                     </div>
                     <div class="field">
                       <label for="weeklyHours">주당 근로시간</label>
-                      <input
-                        id="weeklyHours"
-                        name="weeklyHours"
-                        type="number"
-                        min="0"
-                        step="0.5"
-                        placeholder="예: 20"
-                      />
+                      <input id="weeklyHours" name="weeklyHours" type="number" min="0" step="0.5" placeholder="예: 20" />
                     </div>
                     <div class="field">
                       <label for="workdaysPerWeek">주 근무일수</label>
-                      <input
-                        id="workdaysPerWeek"
-                        name="workdaysPerWeek"
-                        type="number"
-                        min="1"
-                        max="7"
-                        step="1"
-                        value="5"
-                      />
+                      <input id="workdaysPerWeek" name="workdaysPerWeek" type="number" min="1" max="7" step="1" value="5" />
                     </div>
                   </div>
                 </fieldset>
+                <div class="action-row">
+                  <button type="button" class="secondary-button" data-action="prev-step">이전</button>
+                  <button type="button" class="primary-button" data-action="next-step">다음</button>
+                </div>
+              </div>
 
-                <fieldset class="fieldset field--wide">
-                  <legend>급여 정보</legend>
+              <div id="form-step-3" class="form-step" data-step="3" hidden>
+                <fieldset class="fieldset">
+                  <legend>급여는 얼마인가요?</legend>
                   <div class="form-grid">
-                    <div class="field">
+                    <div class="field" data-salary-type="hourly">
                       <label for="hourlyWage">시급</label>
-                      <input
-                        id="hourlyWage"
-                        name="hourlyWage"
-                        type="number"
-                        min="0"
-                        step="10"
-                        placeholder="예: 11000"
-                      />
-                      <small class="helper-text">시급/월급 중 하나만 넣어도 된다.</small>
+                      <input id="hourlyWage" name="hourlyWage" type="number" min="0" step="10" placeholder="예: 11000" />
                     </div>
-                    <div class="field">
+                    <div class="field" data-salary-type="monthly yearly">
                       <label for="monthlySalary">세전 월급</label>
-                      <input
-                        id="monthlySalary"
-                        name="monthlySalary"
-                        type="number"
-                        min="0"
-                        step="1000"
-                        placeholder="예: 2800000"
-                      />
+                      <input id="monthlySalary" name="monthlySalary" type="number" min="0" step="1000" placeholder="예: 2800000" />
                     </div>
-                    <div class="field">
-                      <label for="ordinaryHourlyWage">통상시급(선택)</label>
-                      <input
-                        id="ordinaryHourlyWage"
-                        name="ordinaryHourlyWage"
-                        type="number"
-                        min="0"
-                        step="10"
-                        placeholder="퇴직금 정확도 보강용"
-                      />
-                    </div>
-                    <div class="field">
-                      <label for="dependents">공제대상 가족 수(간이 추정용)</label>
-                      <input
-                        id="dependents"
-                        name="dependents"
-                        type="number"
-                        min="1"
-                        max="10"
-                        step="1"
-                        value="1"
-                      />
+                     <div class="field">
+                      <label for="dependents">공제대상 가족 수</label>
+                      <input id="dependents" name="dependents" type="number" min="1" max="10" step="1" value="1" />
                     </div>
                     <div class="field field--wide">
                       <label class="checkbox">
@@ -188,49 +167,41 @@
                     </div>
                   </div>
                 </fieldset>
+                <div class="action-row">
+                  <button type="button" class="secondary-button" data-action="prev-step">이전</button>
+                  <button type="button" class="primary-button" data-action="next-step">다음 (퇴직금)</button>
+                </div>
+              </div>
 
-                <fieldset class="fieldset field--wide">
-                  <legend>퇴직금 정확도 보강 입력</legend>
+              <div id="form-step-4" class="form-step" data-step="4" hidden>
+                <fieldset class="fieldset">
+                  <legend>퇴직금 정확도를 높이려면 알려주세요. (선택)</legend>
                   <div class="form-grid">
                     <div class="field">
                       <label for="last3MonthsWageTotal">최근 3개월 급여 총액</label>
-                      <input
-                        id="last3MonthsWageTotal"
-                        name="last3MonthsWageTotal"
-                        type="number"
-                        min="0"
-                        step="1000"
-                        placeholder="예: 8400000"
-                      />
+                      <input id="last3MonthsWageTotal" name="last3MonthsWageTotal" type="number" min="0" step="1000" placeholder="예: 8400000" />
                     </div>
                     <div class="field">
                       <label for="annualBonus">연간 상여금 총액</label>
-                      <input
-                        id="annualBonus"
-                        name="annualBonus"
-                        type="number"
-                        min="0"
-                        step="1000"
-                        placeholder="예: 2000000"
-                      />
+                      <input id="annualBonus" name="annualBonus" type="number" min="0" step="1000" placeholder="예: 2000000" />
                     </div>
-                    <div class="field field--wide">
+                    <div class="field">
                       <label for="annualLeavePayout">연간 연차수당 총액</label>
-                      <input
-                        id="annualLeavePayout"
-                        name="annualLeavePayout"
-                        type="number"
-                        min="0"
-                        step="1000"
-                        placeholder="예: 600000"
-                      />
+                      <input id="annualLeavePayout" name="annualLeavePayout" type="number" min="0" step="1000" placeholder="예: 600000" />
+                    </div>
+                     <div class="field">
+                      <label for="ordinaryHourlyWage">통상시급</label>
+                      <input id="ordinaryHourlyWage" name="ordinaryHourlyWage" type="number" min="0" step="10" placeholder="퇴직금 정확도 보강용" />
                     </div>
                   </div>
                 </fieldset>
+                <div class="action-row">
+                  <button type="button" class="secondary-button" data-action="prev-step">이전</button>
+                  <button type="submit" class="primary-button">결과 보기</button>
+                </div>
               </div>
 
               <div class="action-row" style="margin-top:1rem">
-                <button class="primary-button" type="submit">계산하기</button>
                 <button class="secondary-button" type="button" id="save-result">현재 입력 저장</button>
                 <button class="secondary-button" type="button" id="copy-summary">요약 복사</button>
                 <button class="secondary-button" type="button" id="export-json">JSON 내보내기</button>
@@ -243,10 +214,11 @@
             <div class="section__header">
               <h2>결과</h2>
               <p>
-                이 결과는 정보 제공용 간이 계산이다. 계약서, 급여명세서, 비과세 처리, 회사 내규까지 들어가면
-                실제 숫자는 달라질 수 있다. 법과 급여는 늘 사람을 귀찮게 한다.
+                정보 제공용 간이 계산 결과입니다. 실제 지급액은 근로계약서, 급여명세서, 비과세 처리, 회사 내규에 따라 달라질 수 있습니다.
               </p>
             </div>
+
+            <div id="radar-host" style="margin-bottom:1rem"></div>
 
             <div class="summary-cards" id="summary-cards"></div>
 
@@ -256,7 +228,7 @@
               <div class="panel__head">
                 <div>
                   <h3>지금 확인할 것</h3>
-                  <p>숫자 다음 행동이 없으면 검색만 다시 하게 된다. 그래서 붙여놨다.</p>
+                  <p>결과를 바탕으로 지금 확인해야 할 항목을 정리했습니다.</p>
                 </div>
               </div>
               <ul class="checklist" id="checklist-list"></ul>
@@ -266,7 +238,7 @@
               <div class="panel__head">
                 <div>
                   <h3>계산 근거</h3>
-                  <p>숫자만 보고 믿지 마. 공식이랑 전제부터 봐.</p>
+                  <p>각 항목의 계산 공식과 적용 전제를 볼 수 있습니다.</p>
                 </div>
               </div>
               <div class="formula-stack" id="formula-panels"></div>
@@ -276,7 +248,7 @@
               <div class="panel__head">
                 <div>
                   <h3>공식 출처</h3>
-                  <p>앱 안에 근거 링크를 따로 모아뒀다. 이상한 블로그 대신 여기부터 보는 게 낫다.</p>
+                  <p>계산에 적용된 법령과 기준의 출처 링크를 모았습니다.</p>
                 </div>
               </div>
               <ul class="source-list" id="source-list"></ul>
@@ -292,8 +264,8 @@
           <section>
             <h3>주의</h3>
             <p class="footer-meta">
-              이 계산기는 법률·세무 자문이 아니다. 실제 지급액은 근로계약서, 단체협약, 회사 내규, 급여명세,
-              비과세 처리, 산입 범위에 따라 달라질 수 있다.
+              이 계산기는 법률·세무 자문이 아닙니다. 실제 지급액은 근로계약서, 단체협약, 회사 내규, 급여명세,
+              비과세 처리, 산입 범위에 따라 달라질 수 있습니다.
             </p>
           </section>
           <section>

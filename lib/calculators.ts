@@ -1,35 +1,131 @@
-import { RULESET_2026 } from './rules.js';
+import { RULESET_2026 } from '@/lib/rules';
 
 const DAYS = {
   WEEK_TO_MONTH: 4.345,
   YEAR: 365,
 };
 
-export function round(value) {
+export interface CalculatorInput {
+  salaryType?: string;
+  startDate?: string;
+  endDate?: string;
+  hourlyWage?: number;
+  monthlySalary?: number;
+  weeklyHours?: number;
+  workdaysPerWeek?: number;
+  attendanceComplete?: boolean;
+  last3MonthsWageTotal?: number;
+  annualBonus?: number;
+  annualLeavePayout?: number;
+  ordinaryHourlyWage?: number;
+  dependents?: number;
+}
+
+export interface MonthlyHoursResult {
+  monthlyWorkHours: number;
+  monthlyHolidayHours: number;
+  monthlyPaidHours: number;
+  dailyHours: number;
+}
+
+export interface WeeklyHolidayResult {
+  eligible: boolean;
+  weeklyHours: number;
+  workdaysPerWeek: number;
+  dailyHours: number;
+  weeklyHolidayPay: number;
+  monthlyHolidayPay: number;
+  reason: string;
+  formulaText: string;
+}
+
+export interface MinimumWageResult {
+  compliant: boolean;
+  minimumWage: number;
+  effectiveHourly: number;
+  hourlyGap: number;
+  monthlyShortfall: number;
+  monthlyPaidHours: number;
+  dailyHours: number;
+  note: string;
+}
+
+export interface DeductionItem {
+  key: string;
+  label: string;
+  value: number;
+}
+
+export interface NetSalaryResult {
+  monthlyGross: number;
+  monthlyNet: number;
+  annualGross: number;
+  annualIncomeTax?: number;
+  annualIncomeTaxBeforeCredit?: number;
+  earnedIncomeTaxCredit?: number;
+  estimatedTaxBase?: number;
+  deductions: DeductionItem[];
+  note: string;
+  estimated: boolean;
+  grossMode?: string;
+  grossNote?: string;
+}
+
+export interface SeveranceResult {
+  eligible: boolean;
+  employmentDays: number;
+  threeMonthDays: number;
+  dailyHours: number;
+  averageWageBase: number;
+  dailyAverageWage: number;
+  dailyOrdinaryWage: number;
+  appliedDailyWage: number;
+  severancePay: number;
+  note: string;
+  formulaText: string;
+}
+
+export interface OverviewResult {
+  weeklyHoliday: WeeklyHolidayResult;
+  minimumWage: MinimumWageResult;
+  severance: SeveranceResult;
+  netSalary: NetSalaryResult;
+  checklist: string[];
+  summary: {
+    monthlyHolidayPay: number;
+    severancePay: number;
+    monthlyNet: number;
+    monthlyGross: number;
+    minimumWageCompliant: boolean;
+  };
+}
+
+export function round(value: number | string): number {
   return Math.round(Number(value) || 0);
 }
 
-export function floor10(value) {
+export function floor10(value: number | string): number {
   return Math.floor((Number(value) || 0) / 10) * 10;
 }
 
-export function clampMin(value, min = 0) {
+export function clampMin(value: number | string | undefined, min = 0): number {
   return Math.max(min, Number(value) || 0);
 }
 
-export function toDate(value) {
+export function toDate(value: string | undefined | null): Date | null {
+  if (!value) return null;
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
-export function diffDaysInclusive(start, end) {
+export function diffDaysInclusive(start: Date | null, end: Date | null): number {
   if (!start || !end) return 0;
   const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate());
   const endDate = new Date(end.getFullYear(), end.getMonth(), end.getDate());
-  return Math.max(0, Math.floor((endDate - startDate) / 86400000) + 1);
+  return Math.max(0, Math.floor((endDate.getTime() - startDate.getTime()) / 86400000) + 1);
 }
 
-export function subMonthsSafe(date, months) {
+export function subMonthsSafe(date: Date | null, months: number): Date | null {
   if (!date) return null;
   const copy = new Date(date);
   const targetMonth = copy.getMonth() - months;
@@ -40,22 +136,26 @@ export function subMonthsSafe(date, months) {
   return target;
 }
 
-export function currency(value) {
-  return new Intl.NumberFormat('ko-KR').format(round(value));
+export function currency(value: number | string): string {
+  return new Intl.NumberFormat('ko-KR').format(round(value as number));
 }
 
-export function percent(value, digits = 1) {
+export function percent(value: number | string | undefined, digits = 1): string {
   return `${(Number(value || 0) * 100).toFixed(digits)}%`;
 }
 
-export function computeDailyHours(weeklyHours, workdaysPerWeek) {
+export function computeDailyHours(weeklyHours: number, workdaysPerWeek: number): number {
   const hours = clampMin(weeklyHours);
   const days = clampMin(workdaysPerWeek);
   if (!hours || !days) return 0;
   return hours / days;
 }
 
-export function computeMonthlyHours(weeklyHours, workdaysPerWeek, includeWeeklyHoliday = true) {
+export function computeMonthlyHours(
+  weeklyHours: number,
+  workdaysPerWeek: number,
+  includeWeeklyHoliday = true,
+): MonthlyHoursResult {
   const weekly = clampMin(weeklyHours);
   const daily = computeDailyHours(weeklyHours, workdaysPerWeek);
   const monthlyWorkHours = weekly * DAYS.WEEK_TO_MONTH;
@@ -71,7 +171,7 @@ export function computeMonthlyHours(weeklyHours, workdaysPerWeek, includeWeeklyH
   };
 }
 
-export function calculateWeeklyHolidayPay(input) {
+export function calculateWeeklyHolidayPay(input: CalculatorInput): WeeklyHolidayResult {
   const hourlyWage = clampMin(input.hourlyWage);
   const weeklyHours = clampMin(input.weeklyHours);
   const workdaysPerWeek = clampMin(input.workdaysPerWeek);
@@ -111,7 +211,7 @@ export function calculateWeeklyHolidayPay(input) {
   };
 }
 
-export function calculateMinimumWage(input) {
+export function calculateMinimumWage(input: CalculatorInput): MinimumWageResult {
   const hourlyWage = clampMin(input.hourlyWage);
   const monthlySalary = clampMin(input.monthlySalary);
   const weeklyHours = clampMin(input.weeklyHours);
@@ -153,7 +253,7 @@ export function calculateMinimumWage(input) {
   };
 }
 
-export function calculateEmploymentIncomeDeduction(annualGross) {
+export function calculateEmploymentIncomeDeduction(annualGross: number): number {
   const gross = clampMin(annualGross);
   if (gross <= 5000000) return gross * 0.7;
   if (gross <= 15000000) return 3500000 + (gross - 5000000) * 0.4;
@@ -162,20 +262,20 @@ export function calculateEmploymentIncomeDeduction(annualGross) {
   return 14750000 + (gross - 100000000) * 0.02;
 }
 
-export function calculateProgressiveTax(taxBase) {
+export function calculateProgressiveTax(taxBase: number): number {
   const base = clampMin(taxBase);
   const bracket =
     RULESET_2026.tax.progressiveBrackets.find((item) => base <= item.max) ||
-    RULESET_2026.tax.progressiveBrackets.at(-1);
+    RULESET_2026.tax.progressiveBrackets[RULESET_2026.tax.progressiveBrackets.length - 1];
 
   return clampMin(base * bracket.rate - bracket.deduction);
 }
 
-export function calculateEarnedIncomeTaxCredit(incomeTax, annualGross) {
+export function calculateEarnedIncomeTaxCredit(incomeTax: number, annualGross: number): number {
   const tax = clampMin(incomeTax);
   const gross = clampMin(annualGross);
 
-  let credit;
+  let credit: number;
   if (tax <= 1300000) {
     credit = tax * 0.55;
   } else {
@@ -196,7 +296,10 @@ export function calculateEarnedIncomeTaxCredit(incomeTax, annualGross) {
   return Math.min(credit, cap);
 }
 
-export function calculateMonthlyGrossEstimate(input, weeklyHoliday) {
+export function calculateMonthlyGrossEstimate(
+  input: CalculatorInput,
+  weeklyHoliday: WeeklyHolidayResult | null,
+): { monthlyGross: number; mode: string; note: string } {
   const monthlySalary = clampMin(input.monthlySalary);
   const hourlyWage = clampMin(input.hourlyWage);
   const weeklyHours = clampMin(input.weeklyHours);
@@ -226,7 +329,10 @@ export function calculateMonthlyGrossEstimate(input, weeklyHoliday) {
   };
 }
 
-export function calculateNetSalaryEstimate(input, weeklyHoliday) {
+export function calculateNetSalaryEstimate(
+  input: CalculatorInput,
+  weeklyHoliday: WeeklyHolidayResult | null,
+): NetSalaryResult {
   const dependents = Math.max(1, Math.floor(clampMin(input.dependents) || 1));
   const grossInfo = calculateMonthlyGrossEstimate(input, weeklyHoliday);
   const monthlyGross = grossInfo.monthlyGross;
@@ -285,7 +391,7 @@ export function calculateNetSalaryEstimate(input, weeklyHoliday) {
     monthlyIncomeTax -
     monthlyLocalIncomeTax;
 
-  const deductions = [
+  const deductions: DeductionItem[] = [
     { key: 'pension', label: '국민연금', value: nationalPension },
     { key: 'health', label: '건강보험', value: healthInsurance },
     { key: 'ltc', label: '장기요양보험', value: longTermCare },
@@ -311,7 +417,7 @@ export function calculateNetSalaryEstimate(input, weeklyHoliday) {
   };
 }
 
-export function calculateSeverance(input) {
+export function calculateSeverance(input: CalculatorInput): SeveranceResult {
   const startDate = toDate(input.startDate);
   const endDate = toDate(input.endDate);
   const weeklyHours = clampMin(input.weeklyHours);
@@ -373,8 +479,20 @@ export function calculateSeverance(input) {
   };
 }
 
-export function buildChecklist({ weeklyHoliday, minimumWage, severance, netSalary, input }) {
-  const checklist = [];
+export function buildChecklist({
+  weeklyHoliday,
+  minimumWage,
+  severance,
+  netSalary,
+  input,
+}: {
+  weeklyHoliday: WeeklyHolidayResult;
+  minimumWage: MinimumWageResult;
+  severance: SeveranceResult;
+  netSalary: NetSalaryResult;
+  input: CalculatorInput;
+}): string[] {
+  const checklist: string[] = [];
 
   if (weeklyHoliday.eligible) {
     checklist.push('최근 4주 출근기록과 주간 스케줄을 모아두면 개근 판단 근거로 쓸 수 있습니다. 주휴는 개근이 핵심 조건입니다.');
@@ -405,7 +523,7 @@ export function buildChecklist({ weeklyHoliday, minimumWage, severance, netSalar
   return checklist;
 }
 
-export function calculateOverview(input) {
+export function calculateOverview(input: CalculatorInput): OverviewResult {
   const weeklyHoliday = calculateWeeklyHolidayPay(input);
   const minimumWage = calculateMinimumWage(input);
   const severance = calculateSeverance(input);
@@ -434,7 +552,7 @@ export function calculateOverview(input) {
   };
 }
 
-export function buildShareText(input, results) {
+export function buildShareText(input: CalculatorInput, results: OverviewResult): string {
   return [
     '[퇴사각 결과 요약]',
     `입사일: ${input.startDate || '-'}`,

@@ -2,12 +2,11 @@ import { APP_META, SOURCE_LIST, RULESET_2026 } from './rules.js';
 import {
   calculateOverview,
   currency,
-  round,
-  percent,
   buildShareText,
   computeMonthlyHours,
 } from './calculators.js';
 
+const radarHost = document.querySelector('#radar-host');
 const form = document.querySelector('#calculator-form');
 const resultRoot = document.querySelector('#results');
 const summaryCards = document.querySelector('#summary-cards');
@@ -29,14 +28,23 @@ const HISTORY_KEY = 'taesagak:v0.1.0:history';
 let deferredPrompt = null;
 let currentResults = null;
 let currentInput = null;
+let currentStep = 1;
 
 function getInput() {
   const formData = new FormData(form);
+  const salaryType = formData.get('salaryType')?.toString() || 'monthly';
+  const monthlySalaryFromYearly =
+    salaryType === 'yearly' ? Number(formData.get('monthlySalary') || 0) / 12 : 0;
+
   return {
+    salaryType,
     startDate: formData.get('startDate')?.toString().trim() || '',
     endDate: formData.get('endDate')?.toString().trim() || '',
     hourlyWage: Number(formData.get('hourlyWage') || 0),
-    monthlySalary: Number(formData.get('monthlySalary') || 0),
+    monthlySalary:
+      salaryType === 'monthly'
+        ? Number(formData.get('monthlySalary') || 0)
+        : monthlySalaryFromYearly,
     weeklyHours: Number(formData.get('weeklyHours') || 0),
     workdaysPerWeek: Number(formData.get('workdaysPerWeek') || 0),
     attendanceComplete: formData.get('attendanceComplete') === 'on',
@@ -52,6 +60,13 @@ function setFormValues(data) {
   Object.entries(data || {}).forEach(([key, value]) => {
     const field = form.elements.namedItem(key);
     if (!field) return;
+
+    if (field instanceof RadioNodeList) {
+      field.forEach((radio) => {
+        radio.checked = radio.value === value;
+      });
+      return;
+    }
     if (field.type === 'checkbox') {
       field.checked = Boolean(value);
       return;
@@ -60,11 +75,113 @@ function setFormValues(data) {
   });
 }
 
+function showStep(step) {
+  document.querySelectorAll('.form-step').forEach((el) => {
+    el.hidden = Number(el.dataset.step) !== step;
+  });
+  currentStep = step;
+  handleSalaryTypeChange(); // Ensure correct fields are shown on step change
+}
+
+function handleSalaryTypeChange() {
+  const salaryType = form.elements.salaryType.value;
+  const hourlyField = document.querySelector('[data-salary-type="hourly"]');
+  const salaryAmountField = document.querySelector('[data-salary-type="monthly yearly"]');
+
+  if (hourlyField) hourlyField.hidden = salaryType !== 'hourly';
+  if (salaryAmountField) {
+    salaryAmountField.hidden = salaryType === 'hourly';
+    const label = salaryAmountField.querySelector('label');
+    const input = salaryAmountField.querySelector('input');
+    if (label) label.textContent = salaryType === 'yearly' ? '세전 연봉' : '세전 월급';
+    if (input) input.placeholder = salaryType === 'yearly' ? '예: 33600000' : '예: 2800000';
+  }
+}
+
 function formatBooleanBadge(flag, successText, failText) {
   return `
     <span class="pill ${flag ? 'pill--success' : 'pill--warn'}">
       ${flag ? successText : failText}
     </span>
+  `;
+}
+
+function radarStatus(flag, hasData) {
+  if (!hasData) return 'muted';
+  return flag ? 'ok' : 'warn';
+}
+
+function renderRadar(results) {
+  const { weeklyHoliday, minimumWage, severance, netSalary } = results;
+
+  const items = [
+    {
+      title: '최저임금',
+      status: minimumWage.effectiveHourly > 0
+        ? (minimumWage.compliant ? 'ok' : 'danger')
+        : 'muted',
+      badge: minimumWage.compliant
+        ? '기준 이상'
+        : minimumWage.effectiveHourly > 0 ? '미달 가능성' : '입력값 없음',
+      badgeType: minimumWage.compliant ? 'success' : minimumWage.effectiveHourly > 0 ? 'danger' : 'muted',
+      detail: minimumWage.effectiveHourly > 0
+        ? `환산 시급 ${currency(minimumWage.effectiveHourly)}원`
+        : '시급 또는 월급을 입력하면 점검된다.',
+    },
+    {
+      title: '주휴수당',
+      status: radarStatus(weeklyHoliday.eligible, weeklyHoliday.weeklyHours > 0),
+      badge: weeklyHoliday.eligible ? '대상 가능성 높음' : weeklyHoliday.weeklyHours > 0 ? '대상 아님/불명' : '입력값 없음',
+      badgeType: weeklyHoliday.eligible ? 'success' : weeklyHoliday.weeklyHours > 0 ? 'warn' : 'muted',
+      detail: weeklyHoliday.eligible
+        ? `월 ${currency(weeklyHoliday.monthlyHolidayPay)}원 추정`
+        : weeklyHoliday.weeklyHours > 0 ? weeklyHoliday.reason : '시급과 근로시간을 입력하면 계산된다.',
+    },
+    {
+      title: '퇴직금',
+      status: severance.eligible
+        ? 'ok'
+        : severance.employmentDays > 300 ? 'warn' : 'muted',
+      badge: severance.eligible ? '요건 충족' : severance.employmentDays > 0 ? '요건 미충족 가능' : '날짜 미입력',
+      badgeType: severance.eligible ? 'success' : severance.employmentDays > 0 ? 'warn' : 'muted',
+      detail: severance.eligible
+        ? `추정 ${currency(severance.severancePay)}원`
+        : severance.employmentDays > 0 && severance.employmentDays < 365
+          ? `1년까지 ${365 - severance.employmentDays}일 남음`
+          : '입사일·퇴사일을 입력하면 계산된다.',
+    },
+    {
+      title: '실수령액',
+      status: netSalary.monthlyGross > 0 ? 'ok' : 'muted',
+      badge: netSalary.monthlyGross > 0 ? '계산됨' : '급여 미입력',
+      badgeType: netSalary.monthlyGross > 0 ? 'success' : 'muted',
+      detail: netSalary.monthlyNet > 0
+        ? `세후 월 ${currency(netSalary.monthlyNet)}원`
+        : '시급 또는 월급을 입력하면 추정된다.',
+    },
+  ];
+
+  radarHost.innerHTML = `
+    <section class="panel">
+      <div class="panel__head">
+        <div>
+          <h3>놓친 돈 레이더</h3>
+          <p>4개 항목 상태를 한눈에 확인한다.</p>
+        </div>
+      </div>
+      <div class="radar-grid">
+        ${items.map((item) => `
+          <div class="radar-item radar-item--${item.status}">
+            <span class="radar-item__dot" aria-hidden="true"></span>
+            <div class="radar-item__content">
+              <strong>${item.title}</strong>
+              <span class="pill pill--${item.badgeType}" style="font-size:0.75rem;min-height:24px">${item.badge}</span>
+              <p>${item.detail}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </section>
   `;
 }
 
@@ -140,7 +257,7 @@ function renderBreakdown(results) {
       <div class="panel__head">
         <div>
           <h3>월 세전/세후 구조</h3>
-          <p>숫자도 봐야 하지만, 어디서 깎이는지도 봐야 덜 당해. 예, 인간은 자주 안 본다.</p>
+          <p>항목별로 공제 금액을 확인하면 실수령액 차이를 파악할 수 있습니다.</p>
         </div>
         <div class="panel__chip-group">
           <span class="pill pill--muted">세전 ${currency(netSalary.monthlyGross)}원</span>
@@ -148,7 +265,7 @@ function renderBreakdown(results) {
         </div>
       </div>
       <ul class="breakdown-list">
-        ${rows || '<li class="empty-line">세전 급여가 없어서 공제 내역을 못 그렸어.</li>'}
+        ${rows || '<li class="empty-line">세전 급여가 없어 공제 내역을 표시할 수 없습니다.</li>'}
       </ul>
     </section>
   `;
@@ -260,7 +377,7 @@ function saveHistory(snapshot) {
 function renderHistory() {
   const history = loadHistory();
   if (!history.length) {
-    historyList.innerHTML = '<li class="history-empty">아직 저장된 계산이 없다. 세상은 넓고 저장은 안 되어 있지.</li>';
+    historyList.innerHTML = '<li class="history-empty">저장된 계산 내역이 없습니다.</li>';
     return;
   }
 
@@ -302,12 +419,13 @@ function renderGrossPreview() {
     return;
   }
 
-  grossPreview.textContent = '시급 또는 월급을 넣으면 월 환산 급여를 미리 보여준다.';
+  grossPreview.textContent = '시급 또는 월급을 입력하면 월 환산 급여를 미리 확인할 수 있습니다.';
 }
 
 function runCalculation() {
   currentInput = getInput();
   currentResults = calculateOverview(currentInput);
+  renderRadar(currentResults);
   renderSummaryCards(currentResults);
   renderChecklist(currentResults);
   renderFormulaPanels(currentResults, currentInput);
@@ -316,7 +434,7 @@ function runCalculation() {
   breakdownHost.innerHTML = renderBreakdown(currentResults);
 
   resultRoot.hidden = false;
-  renderStatus('계산 완료. 숫자는 차갑고, 네가 놓친 돈도 꽤 차갑다.');
+  renderStatus('계산이 완료되었습니다.');
   persistInput(currentInput);
 }
 
@@ -325,8 +443,8 @@ function handleCopySummary() {
   const text = buildShareText(currentInput, currentResults);
   navigator.clipboard
     .writeText(text)
-    .then(() => renderStatus('요약을 클립보드에 복사했어. 이제 어디 붙여넣을지는 네 자유지.'))
-    .catch(() => renderStatus('클립보드 복사에 실패했어. 브라우저 권한을 봐.'));
+    .then(() => renderStatus('요약을 클립보드에 복사했습니다.'))
+    .catch(() => renderStatus('클립보드 복사에 실패했습니다. 브라우저 권한 설정을 확인해야 합니다.'));
 }
 
 function handleExportJson() {
@@ -345,12 +463,12 @@ function handleExportJson() {
   anchor.download = `taesagak-${Date.now()}.json`;
   anchor.click();
   URL.revokeObjectURL(url);
-  renderStatus('JSON으로 내보냈어.');
+  renderStatus('JSON 파일을 내보냈습니다.');
 }
 
 function handleSaveResult() {
   if (!currentResults || !currentInput) {
-    renderStatus('먼저 계산부터 해. 빈 파일을 저장하는 취미는 별로 권하지 않아.');
+    renderStatus('계산 결과가 없습니다. 입력 후 결과 보기를 눌러야 저장됩니다.');
     return;
   }
 
@@ -364,7 +482,7 @@ function handleSaveResult() {
     input: currentInput,
   });
 
-  renderStatus('현재 입력값을 저장했어.');
+  renderStatus('현재 입력값을 저장했습니다.');
 }
 
 function installFromHistory(event) {
@@ -375,17 +493,18 @@ function installFromHistory(event) {
   if (!entry) return;
   setFormValues(entry.input);
   renderGrossPreview();
-  renderStatus(`${entry.title} 입력값을 불러왔어.`);
+  renderStatus(`${entry.title} 입력값을 불러왔습니다.`);
   runCalculation();
 }
 
 function resetAll() {
   form.reset();
+  showStep(1);
   renderGrossPreview();
   resultRoot.hidden = true;
   currentResults = null;
   currentInput = null;
-  renderStatus('입력을 초기화했어.');
+  renderStatus('입력을 초기화했습니다.');
 }
 
 function wireInstallPrompt() {
@@ -402,6 +521,23 @@ function wireInstallPrompt() {
     deferredPrompt = null;
     installButton.hidden = true;
   });
+}
+
+// Initialize and wire up multi-step form
+function initStepForm() {
+  form.addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'next-step') {
+      showStep(currentStep + 1);
+    } else if (e.target.dataset.action === 'prev-step') {
+      showStep(currentStep - 1);
+    }
+  });
+
+  form.elements.salaryType.forEach((radio) => {
+    radio.addEventListener('change', handleSalaryTypeChange);
+  });
+
+  showStep(1);
 }
 
 form.addEventListener('submit', (event) => {
@@ -429,5 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHistory();
   renderGrossPreview();
   wireInstallPrompt();
-  runCalculation();
+  initStepForm();
+  // Remove auto-calculation on load, let user drive it.
+  // runCalculation();
 });
