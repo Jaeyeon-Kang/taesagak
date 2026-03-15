@@ -1,0 +1,21 @@
+{
+  "name": "퇴사각",
+  "short_name": "퇴사각",
+  "start_url": "./app.html",
+  "display": "standalone",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "description": "퇴직금, 주휴수당, 실수령액, 최저임금 점검을 한 번에 보는 근로자용 계산기",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
