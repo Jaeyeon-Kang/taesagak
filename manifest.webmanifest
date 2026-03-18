@@ -3,8 +3,8 @@
   "short_name": "퇴사각",
   "start_url": "./app.html",
   "display": "standalone",
-  "background_color": "#0b1020",
-  "theme_color": "#0b1020",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "description": "퇴직금, 주휴수당, 실수령액, 최저임금. 복잡한 계산은 기계한테 맡기고, 받아내야 할 돈만 한눈에 파악하세요.",
   "icons": [
     {

@@ -4,16 +4,33 @@ import Link from 'next/link';
 import { calculateWeeklyHolidayPay, currency, type WeeklyHolidayResult } from '@/lib/calculators';
 
 export default function WeeklyHolidayPage() {
+  const [inputMode, setInputMode] = useState<'hourly' | 'monthly'>('monthly');
   const [hourlyWage, setHourlyWage] = useState('');
-  const [weeklyHours, setWeeklyHours] = useState('');
+  const [monthlySalary, setMonthlySalary] = useState('');
+  const [weeklyHours, setWeeklyHours] = useState('40');
   const [workdays, setWorkdays] = useState('5');
   const [attendance, setAttendance] = useState(true);
   const [result, setResult] = useState<WeeklyHolidayResult | null>(null);
+  const [derivedHourly, setDerivedHourly] = useState<number | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    let effectiveHourly = Number(hourlyWage || 0);
+
+    if (inputMode === 'monthly') {
+      const monthly = Number(monthlySalary || 0);
+      const wh = Number(weeklyHours || 0);
+      const wd = Number(workdays || 5);
+      const weeklyPaidHours = wh + (wh / wd);
+      const monthlyPaidHours = weeklyPaidHours * 4.345;
+      effectiveHourly = monthlyPaidHours > 0 ? Math.round(monthly / monthlyPaidHours) : 0;
+      setDerivedHourly(effectiveHourly);
+    } else {
+      setDerivedHourly(null);
+    }
+
     const res = calculateWeeklyHolidayPay({
-      hourlyWage: Number(hourlyWage || 0),
+      hourlyWage: effectiveHourly,
       weeklyHours: Number(weeklyHours || 0),
       workdaysPerWeek: Number(workdays || 5),
       attendanceComplete: attendance,
@@ -24,34 +41,66 @@ export default function WeeklyHolidayPage() {
   return (
     <main className="page-shell">
       <section className="section">
-        <div className="section__header">
-          <span className="eyebrow">calculator · 2026 기준</span>
-          <h1 className="page-title">2026 주휴수당 계산기</h1>
-          <p className="page-lead">
-            시급과 주당 근로시간을 입력하면 주휴수당 대상 여부와 월 추정액을 바로 보여줍니다.
-            <span className="pill pill--accent" style={{ verticalAlign: 'middle' }}>2026 기준</span>
+        <div className="section__header" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <h1 className="page-title" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)' }}>주휴수당 계산기</h1>
+          <p className="page-lead" style={{ marginTop: '0.5rem' }}>
+            시급 또는 월급을 입력하면 주휴수당 대상 여부와 월 추정액을 확인할 수 있습니다.
           </p>
         </div>
 
-        <div className="panel">
-          <div className="panel__head"><div>
-            <h2>입력</h2>
-            <p>주 15시간 이상 + 개근이면 주휴수당 대상입니다.</p>
-          </div></div>
+        <div className="panel" style={{ maxWidth: '640px', margin: '1.5rem auto 0' }}>
           <form onSubmit={handleSubmit} noValidate>
             <div className="form-grid">
-              <div className="field">
-                <label htmlFor="wh-hourly">시급</label>
-                <input
-                  id="wh-hourly"
-                  type="number"
-                  min="0"
-                  step="10"
-                  placeholder="예: 10320"
-                  value={hourlyWage}
-                  onChange={(e) => setHourlyWage(e.target.value)}
-                />
+              <div className="field field--wide">
+                <fieldset className="fieldset" style={{ border: 'none', padding: '0', margin: '0' }}>
+                  <legend style={{ fontSize: '0.875rem', color: 'var(--text-2)', marginBottom: '0.5rem' }}>급여 입력 방식</legend>
+                  <div className="choice-group">
+                    <label className="choice-button">
+                      <input type="radio" name="input-mode" value="monthly" checked={inputMode === 'monthly'} onChange={() => setInputMode('monthly')} />
+                      <span>월급으로 입력</span>
+                    </label>
+                    <label className="choice-button">
+                      <input type="radio" name="input-mode" value="hourly" checked={inputMode === 'hourly'} onChange={() => setInputMode('hourly')} />
+                      <span>시급으로 입력</span>
+                    </label>
+                  </div>
+                </fieldset>
               </div>
+
+              {inputMode === 'hourly' ? (
+                <div className="field field--wide">
+                  <label htmlFor="wh-hourly">시급</label>
+                  <input
+                    id="wh-hourly"
+                    type="number"
+                    min="0"
+                    step="10"
+                    placeholder="예: 10320"
+                    value={hourlyWage}
+                    onChange={(e) => setHourlyWage(e.target.value)}
+                  />
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                    근로계약서 또는 급여명세서에서 확인할 수 있습니다.
+                  </p>
+                </div>
+              ) : (
+                <div className="field field--wide">
+                  <label htmlFor="wh-monthly">세전 월급</label>
+                  <input
+                    id="wh-monthly"
+                    type="number"
+                    min="0"
+                    step="10000"
+                    placeholder="예: 2800000"
+                    value={monthlySalary}
+                    onChange={(e) => setMonthlySalary(e.target.value)}
+                  />
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                    급여명세서의 &lsquo;지급 총액&rsquo;에서 확인할 수 있습니다. 시급은 자동으로 역산됩니다.
+                  </p>
+                </div>
+              )}
+
               <div className="field">
                 <label htmlFor="wh-weekly-hours">주당 근로시간</label>
                 <input
@@ -59,10 +108,13 @@ export default function WeeklyHolidayPage() {
                   type="number"
                   min="0"
                   step="0.5"
-                  placeholder="예: 20"
+                  placeholder="예: 40"
                   value={weeklyHours}
                   onChange={(e) => setWeeklyHours(e.target.value)}
                 />
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                  근로계약서에 명시되어 있습니다. 풀타임은 보통 40시간입니다.
+                </p>
               </div>
               <div className="field">
                 <label htmlFor="wh-workdays">주 근무일수</label>
@@ -84,128 +136,108 @@ export default function WeeklyHolidayPage() {
                     checked={attendance}
                     onChange={(e) => setAttendance(e.target.checked)}
                   />
-                  <span>해당 주 개근으로 간주 (개근 미충족 시 주휴수당 0원)</span>
+                  <span>이번 주에 결근 없이 출근했습니다</span>
                 </label>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                  주휴수당은 해당 주에 빠지지 않고 출근해야 받을 수 있습니다. 결근이 있으면 체크를 해제하세요.
+                </p>
               </div>
             </div>
             <div className="action-row" style={{ marginTop: '1rem' }}>
-              <button type="submit" className="primary-button">주휴수당 계산</button>
+              <button type="submit" className="primary-button">계산하기</button>
             </div>
           </form>
         </div>
 
         {result && (
-          <div style={{ marginTop: '1rem' }}>
+          <div style={{ maxWidth: '640px', margin: '1rem auto 0' }}>
+            {derivedHourly !== null && (
+              <div className="note-box" style={{ marginBottom: '1rem' }}>
+                입력하신 월급 기준 환산 시급: <strong>{currency(derivedHourly)}원</strong>
+              </div>
+            )}
             <div className="summary-cards">
               <article className="metric-card">
                 <div className="metric-card__head">
                   <h3>주 주휴수당</h3>
                   <span className={`pill pill--${result.eligible ? 'success' : 'warn'}`}>
-                    {result.eligible ? '대상 가능성 높음' : '대상 아님 / 불명'}
+                    {result.eligible ? '대상' : '비대상'}
                   </span>
                 </div>
                 <p className="metric-card__value">{currency(result.weeklyHolidayPay)}원</p>
-                <p className="metric-card__hint">1일 소정근로시간({result.dailyHours.toFixed(2)}시간) × 시급 기준</p>
+                <p className="metric-card__hint">1일 소정근로시간({result.dailyHours.toFixed(1)}시간) × 시급</p>
               </article>
               <article className="metric-card">
                 <div className="metric-card__head">
-                  <h3>월 주휴수당 (×4.345주)</h3>
+                  <h3>월 환산 (×4.345주)</h3>
                   <span className={`pill pill--${result.eligible ? 'success' : 'warn'}`}>
-                    {result.eligible ? '대상 가능성 높음' : '대상 아님 / 불명'}
+                    {result.eligible ? '대상' : '비대상'}
                   </span>
                 </div>
                 <p className="metric-card__value">{currency(result.monthlyHolidayPay)}원</p>
                 <p className="metric-card__hint">{result.reason}</p>
               </article>
             </div>
-            <div className="panel" style={{ marginTop: '1rem' }}>
-              <div className="panel__head"><div>
-                <h3>계산 근거</h3>
-                <p>{result.formulaText}</p>
-              </div></div>
-              <ul className="plain-list">
-                <li>입력 시급: <strong>{currency(result.weeklyHolidayPay && result.dailyHours > 0 ? result.weeklyHolidayPay / result.dailyHours : 0)}원</strong></li>
-                <li>주 근로시간: <strong>{result.weeklyHours}시간</strong></li>
-                <li>1일 소정근로시간: <strong>{result.dailyHours.toFixed(2)}시간</strong></li>
-              </ul>
-            </div>
           </div>
         )}
-
-        <div className="ad-slot" aria-hidden="true">광고</div>
       </section>
 
-      <section className="section">
+      <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
         <div className="section__header">
-          <h2>주휴수당이란?</h2>
-          <p>지급 조건과 계산 방법을 정리했습니다.</p>
+          <h2>주휴수당이 뭔가요?</h2>
         </div>
         <div className="value-grid">
           <article className="value-card">
-            <h3>지급 조건</h3>
+            <h3>누가 받나요?</h3>
             <p>
-              1주 소정근로시간이 15시간 이상이고, 해당 주 소정 근로일을 개근한 경우
-              다음 주 1일분의 유급 휴일을 받을 권리가 생긴다.
+              일주일에 15시간 이상 일하고, 그 주에 하루도 빠지지 않고 출근했다면 받을 수 있습니다.
+              즉, <strong>주 3일 이상 알바라도 조건만 맞으면 받을 수 있는 돈</strong>이라는 뜻입니다.
             </p>
           </article>
           <article className="value-card">
-            <h3>계산 방법</h3>
+            <h3>얼마나 받나요?</h3>
             <p>
-              1일 소정근로시간(= 주간 근로시간 ÷ 주 근무일수) × 시급.
-              월 환산은 주당 주휴수당 × 4.345주(월 평균 주수)로 계산한다.
+              하루치 일급만큼 추가로 받습니다.
+              즉, <strong>일주일에 5일 일하면 5일분 월급에 1일분이 더 얹어지는 구조</strong>라는 뜻입니다.
             </p>
           </article>
           <article className="value-card">
-            <h3>자주 놓치는 포인트</h3>
+            <h3>어디서 확인하나요?</h3>
             <p>
-              월급제라도 주휴수당이 별도 항목으로 지급되지 않으면 급여명세서에서
-              주휴수당 반영 여부는 회사에 서면으로 확인하는 것이 좋습니다.
+              급여명세서에 &lsquo;주휴수당&rsquo; 항목이 따로 있거나, 기본급에 포함되어 있을 수 있습니다.
+              확실하지 않으면 <strong>회사 인사팀이나 급여 담당자에게 서면으로 확인</strong>하세요.
             </p>
           </article>
           <article className="value-card">
-            <h3>2026년 최저임금 기준</h3>
+            <h3>안 주면 어떻게 하나요?</h3>
             <p>
-              2026년 최저시급은 10,320원이다. 주 15시간 이상이라면
-              1일 주휴수당 최소 기준은 시급 × 1일 소정근로시간이다.
+              주휴수당 미지급은 임금체불에 해당합니다.
+              <strong>고용노동부(국번 없이 1350)에 신고</strong>하거나, 가까운 노동청에 진정서를 제출할 수 있습니다.
             </p>
           </article>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
         <div className="section__header">
-          <h2>급여명세서에서 확인할 것</h2>
-        </div>
-        <div className="panel">
-          <ul className="plain-list">
-            <li>주휴수당이 기본급에 포함돼 있는지, 별도 항목으로 표기됐는지 확인한다.</li>
-            <li>최근 4주 출근기록이 있으면 개근 판단에 쓸 수 있다.</li>
-            <li>주휴수당이 명세서에 없다면 회사에 서면으로 지급 근거를 요청할 수 있다.</li>
-            <li>미지급 시 고용노동부 임금체불 신고 대상이 될 수 있다.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="section__header">
-          <h2>다른 계산기도 확인해보세요</h2>
+          <h2>다른 계산기</h2>
         </div>
         <div className="feature-grid">
           <Link className="value-card" href="/severance" style={{ textDecoration: 'none' }}>
-            <h3>퇴직금 계산기</h3>
-            <p>1년 이상 근속 시 받을 수 있는 퇴직금을 계산한다.</p>
+            <h3>퇴직금</h3>
+            <p>법정 퇴직금 추정</p>
           </Link>
           <Link className="value-card" href="/net-salary" style={{ textDecoration: 'none' }}>
-            <h3>실수령액 계산기</h3>
-            <p>세전 월급에서 4대보험·세금을 빼고 실제로 받는 금액을 계산한다.</p>
+            <h3>실수령액</h3>
+            <p>세후 실수령액 계산</p>
           </Link>
           <Link className="value-card" href="/minimum-wage" style={{ textDecoration: 'none' }}>
-            <h3>최저임금 계산기</h3>
-            <p>2026년 최저임금(10,320원) 기준으로 미달 여부를 점검한다.</p>
+            <h3>최저임금</h3>
+            <p>미달 여부 점검</p>
           </Link>
           <Link className="value-card" href="/calculator" style={{ textDecoration: 'none' }}>
             <h3>통합 계산기</h3>
-            <p>4개 계산을 한 번에 입력하고 결과를 한 화면에서 본다.</p>
+            <p>4종 한 번에 계산</p>
           </Link>
         </div>
       </section>

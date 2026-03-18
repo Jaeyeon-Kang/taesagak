@@ -41,7 +41,7 @@ export default function CalculatorPage() {
   const [ordinaryHourlyWage, setOrdinaryHourlyWage] = useState('');
   const [results, setResults] = useState<OverviewResult | null>(null);
   const [showResults, setShowResults] = useState(false);
-  const [statusText, setStatusText] = useState('입력값은 브라우저에 자동 저장됩니다. 로그인 없이 사용할 수 있습니다.');
+  const [statusText, setStatusText] = useState('입력값은 브라우저에 자동 저장됩니다.');
   const [historyList, setHistoryList] = useState<HistoryItem[]>([]);
   const [grossPreview, setGrossPreview] = useState('시급 또는 월급을 입력하면 월 환산 급여를 미리 확인할 수 있습니다.');
 
@@ -245,7 +245,7 @@ export default function CalculatorPage() {
         badgeType: minimumWage.compliant ? 'success' : minimumWage.effectiveHourly > 0 ? 'danger' : 'muted',
         detail: minimumWage.effectiveHourly > 0
           ? `환산 시급 ${currency(minimumWage.effectiveHourly)}원`
-          : '시급 또는 월급을 입력하면 점검된다.',
+          : '시급 또는 월급을 입력하면 점검됩니다.',
       },
       {
         title: '주휴수당',
@@ -254,7 +254,7 @@ export default function CalculatorPage() {
         badgeType: weeklyHoliday.eligible ? 'success' : weeklyHoliday.weeklyHours > 0 ? 'warn' : 'muted',
         detail: weeklyHoliday.eligible
           ? `월 ${currency(weeklyHoliday.monthlyHolidayPay)}원 추정`
-          : weeklyHoliday.weeklyHours > 0 ? weeklyHoliday.reason : '시급과 근로시간을 입력하면 계산된다.',
+          : weeklyHoliday.weeklyHours > 0 ? weeklyHoliday.reason : '시급과 근로시간을 입력하면 계산됩니다.',
       },
       {
         title: '퇴직금',
@@ -267,7 +267,7 @@ export default function CalculatorPage() {
           ? `추정 ${currency(severance.severancePay)}원`
           : severance.employmentDays > 0 && severance.employmentDays < 365
             ? `1년까지 ${365 - severance.employmentDays}일 남음`
-            : '입사일·퇴사일을 입력하면 계산된다.',
+            : '입사일·퇴사일을 입력하면 계산됩니다.',
       },
       {
         title: '실수령액',
@@ -276,7 +276,7 @@ export default function CalculatorPage() {
         badgeType: netSalary.monthlyGross > 0 ? 'success' : 'muted',
         detail: netSalary.monthlyNet > 0
           ? `세후 월 ${currency(netSalary.monthlyNet)}원`
-          : '시급 또는 월급을 입력하면 추정된다.',
+          : '시급 또는 월급을 입력하면 추정됩니다.',
       },
     ];
 
@@ -285,7 +285,7 @@ export default function CalculatorPage() {
         <div className="panel__head">
           <div>
             <h3>놓친 돈 레이더</h3>
-            <p>4개 항목 상태를 한눈에 확인한다.</p>
+            <p>4개 항목 상태를 한눈에 확인할 수 있습니다.</p>
           </div>
         </div>
         <div className="radar-grid">
@@ -462,68 +462,15 @@ export default function CalculatorPage() {
 
   return (
     <main className="page-shell section">
-      <div className="section__header">
-        <span className="eyebrow">calculator / worker first</span>
-        <h1 className="page-title">퇴직금·주휴수당·실수령액·최저임금, 한 번에 계산</h1>
-        <p className="page-lead">
-          필수 항목만 입력하면 4가지 결과를 한 화면에 확인할 수 있습니다.
-          계산 근거와 지금 확인해야 할 항목까지 함께 보여줍니다.
+      <div className="section__header" style={{ maxWidth: '640px', margin: '0 auto 1.5rem' }}>
+        <h1 className="page-title" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)' }}>통합 계산기</h1>
+        <p className="page-lead" style={{ marginTop: '0.5rem' }}>
+          퇴직금·주휴수당·실수령액·최저임금을 한 번에 계산합니다. 급여 정보를 입력하면 4가지 결과를 한 화면에서 확인할 수 있습니다.
         </p>
       </div>
 
-      <div className="status-banner">
-        <p>{statusText}</p>
-        <span className="pill pill--accent">2026 기준 룰셋</span>
-      </div>
-
-      <section className="app-layout section">
-        <aside className="sidebar">
-          <section className="panel">
-            <div className="panel__head">
-              <div>
-                <h3>입력 우선순위 가이드</h3>
-                <p>정확도를 높이는 항목 순서입니다.</p>
-              </div>
-            </div>
-            <ol className="plain-list">
-              <li>1. 입사일 / 퇴사일</li>
-              <li>2. 주당 근로시간 / 주 근무일수</li>
-              <li>3. 시급 또는 세전 월급</li>
-              <li>4. 최근 3개월 급여 총액</li>
-              <li>5. 상여금 / 연차수당</li>
-            </ol>
-            <hr className="divider" />
-            <p className="helper-text">{grossPreview}</p>
-          </section>
-
-          <section className="panel">
-            <div className="panel__head">
-              <div>
-                <h3>저장된 계산</h3>
-                <p>브라우저에 로컬 저장됩니다. 기기를 바꾸면 이어지지 않습니다.</p>
-              </div>
-            </div>
-            <ul className="history-list">
-              {historyList.length === 0 ? (
-                <li className="history-empty">저장된 계산 내역이 없습니다.</li>
-              ) : (
-                historyList.map((item, index) => (
-                  <li key={index} className="history-item">
-                    <div>
-                      <strong>{item.title}</strong>
-                      <p>{item.savedAt}</p>
-                    </div>
-                    <button type="button" className="text-button" onClick={() => loadFromHistory(item)}>
-                      불러오기
-                    </button>
-                  </li>
-                ))
-              )}
-            </ul>
-          </section>
-        </aside>
-
-        <div className="content-stack">
+      <section>
+        <div className="content-stack" style={{ maxWidth: '640px', margin: '0 auto' }}>
           <section className="panel">
             <div className="panel__head">
               <div>
@@ -570,7 +517,7 @@ export default function CalculatorPage() {
                       </label>
                     </div>
                   </fieldset>
-                  <div className="action-row">
+                  <div className="action-row" style={{ marginTop: '1.5rem' }}>
                     <button type="button" className="primary-button" onClick={() => setCurrentStep(2)}>다음</button>
                   </div>
                 </div>
@@ -590,6 +537,9 @@ export default function CalculatorPage() {
                           value={startDate}
                           onChange={(e) => setStartDate(e.target.value)}
                         />
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                          근로계약서 또는 첫 출근일 기준입니다. 수습 기간도 포함됩니다.
+                        </p>
                       </div>
                       <div className="field">
                         <label htmlFor="endDate">퇴사일 / 계산 기준일</label>
@@ -600,6 +550,9 @@ export default function CalculatorPage() {
                           value={endDate}
                           onChange={(e) => setEndDate(e.target.value)}
                         />
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                          아직 재직 중이라면 오늘 날짜를 넣으면 됩니다.
+                        </p>
                       </div>
                       <div className="field">
                         <label htmlFor="weeklyHours">주당 근로시간</label>
@@ -609,10 +562,13 @@ export default function CalculatorPage() {
                           type="number"
                           min="0"
                           step="0.5"
-                          placeholder="예: 20"
+                          placeholder="예: 40"
                           value={weeklyHours}
                           onChange={(e) => setWeeklyHours(e.target.value)}
                         />
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                          근로계약서에 명시되어 있습니다. 풀타임은 보통 40시간입니다.
+                        </p>
                       </div>
                       <div className="field">
                         <label htmlFor="workdaysPerWeek">주 근무일수</label>
@@ -629,7 +585,7 @@ export default function CalculatorPage() {
                       </div>
                     </div>
                   </fieldset>
-                  <div className="action-row">
+                  <div className="action-row" style={{ marginTop: '1.5rem' }}>
                     <button type="button" className="secondary-button" onClick={() => setCurrentStep(1)}>이전</button>
                     <button type="button" className="primary-button" onClick={() => setCurrentStep(3)}>다음</button>
                   </div>
@@ -654,6 +610,9 @@ export default function CalculatorPage() {
                             value={hourlyWage}
                             onChange={(e) => setHourlyWage(e.target.value)}
                           />
+                          <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                            근로계약서 또는 급여명세서에서 확인할 수 있습니다.
+                          </p>
                         </div>
                       )}
                       {salaryType !== 'hourly' && (
@@ -669,10 +628,13 @@ export default function CalculatorPage() {
                             value={monthlySalary}
                             onChange={(e) => setMonthlySalary(e.target.value)}
                           />
+                          <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                            급여명세서의 세전 총액 기준입니다.
+                          </p>
                         </div>
                       )}
                       <div className="field">
-                        <label htmlFor="dependents">공제대상 가족 수</label>
+                        <label htmlFor="dependents">공제대상 가족 수 (본인 포함)</label>
                         <input
                           id="dependents"
                           name="dependents"
@@ -683,6 +645,9 @@ export default function CalculatorPage() {
                           value={dependents}
                           onChange={(e) => setDependents(e.target.value)}
                         />
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                          소득세 계산에 사용됩니다. 잘 모르면 1(본인)로 두세요.
+                        </p>
                       </div>
                       <div className="field field--wide">
                         <label className="checkbox">
@@ -693,14 +658,17 @@ export default function CalculatorPage() {
                             checked={attendanceComplete}
                             onChange={(e) => setAttendanceComplete(e.target.checked)}
                           />
-                          <span>주휴수당 계산 시 &ldquo;해당 주 개근&rdquo;으로 간주</span>
+                          <span>이번 주에 결근 없이 출근했습니다</span>
                         </label>
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                          주휴수당은 해당 주에 빠지지 않고 출근해야 받을 수 있습니다.
+                        </p>
                       </div>
                     </div>
                   </fieldset>
-                  <div className="action-row">
+                  <div className="action-row" style={{ marginTop: '1.5rem' }}>
                     <button type="button" className="secondary-button" onClick={() => setCurrentStep(2)}>이전</button>
-                    <button type="button" className="primary-button" onClick={() => setCurrentStep(4)}>다음 (퇴직금)</button>
+                    <button type="button" className="primary-button" onClick={() => setCurrentStep(4)}>다음</button>
                   </div>
                 </div>
               )}
@@ -708,7 +676,10 @@ export default function CalculatorPage() {
               {currentStep === 4 && (
                 <div className="form-step" data-step="4">
                   <fieldset className="fieldset">
-                    <legend>[선택] 추가 수당 입력 (정확도 향상)</legend>
+                    <legend>퇴직금 추가 정보 (선택)</legend>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', margin: '-0.25rem 0 0.75rem' }}>
+                      비워두면 앞에서 입력한 급여 정보로 자동 추정합니다. 더 정확한 퇴직금 계산이 필요하면 입력하세요.
+                    </p>
                     <div className="form-grid">
                       <div className="field">
                         <label htmlFor="last3MonthsWageTotal">최근 3개월 급여 총액</label>
@@ -722,9 +693,12 @@ export default function CalculatorPage() {
                           value={last3MonthsWageTotal}
                           onChange={(e) => setLast3MonthsWageTotal(e.target.value)}
                         />
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                          최근 3개월치 급여명세서의 세전 총액을 합산하세요.
+                        </p>
                       </div>
                       <div className="field">
-                        <label htmlFor="annualBonus">연간 상여금 총액</label>
+                        <label htmlFor="annualBonus">연간 상여금</label>
                         <input
                           id="annualBonus"
                           name="annualBonus"
@@ -737,7 +711,7 @@ export default function CalculatorPage() {
                         />
                       </div>
                       <div className="field">
-                        <label htmlFor="annualLeavePayout">연간 연차수당 총액</label>
+                        <label htmlFor="annualLeavePayout">연간 연차수당</label>
                         <input
                           id="annualLeavePayout"
                           name="annualLeavePayout"
@@ -757,14 +731,17 @@ export default function CalculatorPage() {
                           type="number"
                           min="0"
                           step="10"
-                          placeholder="퇴직금 정확도 보강용"
+                          placeholder="예: 13000"
                           value={ordinaryHourlyWage}
                           onChange={(e) => setOrdinaryHourlyWage(e.target.value)}
                         />
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
+                          급여명세서의 통상임금 항목에서 확인할 수 있습니다.
+                        </p>
                       </div>
                     </div>
                   </fieldset>
-                  <div className="action-row">
+                  <div className="action-row" style={{ marginTop: '1.5rem' }}>
                     <button type="button" className="secondary-button" onClick={() => setCurrentStep(3)}>이전</button>
                     <button type="submit" className="primary-button">결과 보기</button>
                   </div>
@@ -772,9 +749,6 @@ export default function CalculatorPage() {
               )}
 
               <div className="action-row" style={{ marginTop: '1rem' }}>
-                <button className="secondary-button" type="button" onClick={handleSaveResult}>현재 입력 저장</button>
-                <button className="secondary-button" type="button" onClick={handleCopySummary}>요약 복사</button>
-                <button className="secondary-button" type="button" onClick={handleExportJson}>JSON 내보내기</button>
                 <button className="ghost-button" type="button" onClick={handleResetForm}>초기화</button>
               </div>
             </form>
