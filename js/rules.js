@@ -2,7 +2,7 @@ export const APP_META = {
   name: '퇴사각',
   version: '0.1.0',
   buildDate: '2026-03-13',
-  tagline: '그만두기 전에, 네 돈부터 계산해',
+  tagline: '퇴사 전에 챙길 건, 멘탈이 아니라 돈입니다',
 };
 
 export const RULESET_2026 = {

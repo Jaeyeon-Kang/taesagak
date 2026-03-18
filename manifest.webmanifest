@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#0b1020",
   "theme_color": "#0b1020",
-  "description": "퇴직금, 주휴수당, 실수령액, 최저임금 점검을 한 번에 보는 근로자용 계산기",
+  "description": "퇴직금, 주휴수당, 실수령액, 최저임금. 복잡한 계산은 기계한테 맡기고, 받아내야 할 돈만 한눈에 파악하세요.",
   "icons": [
     {
       "src": "./icons/icon-192.png",

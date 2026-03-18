@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: '퇴사각 — 그만두기 전에, 네 돈부터 계산해',
+  title: '퇴사각 — 퇴사 전에 챙길 건, 멘탈이 아니라 돈입니다',
 };
 
 export default function HomePage() {
@@ -10,12 +10,11 @@ export default function HomePage() {
     <main className="page-shell">
       <section className="hero">
         <div className="hero__panel">
-          <span className="hero__eyebrow">worker-first calculator</span>
-          <h1 className="hero__title">그만두기 전에,<br />네 돈부터 계산해</h1>
+          <span className="hero__eyebrow">근로자용 통합 계산기</span>
+          <h1 className="hero__title">퇴사 전에 챙길 건,<br />멘탈이 아니라 돈입니다.</h1>
           <p className="hero__description">
-            퇴직금, 주휴수당, 실수령액, 최저임금 점검을 한 화면에서 확인할 수 있습니다.
-            <strong>계산 근거</strong>와
-            <strong>지금 확인해야 할 항목</strong>까지 함께 보여줍니다.
+            퇴직금, 주휴수당, 실수령액, 최저임금. 복잡한 계산은 기계한테 맡기고,
+            당장 확인해야 할 서류와 받아내야 할 돈만 한눈에 파악하세요.
           </p>
 
           <div className="hero__actions">
@@ -130,10 +129,10 @@ export default function HomePage() {
           </article>
           <article className="value-card">
             <div className="value-card__icon">②</div>
-            <h3>사람말로 해석</h3>
+            <h3>노무사 없이 이해하는 용어</h3>
             <p>
-              &ldquo;1일 평균임금&rdquo;, &ldquo;통상임금&rdquo; 같은 말을 숨기지 않는다.
-              대신 그 뜻을 풀어서 보여준다.
+              &lsquo;통상임금&rsquo;, &lsquo;평균임금&rsquo; 같은 법률 용어를 굳이 숨기지 않습니다.
+              대신 인간의 언어로 번역해서 보여줍니다.
             </p>
           </article>
           <article className="value-card">

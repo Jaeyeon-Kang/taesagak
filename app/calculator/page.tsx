@@ -528,7 +528,7 @@ export default function CalculatorPage() {
             <div className="panel__head">
               <div>
                 <h2>입력</h2>
-                <p>모르는 값은 비워도 됩니다. 입력한 만큼 결과가 정확해집니다.</p>
+                <p>빈 칸은 기본값으로 계산됩니다.</p>
               </div>
             </div>
 
@@ -536,7 +536,7 @@ export default function CalculatorPage() {
               {currentStep === 1 && (
                 <div className="form-step" data-step="1">
                   <fieldset className="fieldset">
-                    <legend>어떤 형태로 급여를 받나요?</legend>
+                    <legend>급여 지급 방식</legend>
                     <div className="choice-group">
                       <label className="choice-button">
                         <input
@@ -579,7 +579,7 @@ export default function CalculatorPage() {
               {currentStep === 2 && (
                 <div className="form-step" data-step="2">
                   <fieldset className="fieldset">
-                    <legend>근무 기간과 시간을 알려주세요.</legend>
+                    <legend>근무 기간 및 시간</legend>
                     <div className="form-grid">
                       <div className="field">
                         <label htmlFor="startDate">입사일</label>
@@ -639,7 +639,7 @@ export default function CalculatorPage() {
               {currentStep === 3 && (
                 <div className="form-step" data-step="3">
                   <fieldset className="fieldset">
-                    <legend>급여는 얼마인가요?</legend>
+                    <legend>급여 정보 입력</legend>
                     <div className="form-grid">
                       {salaryType === 'hourly' && (
                         <div className="field">
@@ -708,7 +708,7 @@ export default function CalculatorPage() {
               {currentStep === 4 && (
                 <div className="form-step" data-step="4">
                   <fieldset className="fieldset">
-                    <legend>퇴직금 정확도를 높이려면 알려주세요. (선택)</legend>
+                    <legend>[선택] 추가 수당 입력 (정확도 향상)</legend>
                     <div className="form-grid">
                       <div className="field">
                         <label htmlFor="last3MonthsWageTotal">최근 3개월 급여 총액</label>
