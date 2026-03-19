@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: '퇴직금 상여금·연차수당 반영 방법 2026',
-  description: '퇴직금 계산 시 상여금과 연차수당을 반영하는 방법. 평균임금 산정 방법, 산입 범위, 실수 줄이는 계산법을 설명합니다.',
-};
+  description:
+    '퇴직금 계산 시 상여금과 연차수당을 반영하는 방법을 설명합니다. 평균임금 산정 방식, 산입 범위, 실수 줄이는 계산법을 한 번에 확인할 수 있습니다.',
+  path: '/guide/severance',
+  keywords: ['퇴직금 상여금', '퇴직금 연차수당', '평균임금 계산', '퇴직금 계산법'],
+});
 
 export default function GuideSeverancePage() {
   return (

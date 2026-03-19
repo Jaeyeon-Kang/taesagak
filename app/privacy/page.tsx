@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: '퇴사각 개인정보 처리 메모',
-};
+export const metadata: Metadata = buildMetadata({
+  title: '개인정보 처리방침',
+  description:
+    '퇴사각은 계산 입력값을 브라우저 로컬 저장소에만 저장하며 서버로 전송하지 않습니다. 개인정보 처리 원칙과 저장 범위를 확인하세요.',
+  path: '/privacy',
+  keywords: ['개인정보 처리방침', '로컬 저장소', '급여 계산기 개인정보'],
+});
 
 export default function PrivacyPage() {
   return (

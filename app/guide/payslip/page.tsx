@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: '급여명세서 체크 가이드 2026',
-  description: '급여명세서에서 꼭 확인해야 할 항목, 이상한 공제 찾는 법, 주휴수당·최저임금 반영 확인 방법을 정리했습니다.',
-};
+  description:
+    '급여명세서에서 꼭 확인해야 할 항목, 이상한 공제 찾는 법, 주휴수당·최저임금 반영 확인 방법을 정리했습니다.',
+  path: '/guide/payslip',
+  keywords: ['급여명세서 보는 법', '실수령액 확인', '주휴수당 급여명세서', '최저임금 확인'],
+});
 
 export default function GuidePayslipPage() {
   return (

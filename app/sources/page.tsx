@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 import { SOURCE_LIST } from '@/lib/rules';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: '퇴사각 — 이 계산기는 어디서 가져왔나요?',
-};
+export const metadata: Metadata = buildMetadata({
+  title: '퇴직금 계산기 · 실수령액 계산기 출처',
+  description:
+    '퇴직금 계산기, 실수령액 계산기, 주휴수당 계산기, 최저임금 계산기에 적용한 고용노동부·국세청·국민연금공단 출처를 한 번에 확인할 수 있습니다.',
+  path: '/sources',
+  keywords: ['퇴직금 계산기 출처', '실수령액 계산기 출처', '주휴수당 계산 근거'],
+});
 
 export default function SourcesPage() {
   return (

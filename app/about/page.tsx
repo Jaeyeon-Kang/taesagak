@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: '퇴사각 소개 — 근로자용 돈찾기 계산기',
-  description: '퇴사각은 근로자가 놓치기 쉬운 주휴수당·퇴직금·실수령액·최저임금을 한 번에 계산하고 확인할 수 있는 무료 웹 계산기입니다.',
-};
+export const metadata: Metadata = buildMetadata({
+  title: '퇴사각 소개',
+  description:
+    '퇴사각은 퇴직금 계산기, 실수령액 계산기, 주휴수당 계산기, 최저임금 계산기를 제공하는 근로자용 돈찾기 서비스입니다.',
+  path: '/about',
+  keywords: ['퇴사각 소개', '근로자 계산기', '퇴직금 계산기 서비스'],
+});
 
 export default function AboutPage() {
   return (

@@ -1022,6 +1022,60 @@ hr.divider {
   margin: 1.5rem 0;
 }
 
+.engagement-panel {
+  background:
+    linear-gradient(180deg, rgba(247, 245, 235, 0.95), rgba(255, 255, 255, 1)),
+    var(--surface);
+}
+
+.engagement-grid {
+  margin-top: 0.5rem;
+}
+
+.engagement-card {
+  border-color: #d9d4c4;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.engagement-card__eyebrow {
+  display: inline-flex;
+  margin-bottom: 0.6rem;
+  color: #6e674f;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.support-card {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid #d9d4c4;
+  background: #fbf8f0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.support-card h3 {
+  font-size: 1rem;
+  margin-top: 0.2rem;
+}
+
+.support-card p {
+  margin-top: 0.45rem;
+  color: var(--text-2);
+  font-size: 0.92rem;
+}
+
+.support-card__note {
+  color: var(--text-3);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
 /* ── 반응형 ─────────────────────────────────── */
 @media (max-width: 1080px) {
   .app-layout,
@@ -1070,4 +1124,13 @@ hr.divider {
   .hero { padding: 2.5rem 0 1rem; }
 
   .metric-card__value { font-size: 1.5rem; }
+
+  .support-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .support-card__note {
+    white-space: normal;
+  }
 }

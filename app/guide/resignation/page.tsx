@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: '퇴사 전 체크리스트 2026 — 돈 챙기기',
-  description: '퇴사 전에 반드시 확인해야 할 체크리스트. 퇴직금·미지급 급여·연차수당·실업급여까지 놓치는 돈 없이 챙기는 방법.',
-};
+export const metadata: Metadata = buildMetadata({
+  title: '퇴사 전 체크리스트 2026',
+  description:
+    '퇴사 전에 반드시 확인해야 할 체크리스트입니다. 퇴직금, 미지급 급여, 연차수당, 실업급여까지 놓치기 쉬운 돈과 서류를 한 번에 정리했습니다.',
+  path: '/guide/resignation',
+  keywords: ['퇴사 체크리스트', '퇴직금 체크리스트', '퇴사 준비', '실업급여 준비'],
+});
 
 export default function GuideResignationPage() {
   return (
