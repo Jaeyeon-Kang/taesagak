@@ -7,7 +7,15 @@ export const metadata: Metadata = buildMetadata({
   description:
     '2026년 주휴수당 지급 조건, 계산 방법, 급여명세서 확인법, 미지급 시 대응까지 실용적으로 정리했습니다.',
   path: '/guide/weekly-holiday',
-  keywords: ['주휴수당 조건', '주휴수당 계산법', '알바 주휴수당', '주휴수당 미지급'],
+  keywords: [
+    '주휴수당 조건 총정리',
+    '주휴수당 못 받는 경우',
+    '알바 주휴수당 안 주면',
+    '주 15시간 주휴수당',
+    '주휴수당 계산 방법',
+    '주휴수당 미지급 신고',
+    '단시간 근로자 주휴수당',
+  ],
 });
 
 export default function GuideWeeklyHolidayPage() {

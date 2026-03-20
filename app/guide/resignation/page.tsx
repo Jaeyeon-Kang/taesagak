@@ -7,7 +7,16 @@ export const metadata: Metadata = buildMetadata({
   description:
     '퇴사 전에 반드시 확인해야 할 체크리스트입니다. 퇴직금, 미지급 급여, 연차수당, 실업급여까지 놓치기 쉬운 돈과 서류를 한 번에 정리했습니다.',
   path: '/guide/resignation',
-  keywords: ['퇴사 체크리스트', '퇴직금 체크리스트', '퇴사 준비', '실업급여 준비'],
+  keywords: [
+    '퇴사 전 체크리스트',
+    '퇴사 전 확인할 것',
+    '퇴직금 받고 퇴사하는 법',
+    '퇴사 후 해야할 것',
+    '실업급여 받으려면',
+    '퇴사일 언제가 유리',
+    '연차수당 퇴사 시 정산',
+    '퇴사 통보 기간',
+  ],
 });
 
 export default function GuideResignationPage() {

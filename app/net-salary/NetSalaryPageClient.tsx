@@ -145,6 +145,44 @@ export default function NetSalaryPage() {
 
       <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
         <div className="section__header">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div className="value-grid">
+          <article className="value-card">
+            <h3>연봉 3000만원이면 실수령액은 얼마인가요?</h3>
+            <p>
+              연봉 3,000만원 기준 월 세전 약 250만원에서 4대보험과 소득세를 공제하면
+              <strong>실수령액은 약 220~225만원</strong> 수준입니다.
+              부양가족 수에 따라 소득세가 달라지므로 위 계산기에서 직접 확인해보세요.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>4대보험이 월급에서 얼마나 빠지나요?</h3>
+            <p>
+              2026년 기준 근로자 부담분은 <strong>국민연금 4.5%, 건강보험 3.545%, 장기요양보험(건보의 12.95%), 고용보험 0.9%</strong>입니다.
+              월급 250만원이면 약 23만원 정도가 4대보험으로 공제됩니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>연봉 4000만원이면 월 실수령액은요?</h3>
+            <p>
+              월 세전 약 333만원에서 공제 후 <strong>실수령액은 약 290~295만원</strong> 수준입니다.
+              연봉이 올라갈수록 소득세 비중이 커져 공제 금액도 함께 늘어납니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>월급 200만원이면 실수령액은 얼마인가요?</h3>
+            <p>
+              월 200만원 기준으로 4대보험과 소득세를 공제하면
+              <strong>실수령액은 약 180~183만원</strong> 수준입니다.
+              부양가족이 있으면 소득세가 줄어 실수령액이 약간 올라갑니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+        <div className="section__header">
           <h2>다른 계산기</h2>
         </div>
         <div className="feature-grid">

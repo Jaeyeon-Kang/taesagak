@@ -7,7 +7,14 @@ export const metadata: Metadata = buildMetadata({
   description:
     '퇴직금 계산 시 상여금과 연차수당을 반영하는 방법을 설명합니다. 평균임금 산정 방식, 산입 범위, 실수 줄이는 계산법을 한 번에 확인할 수 있습니다.',
   path: '/guide/severance',
-  keywords: ['퇴직금 상여금', '퇴직금 연차수당', '평균임금 계산', '퇴직금 계산법'],
+  keywords: [
+    '퇴직금 상여금 포함 여부',
+    '퇴직금 연차수당 포함',
+    '퇴직금 평균임금 계산법',
+    '퇴직금 적게 나온 이유',
+    '퇴직금에 상여금 반영하는 법',
+    '퇴직금 계산 시 빠지는 항목',
+  ],
 });
 
 export default function GuideSeverancePage() {

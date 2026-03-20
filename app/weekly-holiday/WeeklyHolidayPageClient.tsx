@@ -224,6 +224,44 @@ export default function WeeklyHolidayPage() {
 
       <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
         <div className="section__header">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div className="value-grid">
+          <article className="value-card">
+            <h3>편의점 알바도 주휴수당을 받을 수 있나요?</h3>
+            <p>
+              네. 편의점, 카페, 음식점 등 <strong>업종에 관계없이 주 15시간 이상 근무하고 개근하면</strong> 주휴수당을 받을 수 있습니다.
+              사업장 규모나 고용 형태와 무관하게 적용됩니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>주 15시간 미만이면 주휴수당을 못 받나요?</h3>
+            <p>
+              맞습니다. <strong>주 소정근로시간이 15시간 미만</strong>이면 주휴수당 대상이 아닙니다.
+              다만 계약서와 실제 근무시간이 다를 수 있으니 실제 출근 기록을 기준으로 확인하세요.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>월급에 주휴수당이 이미 포함되어 있을 수도 있나요?</h3>
+            <p>
+              월급제 근로자는 기본급에 <strong>주휴수당이 포함된 경우가 많습니다.</strong>
+              급여명세서에 별도 항목이 없더라도 기본급 안에 산입되어 있을 수 있으니,
+              시급으로 역산해서 확인하는 것이 정확합니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>주휴수당을 안 주면 어떻게 신고하나요?</h3>
+            <p>
+              주휴수당 미지급은 <strong>임금체불</strong>에 해당합니다.
+              고용노동부(국번 없이 1350)에 전화하거나 가까운 노동청에 진정서를 제출할 수 있습니다.
+              근로계약서와 출근 기록을 미리 확보해두면 처리가 빠릅니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+        <div className="section__header">
           <h2>다른 계산기</h2>
         </div>
         <div className="feature-grid">

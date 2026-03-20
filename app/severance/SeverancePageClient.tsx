@@ -168,6 +168,45 @@ export default function SeverancePage() {
 
       <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
         <div className="section__header">
+          <h2>자주 묻는 질문</h2>
+        </div>
+        <div className="value-grid">
+          <article className="value-card">
+            <h3>1년 미만 근무하면 퇴직금을 못 받나요?</h3>
+            <p>
+              네, 퇴직금은 <strong>같은 사업장에서 1년 이상 근무</strong>해야 받을 수 있습니다.
+              다만 입사일 기준이므로 수습 기간도 포함됩니다.
+              1년이 며칠 안 남았다면 퇴사일을 조정하는 것이 유리할 수 있습니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>퇴직금에 세금이 붙나요?</h3>
+            <p>
+              퇴직금에는 <strong>퇴직소득세</strong>가 부과됩니다.
+              다만 근속연수에 따라 공제가 크기 때문에 일반 소득세보다 세율이 낮습니다.
+              IRP 계좌로 받으면 퇴직소득세를 이연할 수 있습니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>퇴직금 지급기한은 언제인가요?</h3>
+            <p>
+              퇴사일로부터 <strong>14일 이내</strong>에 지급해야 합니다.
+              기한을 넘기면 연 20%의 지연이자가 발생하며, 고용노동부에 신고할 수 있습니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>퇴직금에 상여금이 포함되나요?</h3>
+            <p>
+              정기 상여금은 <strong>평균임금 산정 시 포함</strong>됩니다.
+              최근 3개월 급여만 입력하면 금액이 적게 나올 수 있으니,
+              연간 상여금 총액의 3/12를 함께 반영해야 정확합니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+        <div className="section__header">
           <h2>다른 계산기</h2>
         </div>
         <div className="feature-grid">
