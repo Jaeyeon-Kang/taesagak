@@ -5,7 +5,13 @@ export default function Header() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="brand" href="/">
-          <span className="brand__mark" aria-hidden="true" />
+          <img
+            className="brand__mark"
+            src="/icons/logo-icon.svg"
+            alt="퇴사각 로고"
+            width={40}
+            height={40}
+          />
           <span className="brand__text">
             <strong>퇴사각</strong>
             <span>근로자용 돈찾기 계산기</span>

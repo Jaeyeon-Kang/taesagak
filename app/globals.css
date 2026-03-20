@@ -40,6 +40,8 @@ body {
   line-height: 1.7;
   font-size: 15px;
   letter-spacing: 0.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 img { max-width: 100%; display: block; }
@@ -67,7 +69,7 @@ button { cursor: pointer; }
   z-index: 20;
   backdrop-filter: blur(20px) saturate(160%);
   background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 2px solid var(--text);
 }
 
 .site-header__inner {
@@ -84,33 +86,21 @@ button { cursor: pointer; }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.7rem;
   text-decoration: none;
 }
 
 .brand__mark {
   width: 40px;
   height: 40px;
-  border-radius: 8px;
-  background: #1a1a1a;
-  box-shadow: none;
-  position: relative;
+  border-radius: 6px;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
-.brand__mark::before,
-.brand__mark::after {
-  content: "";
-  position: absolute;
-  border-radius: 4px;
-  border: 2px solid rgba(255, 255, 255, 0.65);
-}
-
-.brand__mark::before { inset: 9px; border-radius: 3px; }
-.brand__mark::after { inset: 15px 11px 7px; border-width: 0 0 2px 0; border-radius: 0; }
-
-.brand__text strong { display: block; font-size: 1rem; font-weight: 700; }
-.brand__text span { display: block; color: var(--text-3); font-size: 0.83rem; margin-top: 1px; }
+.brand__text { display: flex; flex-direction: column; justify-content: center; }
+.brand__text strong { display: block; font-size: 1rem; font-weight: 700; line-height: 1.2; }
+.brand__text span { display: block; color: var(--text-3); font-size: 0.78rem; line-height: 1.2; margin-top: 2px; }
 
 /* ── 내비 ───────────────────────────────────── */
 .nav {
@@ -135,8 +125,11 @@ button { cursor: pointer; }
 
 .nav a:hover,
 .nav button:hover {
-  background: var(--surface-2);
+  background: transparent;
   color: var(--text);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 /* ── 버튼 ───────────────────────────────────── */
@@ -160,8 +153,8 @@ a.button {
   gap: 0.5rem;
   min-height: 46px;
   padding: 0 1.2rem;
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  border: none;
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
@@ -195,7 +188,7 @@ a.button:hover {
 .button--secondary {
   background: transparent;
   color: var(--text);
-  border-color: var(--line-2);
+  border-color: var(--text);
   box-shadow: none;
 }
 
@@ -206,7 +199,7 @@ a.button:hover {
 
 .ghost-button {
   background: transparent;
-  border-color: var(--line-2);
+  border-color: var(--text);
   color: var(--text-3);
 }
 
@@ -221,7 +214,7 @@ a.button:hover {
   display: grid;
   gap: 2rem;
   justify-items: center;
-  text-align: center;
+  text-align: left;
 }
 
 .hero__panel {
@@ -230,13 +223,13 @@ a.button:hover {
   box-shadow: none;
   padding: 0;
   max-width: 720px;
+  width: 100%;
 }
 
 .glass-card {
   background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow);
+  border: none;
+  box-shadow: none;
   padding: 2.5rem;
 }
 
@@ -267,34 +260,38 @@ a.button:hover {
   color: var(--text-2);
   font-size: 1.05rem;
   max-width: 58ch;
-  margin-left: auto;
-  margin-right: auto;
   line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .hero__highlight {
-  background: linear-gradient(transparent 55%, #d4edda 55%);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 0.15em;
+  text-underline-offset: 0.1em;
+  text-decoration-skip-ink: none;
 }
 
-.hero__actions { margin-top: 1.8rem; justify-content: center; }
+.hero__actions { margin-top: 2rem; }
 
 .hero__stats {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 1.25rem;
 }
 
 .stat {
-  padding: 1rem 1.1rem;
-  background: var(--surface-2);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
+  padding: 1.25rem 1.3rem;
+  background: #fafaf8;
+  border: none;
+  text-align: left;
 }
 
 .stat strong { display: block; font-size: 1.05rem; font-weight: 700; }
 .stat span { display: block; margin-top: 0.25rem; color: var(--text-3); font-size: 0.85rem; }
+a.stat { transition: transform 0.15s; }
+a.stat:hover { transform: translateY(-2px); text-decoration: none; }
 
 /* ── 프리뷰 ─────────────────────────────────── */
 .hero-preview {
@@ -336,9 +333,8 @@ a.button:hover {
 .mini-card {
   padding: 1rem;
   background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  border: none;
+  box-shadow: none;
 }
 
 .mini-card h4 { font-size: 0.88rem; margin-bottom: 0.4rem; }
@@ -364,11 +360,11 @@ a.button:hover {
 
 /* ── 섹션 ───────────────────────────────────── */
 .section {
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 
 .section__header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .section__header h2 {
@@ -383,6 +379,7 @@ a.button:hover {
   font-size: 1rem;
   max-width: 64ch;
   line-height: 1.65;
+  word-break: keep-all;
 }
 
 /* ── 카드 공통 ──────────────────────────────── */
@@ -395,16 +392,15 @@ a.button:hover {
 .page-card,
 .status-banner {
   background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  border: none;
+  box-shadow: none;
 }
 
 .panel,
 .metric-card,
 .page-card,
 .status-banner {
-  padding: 1.5rem;
+  padding: 1.75rem;
 }
 
 /* ── 패널 ───────────────────────────────────── */
@@ -441,7 +437,7 @@ a.button:hover {
 .summary-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .metric-card {
@@ -452,16 +448,7 @@ a.button:hover {
   overflow: hidden;
 }
 
-.metric-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--line);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
+/* metric-card top accent handled by sketchy ::before */
 
 .metric-card__head {
   margin-bottom: 0;
@@ -501,10 +488,10 @@ a.button:hover {
   gap: 0.3rem;
   min-height: 26px;
   padding: 0 0.7rem;
-  border-radius: 999px;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   font-size: 0.78rem;
   font-weight: 600;
-  border: 1px solid transparent;
+  border: 1.5px solid var(--text);
   white-space: nowrap;
 }
 
@@ -545,7 +532,7 @@ a.button:hover {
 .footer-grid,
 .summary-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -554,15 +541,49 @@ a.button:hover {
 
 .value-card,
 .link-card {
-  padding: 1.4rem;
+  padding: 1.6rem;
   transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
   text-decoration: none;
   display: block;
 }
 
+/* 읽기용 카드 - 옅은 배경 */
+article.value-card,
+div.value-card {
+  background: #fafaf8;
+}
+
+/* 클릭용 카드 */
+a.value-card {
+  transition: transform 0.15s, background 0.15s;
+  cursor: pointer;
+  background: var(--surface);
+}
+
+a.value-card::after {
+  content: "\2192";
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 1.1rem;
+  color: var(--text-3);
+  transition: transform 0.15s, color 0.15s;
+}
+
 a.value-card:hover {
   background: var(--surface-2);
   text-decoration: none;
+  transform: translateY(-3px);
+}
+
+a.value-card:hover::after {
+  transform: translateX(4px);
+  color: var(--text);
+}
+
+/* 읽기용 카드 */
+article.value-card,
+div.value-card {
+  cursor: default;
 }
 
 .value-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.55rem; }
@@ -647,8 +668,8 @@ a.value-card:hover {
 .field textarea {
   width: 100%;
   min-height: 48px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line-2);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  border: 2px solid var(--text);
   background: var(--surface);
   color: var(--text);
   padding: 0.8rem 1rem;
@@ -669,16 +690,21 @@ a.value-card:hover {
 }
 
 .fieldset {
-  border: 1px solid var(--line-2);
-  border-radius: var(--radius-lg);
-  padding: 1.1rem;
+  border: none;
+  padding: 1.1rem 0 0;
   margin: 0;
 }
 
+.fieldset::before {
+  display: none !important;
+}
+
 .fieldset legend {
-  padding: 0 0.5rem;
-  color: var(--text-3);
-  font-size: 0.9rem;
+  padding: 0;
+  color: var(--text-2);
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .checkbox {
@@ -687,8 +713,7 @@ a.value-card:hover {
   gap: 0.7rem;
   min-height: 48px;
   padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  border: 1px dashed var(--line-2);
+  border: none;
   background: var(--surface-2);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
@@ -711,8 +736,7 @@ a.value-card:hover {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.1rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line-2);
+  border: none;
   background: var(--surface);
   cursor: pointer;
   transition: all 0.15s;
@@ -757,7 +781,7 @@ a.value-card:hover {
 .radar-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 1.25rem;
 }
 
 .radar-item {
@@ -765,25 +789,21 @@ a.value-card:hover {
   align-items: flex-start;
   gap: 1rem;
   padding: 1.1rem;
-  border-radius: var(--radius-md);
   background: var(--surface-2);
-  border: 1px solid var(--line);
+  border: none;
   transition: border-color 0.15s;
 }
 
 .radar-item--ok {
   background: #f0fdf4;
-  border-color: #bbf7d0;
 }
 
 .radar-item--warn {
   background: #fefce8;
-  border-color: #fde68a;
 }
 
 .radar-item--danger {
   background: #fef2f2;
-  border-color: #fecaca;
 }
 
 .radar-item__dot {
@@ -844,7 +864,7 @@ a.value-card:hover {
 }
 
 /* ── 공식 카드 ───────────────────────────────── */
-.formula-stack { display: grid; gap: 0.75rem; }
+.formula-stack { display: grid; gap: 1rem; }
 
 .formula-card { overflow: clip; }
 
@@ -881,15 +901,15 @@ a.value-card:hover {
 .formula-card__body p { margin-bottom: 0.5rem; }
 
 /* ── 체크리스트 ─────────────────────────────── */
-.checklist { display: grid; gap: 0.75rem; }
+.checklist { display: grid; gap: 1rem; }
 
 .checklist li {
   display: flex;
   gap: 0.75rem;
   align-items: flex-start;
-  padding: 0.85rem 1rem;
+  padding: 1rem 1.1rem;
   border-radius: var(--radius-md);
-  background: var(--surface-2);
+  background: #fafaf8;
   border: 1px solid var(--line);
   font-size: 0.92rem;
   line-height: 1.55;
@@ -972,9 +992,9 @@ hr.divider {
 
 /* ── 푸터 ───────────────────────────────────── */
 .site-footer {
-  border-top: 1px solid var(--line);
+  border-top: 2px solid var(--text);
   margin-top: 4rem;
-  background: var(--surface-2);
+  background: var(--surface);
 }
 
 .site-footer__inner {
@@ -1119,7 +1139,7 @@ hr.divider {
 
   .page-shell { width: min(100% - 1.5rem, var(--max-width)); }
 
-  .section { padding: 1.5rem 0; }
+  .section { padding: 2rem 0; }
 
   .hero { padding: 2.5rem 0 1rem; }
 
@@ -1133,4 +1153,100 @@ hr.divider {
   .support-card__note {
     white-space: normal;
   }
+}
+
+/* ── 손그림 border ────────────────────────────── */
+.panel,
+.metric-card,
+.formula-card,
+.timeline__item,
+.value-card,
+.link-card,
+.page-card,
+.status-banner,
+.glass-card,
+.mini-card,
+.stat,
+.radar-item,
+.fieldset,
+.choice-button,
+.checkbox,
+.button,
+button.primary-button,
+button.secondary-button,
+button.ghost-button,
+a.button,
+.pill {
+  position: relative;
+  border-color: transparent !important;
+}
+
+/* 큰 컨테이너: 2px */
+.panel::before,
+.glass-card::before,
+.page-card::before,
+.status-banner::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--text);
+  border-radius: 2px;
+  filter: url(#sketchy);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 카드: 1.5px */
+.metric-card::before,
+.formula-card::before,
+.timeline__item::before,
+.value-card::before,
+.link-card::before,
+.mini-card::before,
+.stat::before,
+.radar-item::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1.5px solid var(--text);
+  border-radius: 2px;
+  filter: url(#sketchy);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 작은 요소: 1px */
+.choice-button::before,
+.checkbox::before,
+.button::before,
+button.primary-button::before,
+button.secondary-button::before,
+button.ghost-button::before,
+a.button::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1.2px solid var(--text);
+  border-radius: 2px;
+  filter: url(#sketchy);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pill::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--text-2);
+  border-radius: 2px;
+  filter: url(#sketchy);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1.5px solid var(--text);
+  border-radius: 2px;
 }

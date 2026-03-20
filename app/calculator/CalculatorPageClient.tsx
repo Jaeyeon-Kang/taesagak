@@ -589,6 +589,7 @@ export default function CalculatorPage() {
                   <div className="action-row" style={{ marginTop: '1.5rem' }}>
                     <button type="button" className="secondary-button" onClick={() => setCurrentStep(1)}>이전</button>
                     <button type="button" className="primary-button" onClick={() => setCurrentStep(3)}>다음</button>
+                    <button className="ghost-button" type="button" onClick={handleResetForm}>초기화</button>
                   </div>
                 </div>
               )}
@@ -670,6 +671,7 @@ export default function CalculatorPage() {
                   <div className="action-row" style={{ marginTop: '1.5rem' }}>
                     <button type="button" className="secondary-button" onClick={() => setCurrentStep(2)}>이전</button>
                     <button type="button" className="primary-button" onClick={() => setCurrentStep(4)}>다음</button>
+                    <button className="ghost-button" type="button" onClick={handleResetForm}>초기화</button>
                   </div>
                 </div>
               )}
@@ -745,13 +747,10 @@ export default function CalculatorPage() {
                   <div className="action-row" style={{ marginTop: '1.5rem' }}>
                     <button type="button" className="secondary-button" onClick={() => setCurrentStep(3)}>이전</button>
                     <button type="submit" className="primary-button">결과 보기</button>
+                    <button className="ghost-button" type="button" onClick={handleResetForm}>초기화</button>
                   </div>
                 </div>
               )}
-
-              <div className="action-row" style={{ marginTop: '1rem' }}>
-                <button className="ghost-button" type="button" onClick={handleResetForm}>초기화</button>
-              </div>
             </form>
           </section>
 

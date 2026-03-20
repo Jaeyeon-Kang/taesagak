@@ -30,18 +30,18 @@ export default function HomePage() {
             <Link className="button button--secondary" href="/guide/resignation">퇴사 체크리스트 보기</Link>
           </div>
           <div className="hero__stats">
-            <div className="stat">
+            <Link className="stat" href="/severance" style={{ textDecoration: 'none' }}>
               <strong>퇴직금 계산기</strong>
               <span>상여금·연차수당 반영 근거까지 정리</span>
-            </div>
-            <div className="stat">
+            </Link>
+            <Link className="stat" href="/net-salary" style={{ textDecoration: 'none' }}>
               <strong>실수령액 계산기</strong>
               <span>4대보험과 세금 공제 구조를 함께 확인</span>
-            </div>
-            <div className="stat">
+            </Link>
+            <Link className="stat" href="/weekly-holiday" style={{ textDecoration: 'none' }}>
               <strong>주휴수당 계산기</strong>
               <span>조건 확인부터 월 환산액까지 한 번에</span>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

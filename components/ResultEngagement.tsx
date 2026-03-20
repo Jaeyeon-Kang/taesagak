@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { AdUnit } from '@/components/AdSense';
 
 type Topic = 'calculator' | 'severance' | 'weekly-holiday' | 'net-salary' | 'minimum-wage';
 
@@ -98,8 +99,18 @@ const contentByTopic: Record<Topic, ContentLink[]> = {
   ],
 };
 
+const cpaByTopic: Record<Topic, { label: string; text: string; envKey: string } | null> = {
+  calculator: { label: 'IRP 계좌', text: '퇴직금을 IRP로 옮기면 퇴직소득세를 이연할 수 있습니다.', envKey: 'NEXT_PUBLIC_CPA_IRP_URL' },
+  severance: { label: 'IRP 계좌', text: '퇴직금을 IRP 계좌로 받으면 퇴직소득세 이연이 가능합니다.', envKey: 'NEXT_PUBLIC_CPA_IRP_URL' },
+  'net-salary': { label: '연말정산 환급', text: '세금 공제를 더 받을 수 있는 절세 계좌를 확인해보세요.', envKey: 'NEXT_PUBLIC_CPA_TAX_URL' },
+  'weekly-holiday': null,
+  'minimum-wage': null,
+};
+
 export default function ResultEngagement({ topic }: { topic: Topic }) {
   const links = contentByTopic[topic];
+  const cpa = cpaByTopic[topic];
+  const cpaUrl = cpa ? (process.env[cpa.envKey] ?? null) : null;
 
   return (
     <section className="panel engagement-panel">
@@ -110,7 +121,23 @@ export default function ResultEngagement({ topic }: { topic: Topic }) {
         </div>
       </div>
 
-      <div className="value-grid engagement-grid">
+      {cpa && cpaUrl && (
+        <a
+          className="value-card cpa-banner"
+          href={cpaUrl}
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'none', display: 'block', marginBottom: '1rem' }}
+        >
+          <span className="engagement-card__eyebrow">{cpa.label}</span>
+          <h3 style={{ marginBottom: '0.25rem' }}>{cpa.text}</h3>
+          <span style={{ fontSize: '0.85rem', color: 'var(--text-3)' }}>자세히 보기 →</span>
+        </a>
+      )}
+
+      <AdUnit slot="" format="horizontal" />
+
+      <div className="value-grid engagement-grid" style={{ marginTop: '1rem' }}>
         {links.map((item) => (
           <Link key={item.href} className="value-card engagement-card" href={item.href}>
             <span className="engagement-card__eyebrow">관련 가이드</span>
@@ -139,7 +166,7 @@ export default function ResultEngagement({ topic }: { topic: Topic }) {
           </a>
         ) : (
           <div className="support-card__note">
-            `NEXT_PUBLIC_TOSS_DONATION_URL`을 연결하면 토스 익명 송금 버튼이 활성화됩니다.
+            NEXT_PUBLIC_TOSS_DONATION_URL을 연결하면 토스 익명 송금 버튼이 활성화됩니다.
           </div>
         )}
       </div>
