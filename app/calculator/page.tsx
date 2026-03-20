@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import CalculatorPageClient from '@/app/calculator/CalculatorPageClient';
 import { buildMetadata } from '@/lib/seo';
+import JsonLd, { calculatorJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '퇴직금 계산기 + 실수령액 계산기 + 주휴수당 계산기 통합',
@@ -11,5 +12,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function CalculatorPage() {
-  return <CalculatorPageClient />;
+  return (
+    <>
+      <JsonLd data={calculatorJsonLd({ name: '통합 계산기', description: '퇴직금, 실수령액, 주휴수당, 최저임금을 한 화면에서 계산합니다.', path: '/calculator' })} />
+      <CalculatorPageClient />
+    </>
+  );
 }

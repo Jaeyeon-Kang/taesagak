@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import NetSalaryPageClient from '@/app/net-salary/NetSalaryPageClient';
 import { buildMetadata } from '@/lib/seo';
+import JsonLd, { calculatorJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '실수령액 계산기 2026',
@@ -11,5 +12,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function NetSalaryPage() {
-  return <NetSalaryPageClient />;
+  return (
+    <>
+      <JsonLd data={calculatorJsonLd({ name: '실수령액 계산기', description: '세전 월급이나 연봉을 입력하면 4대보험과 세금 공제 후 세후 금액을 확인할 수 있습니다.', path: '/net-salary' })} />
+      <NetSalaryPageClient />
+    </>
+  );
 }

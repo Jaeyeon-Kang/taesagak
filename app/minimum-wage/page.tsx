@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import MinimumWagePageClient from '@/app/minimum-wage/MinimumWagePageClient';
 import { buildMetadata } from '@/lib/seo';
+import JsonLd, { calculatorJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '최저임금 계산기 2026',
@@ -11,5 +12,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function MinimumWagePage() {
-  return <MinimumWagePageClient />;
+  return (
+    <>
+      <JsonLd data={calculatorJsonLd({ name: '최저임금 계산기', description: '2026년 최저임금 10,320원 기준으로 환산 시급과 월 부족분을 점검합니다.', path: '/minimum-wage' })} />
+      <MinimumWagePageClient />
+    </>
+  );
 }

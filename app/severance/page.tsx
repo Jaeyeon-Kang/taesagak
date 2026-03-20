@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import SeverancePageClient from '@/app/severance/SeverancePageClient';
 import { buildMetadata } from '@/lib/seo';
+import JsonLd, { calculatorJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '퇴직금 계산기 2026',
@@ -11,5 +12,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function SeverancePage() {
-  return <SeverancePageClient />;
+  return (
+    <>
+      <JsonLd data={calculatorJsonLd({ name: '퇴직금 계산기', description: '입사일, 퇴사일, 최근 3개월 급여를 기준으로 법정 퇴직금을 계산합니다.', path: '/severance' })} />
+      <SeverancePageClient />
+    </>
+  );
 }

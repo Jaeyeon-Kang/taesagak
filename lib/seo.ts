@@ -20,6 +20,13 @@ export const SITE_KEYWORDS = [
   '퇴사각',
 ];
 
+const ogImage = {
+  url: '/og-image.png',
+  width: 1200,
+  height: 630,
+  alt: '퇴사각 — 퇴직금·실수령액·주휴수당·최저임금 계산기',
+};
+
 export const BASE_METADATA: Metadata = {
   ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   applicationName: SITE_NAME,
@@ -37,11 +44,13 @@ export const BASE_METADATA: Metadata = {
     siteName: SITE_NAME,
     locale: 'ko_KR',
     type: 'website',
+    images: [ogImage],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: [ogImage],
   },
   robots: {
     index: true,
@@ -82,12 +91,14 @@ export function buildMetadata({
       siteName: SITE_NAME,
       locale: 'ko_KR',
       type: 'article',
+      images: [ogImage],
       ...(siteUrl ? { url: new URL(path, siteUrl).toString() } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: [ogImage],
     },
   };
 }

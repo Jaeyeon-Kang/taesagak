@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import WeeklyHolidayPageClient from '@/app/weekly-holiday/WeeklyHolidayPageClient';
 import { buildMetadata } from '@/lib/seo';
+import JsonLd, { calculatorJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '주휴수당 계산기 2026',
@@ -11,5 +12,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function WeeklyHolidayPage() {
-  return <WeeklyHolidayPageClient />;
+  return (
+    <>
+      <JsonLd data={calculatorJsonLd({ name: '주휴수당 계산기', description: '시급이나 월급을 입력하면 주휴수당 대상 여부와 월 환산액을 바로 계산합니다.', path: '/weekly-holiday' })} />
+      <WeeklyHolidayPageClient />
+    </>
+  );
 }

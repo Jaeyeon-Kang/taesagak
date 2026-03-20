@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: '퇴사각 업데이트 로그',
-};
+export const metadata: Metadata = buildMetadata({
+  title: '업데이트 로그',
+  description:
+    '퇴사각 계산기의 변경 이력과 룰셋 업데이트 내역을 확인할 수 있습니다.',
+  path: '/update-log',
+  keywords: ['퇴사각 업데이트', '계산기 변경 이력'],
+});
 
 export default function UpdateLogPage() {
   return (

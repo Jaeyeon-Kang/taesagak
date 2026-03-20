@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <filter id="sketchy" filterUnits="userSpaceOnUse">
+      <feTurbulence type="turbulence" baseFrequency="0.012" numOctaves="3" seed="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1200" height="630" fill="#ffffff"/>
+
+  <!-- 손그림 외곽선 -->
+  <rect x="24" y="24" width="1152" height="582" rx="2" fill="none" stroke="#1a1a1a" stroke-width="2.5" filter="url(#sketchy)"/>
+
+  <!-- 로고 아이콘 (원본 기반, 좌측 배치) -->
+  <g transform="translate(100, 200)">
+    <rect x="0" y="0" width="80" height="80" rx="0" fill="#141413" filter="url(#sketchy)"/>
+    <g stroke="#ffffff" fill="none" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(0,0) scale(0.8)">
+      <ellipse cx="50" cy="28" rx="19" ry="16"/>
+      <line x1="50" y1="44" x2="50" y2="66"/>
+      <polyline points="50,52 34,38 24,16"/>
+      <line x1="24" y1="16" x2="16" y2="8"/>
+      <line x1="24" y1="16" x2="22" y2="6"/>
+      <line x1="24" y1="16" x2="30" y2="7"/>
+      <line x1="50" y1="52" x2="74" y2="64"/>
+      <line x1="50" y1="66" x2="34" y2="88"/>
+      <line x1="50" y1="66" x2="66" y2="88"/>
+    </g>
+  </g>
+
+  <!-- 사이트명 -->
+  <text x="200" y="256" font-family="'Pretendard Variable', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="52" font-weight="800" fill="#1a1a1a" letter-spacing="-0.03em">퇴사각</text>
+
+  <!-- 구분선 -->
+  <line x1="100" y1="310" x2="500" y2="310" stroke="#e0e0e0" stroke-width="1.5" filter="url(#sketchy)"/>
+
+  <!-- 메인 카피 -->
+  <text x="100" y="370" font-family="'Pretendard Variable', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="38" font-weight="800" fill="#1a1a1a" letter-spacing="-0.04em">퇴사 전에 챙길 건,</text>
+  <text x="100" y="420" font-family="'Pretendard Variable', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="38" font-weight="800" fill="#1a1a1a" letter-spacing="-0.04em">멘탈이 아니라 <tspan text-decoration="underline">돈</tspan>입니다.</text>
+
+  <!-- 설명 -->
+  <text x="100" y="480" font-family="'Pretendard Variable', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif" font-size="20" font-weight="500" fill="#666666">퇴직금 · 실수령액 · 주휴수당 · 최저임금 계산기</text>
+
+  <!-- 우측 장식 카드들 -->
+  <g transform="translate(650, 140)" filter="url(#sketchy)">
+    <rect x="0" y="0" width="420" height="90" rx="2" fill="#fafaf8" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="24" y="38" font-family="'Pretendard Variable', sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">퇴직금 계산기</text>
+    <text x="24" y="64" font-family="'Pretendard Variable', sans-serif" font-size="14" font-weight="500" fill="#999999">상여금·연차수당 반영 근거까지 정리</text>
+  </g>
+
+  <g transform="translate(650, 250)" filter="url(#sketchy)">
+    <rect x="0" y="0" width="420" height="90" rx="2" fill="#fafaf8" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="24" y="38" font-family="'Pretendard Variable', sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">실수령액 계산기</text>
+    <text x="24" y="64" font-family="'Pretendard Variable', sans-serif" font-size="14" font-weight="500" fill="#999999">4대보험과 세금 공제 구조를 함께 확인</text>
+  </g>
+
+  <g transform="translate(650, 360)" filter="url(#sketchy)">
+    <rect x="0" y="0" width="420" height="90" rx="2" fill="#fafaf8" stroke="#1a1a1a" stroke-width="1.5"/>
+    <text x="24" y="38" font-family="'Pretendard Variable', sans-serif" font-size="18" font-weight="700" fill="#1a1a1a">주휴수당 계산기</text>
+    <text x="24" y="64" font-family="'Pretendard Variable', sans-serif" font-size="14" font-weight="500" fill="#999999">조건 확인부터 월 환산액까지 한 번에</text>
+  </g>
+
+  <!-- 하단 URL -->
+  <text x="100" y="560" font-family="'Pretendard Variable', sans-serif" font-size="16" font-weight="600" fill="#999999" letter-spacing="0.05em">taesagak.com</text>
+</svg>
