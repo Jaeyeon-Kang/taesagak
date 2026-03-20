@@ -172,20 +172,20 @@ export default function SeverancePage() {
         </div>
         <div className="feature-grid">
           <Link className="value-card" href="/weekly-holiday" style={{ textDecoration: 'none' }}>
-            <h3>주휴수당</h3>
-            <p>주휴수당 추정</p>
+            <h3>주휴수당 계산기</h3>
+            <p>시급이나 월급만 입력하면 주휴수당 대상 여부와 월 환산액을 바로 계산합니다.</p>
           </Link>
           <Link className="value-card" href="/net-salary" style={{ textDecoration: 'none' }}>
-            <h3>실수령액</h3>
-            <p>세후 실수령액 계산</p>
+            <h3>실수령액 계산기</h3>
+            <p>세전 월급이나 연봉을 넣으면 4대보험과 세금 공제 후 세후 금액을 확인할 수 있습니다.</p>
           </Link>
           <Link className="value-card" href="/minimum-wage" style={{ textDecoration: 'none' }}>
-            <h3>최저임금</h3>
-            <p>미달 여부 점검</p>
+            <h3>최저임금 계산기</h3>
+            <p>2026년 최저임금 10,320원 기준으로 환산 시급과 월 부족분을 함께 점검합니다.</p>
           </Link>
           <Link className="value-card" href="/calculator" style={{ textDecoration: 'none' }}>
             <h3>통합 계산기</h3>
-            <p>4종 한 번에 계산</p>
+            <p>퇴직금, 실수령액, 주휴수당, 최저임금 4종을 한 번에 입력하고 결과를 비교할 수 있습니다.</p>
           </Link>
         </div>
       </section>

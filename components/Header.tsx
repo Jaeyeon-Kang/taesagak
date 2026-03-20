@@ -20,6 +20,7 @@ export default function Header() {
         <nav className="nav" aria-label="주요">
           <Link href="/">홈</Link>
           <Link href="/calculator">계산기</Link>
+          <Link href="/guide/resignation">가이드</Link>
           <Link href="/sources">출처</Link>
         </nav>
       </div>

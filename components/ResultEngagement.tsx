@@ -121,22 +121,6 @@ export default function ResultEngagement({ topic }: { topic: Topic }) {
         </div>
       </div>
 
-      {cpa && cpaUrl && (
-        <a
-          className="value-card cpa-banner"
-          href={cpaUrl}
-          target="_blank"
-          rel="noreferrer noopener"
-          style={{ textDecoration: 'none', display: 'block', marginBottom: '1rem' }}
-        >
-          <span className="engagement-card__eyebrow">{cpa.label}</span>
-          <h3 style={{ marginBottom: '0.25rem' }}>{cpa.text}</h3>
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-3)' }}>자세히 보기 →</span>
-        </a>
-      )}
-
-      <AdUnit slot="" format="horizontal" />
-
       <div className="value-grid engagement-grid" style={{ marginTop: '1rem' }}>
         {links.map((item) => (
           <Link key={item.href} className="value-card engagement-card" href={item.href}>
@@ -146,6 +130,22 @@ export default function ResultEngagement({ topic }: { topic: Topic }) {
           </Link>
         ))}
       </div>
+
+      {cpa && cpaUrl && (
+        <a
+          className="value-card cpa-banner"
+          href={cpaUrl}
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'none', display: 'block', marginTop: '1rem' }}
+        >
+          <span className="engagement-card__eyebrow">{cpa.label}</span>
+          <h3 style={{ marginBottom: '0.25rem' }}>{cpa.text}</h3>
+          <span style={{ fontSize: '0.85rem', color: 'var(--text-3)' }}>자세히 보기 →</span>
+        </a>
+      )}
+
+      <AdUnit slot="" format="horizontal" />
 
       <div className="support-card">
         <div>

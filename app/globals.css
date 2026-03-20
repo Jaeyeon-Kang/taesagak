@@ -731,6 +731,11 @@ div.value-card {
   flex-wrap: wrap;
 }
 
+.choice-group .choice-button {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
 .choice-button {
   display: inline-flex;
   align-items: center;
@@ -1135,7 +1140,7 @@ hr.divider {
 
   .form-grid, .radar-grid { grid-template-columns: 1fr; }
 
-  .hero__stats { grid-template-columns: 1fr; gap: 0.6rem; }
+  .hero__stats { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
 
   .page-shell { width: min(100% - 1.5rem, var(--max-width)); }
 
@@ -1247,6 +1252,8 @@ a.button::before {
 .field input,
 .field select,
 .field textarea {
+  position: relative;
   border: 1.5px solid var(--text);
   border-radius: 2px;
+  filter: url(#sketchy);
 }

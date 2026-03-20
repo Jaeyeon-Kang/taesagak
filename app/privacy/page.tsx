@@ -13,11 +13,9 @@ export default function PrivacyPage() {
   return (
     <main className="page-shell section">
       <div className="section__header">
-        <span className="eyebrow">privacy</span>
-        <h1 className="page-title">개인정보 처리 메모</h1>
+        <h1 className="page-title">개인정보 처리방침</h1>
         <p className="page-lead">
-          이 MVP는 서버 전송 없이 브라우저 로컬 저장만 사용한다. 한마디로,
-          네 입력값을 서버에 굳이 보내지 않는다. 인터넷이 늘 사람 말을 듣는 건 아니지만, 이 부분은 비교적 얌전하다.
+          퇴사각은 사용자의 계산 입력값을 서버로 전송하지 않습니다. 모든 데이터는 브라우저 내에서만 처리됩니다.
         </p>
       </div>
 
@@ -25,34 +23,31 @@ export default function PrivacyPage() {
         <section className="legal-block">
           <h2>1. 수집하는 정보</h2>
           <p>
-            기본 버전에서는 회원가입이 없고, 계산 입력값은 사용자가 쓰는 브라우저의
-            <strong>localStorage</strong>에만 저장된다.
+            퇴사각은 회원가입 절차가 없으며, 계산에 입력한 값은 사용자 브라우저의
+            <strong> localStorage</strong>에만 저장됩니다. 서버로 전송되거나 외부 데이터베이스에 기록되지 않습니다.
           </p>
         </section>
 
         <section className="legal-block">
           <h2>2. 저장 목적</h2>
           <p>
-            최근 입력값 유지, 계산 기록 5건 저장, 재접속 시 폼 자동 복원.
-            딱 여기까지다.
+            최근 입력값 유지, 계산 기록 보관, 재접속 시 폼 자동 복원을 위해 사용됩니다.
           </p>
         </section>
 
         <section className="legal-block">
-          <h2>3. 서버 전송 여부</h2>
+          <h2>3. 외부 스크립트</h2>
           <p>
-            기본 배포본에는 별도 API 호출이 없다.
-            다만 추후 광고 스크립트, 분석 스크립트, 문의 폼, 계정 기능을 붙이면 얘기가 달라진다.
-            그 시점엔 이 문서도 같이 수정해야 한다. 안 그러면 정책 페이지가 장식품이 된다.
+            서비스 개선과 운영을 위해 Google Analytics(방문 통계)와 Google AdSense(광고)를 사용하고 있습니다.
+            해당 스크립트는 쿠키를 통해 익명화된 이용 정보를 수집할 수 있으며, 이는 각 서비스의 개인정보 처리방침을 따릅니다.
           </p>
         </section>
 
         <section className="legal-block">
-          <h2>4. 사용자가 할 수 있는 일</h2>
+          <h2>4. 데이터 삭제</h2>
           <ul>
-            <li>브라우저 저장소 삭제로 입력값/히스토리 제거</li>
-            <li>개인정보 입력 자체를 최소화</li>
-            <li>민감한 급여명세 상세는 복사만 하고 앱엔 최소 정보만 입력</li>
+            <li>브라우저 저장소(localStorage)를 삭제하면 모든 입력값과 계산 기록이 즉시 제거됩니다.</li>
+            <li>브라우저 설정에서 쿠키를 삭제하면 외부 스크립트의 추적 정보도 초기화됩니다.</li>
           </ul>
         </section>
       </div>
