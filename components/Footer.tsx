@@ -16,7 +16,9 @@ export default function Footer() {
             <h3>퇴사각</h3>
             <div className="footer-links">
               <Link href="/">홈</Link>
+              <Link href="/about">소개</Link>
               <Link href="/sources">출처</Link>
+              <Link href="/update-log">업데이트</Link>
               <Link href="/privacy">개인정보</Link>
             </div>
           </section>

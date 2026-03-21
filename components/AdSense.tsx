@@ -32,11 +32,7 @@ export function AdUnit({ slot, format = 'auto' }: { slot: string; format?: strin
   }, [slot]);
 
   if (!ADSENSE_ID || !slot) {
-    return (
-      <div className="ad-slot page-shell" aria-hidden="true">
-        광고 영역 (AdSense 연결 후 표시)
-      </div>
-    );
+    return null;
   }
 
   return (

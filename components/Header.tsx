@@ -22,6 +22,7 @@ export default function Header() {
           <Link href="/calculator">계산기</Link>
           <Link href="/guide/resignation">가이드</Link>
           <Link href="/sources">출처</Link>
+          <Link href="/about">소개</Link>
         </nav>
       </div>
     </header>
