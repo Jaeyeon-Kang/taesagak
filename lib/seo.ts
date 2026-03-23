@@ -50,6 +50,9 @@ export const BASE_METADATA: Metadata = {
     description: SITE_DESCRIPTION,
     images: [ogImage],
   },
+  verification: {
+    google: '9_r0kRzMrnyqxe9Aft75QHbC5Xx1EKtlbpxLFcYBhK0',
+  },
   robots: {
     index: true,
     follow: true,
