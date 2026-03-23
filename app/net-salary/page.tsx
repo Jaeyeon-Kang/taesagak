@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import NetSalaryPageClient from '@/app/net-salary/NetSalaryPageClient';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { calculatorJsonLd, faqJsonLd } from '@/components/JsonLd';
+import JsonLd, { calculatorJsonLd, faqJsonLd, breadcrumbJsonLd } from '@/components/JsonLd';
 
 const faqs = [
   { question: '연봉 3000만원이면 실수령액은 얼마인가요?', answer: '연봉 3,000만원 기준 월 세전 약 250만원에서 4대보험과 소득세를 공제하면 실수령액은 약 220~225만원 수준입니다. 부양가족 수에 따라 소득세가 달라집니다.' },
@@ -29,6 +29,7 @@ export const metadata: Metadata = buildMetadata({
 export default function NetSalaryPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '실수령액 계산기', path: '/net-salary' }])} />
       <JsonLd data={calculatorJsonLd({ name: '실수령액 계산기', description: '세전 월급이나 연봉을 입력하면 4대보험과 세금 공제 후 세후 금액을 확인할 수 있습니다.', path: '/net-salary' })} />
       <JsonLd data={faqJsonLd(faqs)} />
       <NetSalaryPageClient />

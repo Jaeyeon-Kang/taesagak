@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import SeverancePageClient from '@/app/severance/SeverancePageClient';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { calculatorJsonLd, faqJsonLd } from '@/components/JsonLd';
+import JsonLd, { calculatorJsonLd, faqJsonLd, breadcrumbJsonLd } from '@/components/JsonLd';
 
 const faqs = [
   { question: '1년 미만 근무하면 퇴직금을 못 받나요?', answer: '네, 퇴직금은 같은 사업장에서 1년 이상 근무해야 받을 수 있습니다. 다만 입사일 기준이므로 수습 기간도 포함됩니다.' },
@@ -29,6 +29,7 @@ export const metadata: Metadata = buildMetadata({
 export default function SeverancePage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '퇴직금 계산기', path: '/severance' }])} />
       <JsonLd data={calculatorJsonLd({ name: '퇴직금 계산기', description: '입사일, 퇴사일, 최근 3개월 급여를 기준으로 법정 퇴직금을 계산합니다.', path: '/severance' })} />
       <JsonLd data={faqJsonLd(faqs)} />
       <SeverancePageClient />

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import MinimumWagePageClient from '@/app/minimum-wage/MinimumWagePageClient';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { calculatorJsonLd, faqJsonLd } from '@/components/JsonLd';
+import JsonLd, { calculatorJsonLd, faqJsonLd, breadcrumbJsonLd } from '@/components/JsonLd';
 
 const faqs = [
   { question: '2026년 최저시급은 얼마인가요?', answer: '2026년 최저임금은 시급 10,320원입니다. 주 40시간, 월 209시간 기준으로 환산하면 월급 약 2,156,880원입니다.' },
@@ -29,6 +29,7 @@ export const metadata: Metadata = buildMetadata({
 export default function MinimumWagePage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '최저임금 계산기', path: '/minimum-wage' }])} />
       <JsonLd data={calculatorJsonLd({ name: '최저임금 계산기', description: '2026년 최저임금 10,320원 기준으로 환산 시급과 월 부족분을 점검합니다.', path: '/minimum-wage' })} />
       <JsonLd data={faqJsonLd(faqs)} />
       <MinimumWagePageClient />

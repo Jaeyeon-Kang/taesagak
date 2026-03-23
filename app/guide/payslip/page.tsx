@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
+import JsonLd, { breadcrumbJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '급여명세서 체크 가이드 2026',
@@ -20,6 +21,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default function GuidePayslipPage() {
   return (
+    <>
+    <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '급여명세서 체크 가이드', path: '/guide/payslip' }])} />
     <main className="page-shell">
       <section className="section">
         <div className="section__header">
@@ -132,5 +135,6 @@ export default function GuidePayslipPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

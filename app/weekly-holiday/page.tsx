@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import WeeklyHolidayPageClient from '@/app/weekly-holiday/WeeklyHolidayPageClient';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { calculatorJsonLd, faqJsonLd } from '@/components/JsonLd';
+import JsonLd, { calculatorJsonLd, faqJsonLd, breadcrumbJsonLd } from '@/components/JsonLd';
 
 const faqs = [
   { question: '편의점 알바도 주휴수당을 받을 수 있나요?', answer: '네. 편의점, 카페, 음식점 등 업종에 관계없이 주 15시간 이상 근무하고 개근하면 주휴수당을 받을 수 있습니다.' },
@@ -29,6 +29,7 @@ export const metadata: Metadata = buildMetadata({
 export default function WeeklyHolidayPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '주휴수당 계산기', path: '/weekly-holiday' }])} />
       <JsonLd data={calculatorJsonLd({ name: '주휴수당 계산기', description: '시급이나 월급을 입력하면 주휴수당 대상 여부와 월 환산액을 바로 계산합니다.', path: '/weekly-holiday' })} />
       <JsonLd data={faqJsonLd(faqs)} />
       <WeeklyHolidayPageClient />
