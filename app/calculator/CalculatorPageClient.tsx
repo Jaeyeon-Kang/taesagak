@@ -480,6 +480,53 @@ export default function CalculatorPage() {
               </div>
             </div>
 
+            <div className="step-indicator" style={{ display: 'flex', alignItems: 'center', gap: '0', marginBottom: '1.25rem' }}>
+              {[
+                { step: 1, label: '급여 방식' },
+                { step: 2, label: '근무 기간' },
+                { step: 3, label: '급여 정보' },
+                { step: 4, label: '추가 정보' },
+              ].map(({ step, label }, i) => (
+                <div key={step} style={{ display: 'flex', alignItems: 'center', flex: i < 3 ? 1 : 'none' }}>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentStep(step)}
+                    style={{
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem',
+                      background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem',
+                    }}
+                  >
+                    <span style={{
+                      width: '28px', height: '28px', borderRadius: '50%',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: '0.8rem', fontWeight: 700,
+                      background: currentStep >= step ? 'var(--accent, #2563eb)' : 'var(--surface-2, #e5e7eb)',
+                      color: currentStep >= step ? '#fff' : 'var(--text-3, #9ca3af)',
+                      transition: 'background 0.2s, color 0.2s',
+                    }}>
+                      {step}
+                    </span>
+                    <span style={{
+                      fontSize: '0.7rem',
+                      color: currentStep >= step ? 'var(--text, #111)' : 'var(--text-3, #9ca3af)',
+                      fontWeight: currentStep === step ? 600 : 400,
+                      transition: 'color 0.2s',
+                      whiteSpace: 'nowrap',
+                    }}>
+                      {label}
+                    </span>
+                  </button>
+                  {i < 3 && (
+                    <div style={{
+                      flex: 1, height: '2px', marginBottom: '1.2rem',
+                      background: currentStep > step ? 'var(--accent, #2563eb)' : 'var(--surface-2, #e5e7eb)',
+                      transition: 'background 0.2s',
+                    }} />
+                  )}
+                </div>
+              ))}
+            </div>
+
             <form onSubmit={handleSubmit} noValidate>
               {currentStep === 1 && (
                 <div className="form-step" data-step="1">
