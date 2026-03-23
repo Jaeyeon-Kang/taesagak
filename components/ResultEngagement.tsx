@@ -164,11 +164,7 @@ export default function ResultEngagement({ topic }: { topic: Topic }) {
           >
             토스 익명 송금 열기
           </a>
-        ) : (
-          <div className="support-card__note">
-            NEXT_PUBLIC_TOSS_DONATION_URL을 연결하면 토스 익명 송금 버튼이 활성화됩니다.
-          </div>
-        )}
+        ) : null}
       </div>
     </section>
   );

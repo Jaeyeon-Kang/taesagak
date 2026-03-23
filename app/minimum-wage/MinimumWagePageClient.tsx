@@ -8,7 +8,7 @@ import ResultEngagement from '@/components/ResultEngagement';
 export default function MinimumWagePage() {
   const [mwHourly, setMwHourly] = useState('');
   const [mwMonthly, setMwMonthly] = useState('');
-  const [mwWeeklyHours, setMwWeeklyHours] = useState('');
+  const [mwWeeklyHours, setMwWeeklyHours] = useState('40');
   const [mwWorkdays, setMwWorkdays] = useState('5');
   const [result, setResult] = useState<MinimumWageResult | null>(null);
 

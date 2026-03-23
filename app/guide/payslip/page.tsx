@@ -53,14 +53,14 @@ export default function GuidePayslipPage() {
           <article className="value-card">
             <h3>국민연금</h3>
             <p>
-              2026년 근로자 부담율 4.5%. 월 보수 상한 6,370,000원 기준.
-              공제액 = 월 보수 × 4.5% (상한 초과분은 상한액 기준 적용).
+              2026년 근로자 부담율 4.75%. 월 보수 상한 6,370,000원 기준.
+              공제액 = 월 보수 × 4.75% (상한 초과분은 상한액 기준 적용).
             </p>
           </article>
           <article className="value-card">
             <h3>건강보험</h3>
             <p>
-              근로자 3.545%. 장기요양보험 0.4724% 별도.
+              근로자 3.595%. 장기요양보험 0.4724% 별도.
               합산 약 4.0% 수준. 지역가입자 대비 유리하므로 직장가입 유지가 이득이다.
             </p>
           </article>
@@ -81,18 +81,16 @@ export default function GuidePayslipPage() {
         </div>
       </section>
 
-      <div className="ad-slot page-shell" aria-hidden="true">광고</div>
-
       <section className="section">
         <div className="section__header">
           <h2>최저임금 반영 확인</h2>
         </div>
         <div className="panel">
           <ol className="plain-list">
-            <li>1. 급여명세서에서 기본급을 확인한다.</li>
-            <li>2. 시급제라면 기본급 ÷ 실제 근무시간 = 시급. 10,320원(2026 최저시급) 이상인지 확인한다.</li>
-            <li>3. 월급제라면 기본급 ÷ 월 소정근로시간으로 역산한 시급이 최저시급 이상인지 확인한다.</li>
-            <li>4. 식대, 교통비 등 수당은 최저임금 산입 범위 기준을 별도로 확인해야 한다.</li>
+            <li>급여명세서에서 기본급을 확인한다.</li>
+            <li>시급제라면 기본급 ÷ 실제 근무시간 = 시급. 10,320원(2026 최저시급) 이상인지 확인한다.</li>
+            <li>월급제라면 기본급 ÷ 월 소정근로시간으로 역산한 시급이 최저시급 이상인지 확인한다.</li>
+            <li>식대, 교통비 등 수당은 최저임금 산입 범위 기준을 별도로 확인해야 한다.</li>
           </ol>
         </div>
       </section>

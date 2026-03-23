@@ -82,8 +82,6 @@ export default function GuideWeeklyHolidayPage() {
         </div>
       </section>
 
-      <div className="ad-slot page-shell" aria-hidden="true">광고</div>
-
       <section className="section">
         <div className="section__header">
           <h2>주휴수당 계산 방법</h2>
@@ -135,10 +133,10 @@ export default function GuideWeeklyHolidayPage() {
         </div>
         <div className="panel">
           <ol className="plain-list">
-            <li>1. 고용노동부 임금체불 진정서 제출 (전화 1350 또는 온라인 민원24)</li>
-            <li>2. 3년 이내 청구 가능 (소멸시효 3년)</li>
-            <li>3. 소액사건심판 또는 지급명령 신청으로 법적 절차 진행 가능</li>
-            <li>4. 사업주는 3년 이하 징역 또는 2천만원 이하 벌금 대상</li>
+            <li>고용노동부 임금체불 진정서 제출 (전화 1350 또는 온라인 민원24)</li>
+            <li>3년 이내 청구 가능 (소멸시효 3년)</li>
+            <li>소액사건심판 또는 지급명령 신청으로 법적 절차 진행 가능</li>
+            <li>사업주는 3년 이하 징역 또는 2천만원 이하 벌금 대상</li>
           </ol>
         </div>
       </section>

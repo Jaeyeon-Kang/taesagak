@@ -223,8 +223,10 @@ export default function CalculatorPage() {
     if (inp.annualBonus) setAnnualBonus(String(inp.annualBonus));
     if (inp.annualLeavePayout) setAnnualLeavePayout(String(inp.annualLeavePayout));
     if (inp.ordinaryHourlyWage) setOrdinaryHourlyWage(String(inp.ordinaryHourlyWage));
+    const calc = calculateOverview(entry.input);
+    setResults(calc);
+    setShowResults(true);
     setStatusText(`${entry.title} 입력값을 불러왔습니다.`);
-    setTimeout(() => runCalculation(), 0);
   };
 
   const monthlySalaryLabel = salaryType === 'yearly' ? '세전 연봉' : '세전 월급';

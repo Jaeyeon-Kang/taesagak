@@ -78,7 +78,6 @@ export default function GuideSeverancePage() {
         </div>
       </section>
 
-      <div className="ad-slot page-shell" aria-hidden="true">광고</div>
 
       <section className="section">
         <div className="section__header">
