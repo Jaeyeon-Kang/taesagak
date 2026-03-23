@@ -88,8 +88,6 @@ export default function GuideResignationPage() {
         </div>
       </section>
 
-      <div className="ad-slot page-shell" aria-hidden="true">광고</div>
-
       <section className="section">
         <div className="section__header">
           <h2>퇴사 후 받아야 할 돈 목록</h2>
@@ -110,10 +108,10 @@ export default function GuideResignationPage() {
         </div>
         <div className="panel">
           <ol className="plain-list">
-            <li>1. 퇴사 후 14일 이내 건강보험 지역가입자 전환 신청 (또는 임의계속가입)</li>
-            <li>2. 고용보험 수급 신청 (퇴사 다음날부터 가능, 1년 내 신청)</li>
-            <li>3. 퇴직금이 미지급됐다면 14일 이후 고용노동부 임금체불 신고</li>
-            <li>4. 퇴직소득세는 연금 수령 전까지 이연 가능 (IRP 계좌 활용)</li>
+            <li>퇴사 후 14일 이내 건강보험 지역가입자 전환 신청 (또는 임의계속가입)</li>
+            <li>고용보험 수급 신청 (퇴사 다음날부터 가능, 1년 내 신청)</li>
+            <li>퇴직금이 미지급됐다면 14일 이후 고용노동부 임금체불 신고</li>
+            <li>퇴직소득세는 연금 수령 전까지 이연 가능 (IRP 계좌 활용)</li>
           </ol>
         </div>
       </section>
