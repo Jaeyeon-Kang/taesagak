@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://taesagak.co.kr';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.taesagak.co.kr';
 
 export const SITE_NAME = '퇴사각';
 export const SITE_TITLE = '퇴직금 계산기, 실수령액 계산기, 주휴수당 계산기 | 퇴사각';
