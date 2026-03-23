@@ -83,6 +83,44 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="section__header">
+          <h2>데이터 검수 기준</h2>
+        </div>
+        <div className="value-grid">
+          <article className="value-card">
+            <h3>법령 기준 반영</h3>
+            <p>
+              국민연금·건강보험·고용보험 요율, 최저임금, 소득세 간이세액표는
+              매년 초 관보·공단 고시가 확정되면 즉시 코드에 반영합니다.
+              현재 적용 기준은 <strong>2026년 1월 1일</strong>입니다.
+            </p>
+          </article>
+          <article className="value-card">
+            <h3>교차 확인</h3>
+            <p>
+              계산 결과는 고용노동부 퇴직금 산정 예시, 국세청 간이세액표,
+              국민건강보험공단 보험료 산정 기준과 대조해 검증합니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section__header">
+          <h2>오류 제보 및 문의</h2>
+        </div>
+        <div className="panel">
+          <p>
+            계산 결과가 실제와 다르거나 법령 변경이 반영되지 않은 경우,
+            아래 경로로 제보해 주시면 확인 후 수정합니다.
+          </p>
+          <ul style={{ marginTop: '0.5rem', paddingLeft: '1.25rem' }}>
+            <li>이메일: <strong>help@taesagak.co.kr</strong></li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section__header">
           <h2>주의사항</h2>
         </div>
         <div className="panel">

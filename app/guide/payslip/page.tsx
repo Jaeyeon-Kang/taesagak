@@ -60,7 +60,7 @@ export default function GuidePayslipPage() {
           <article className="value-card">
             <h3>건강보험</h3>
             <p>
-              근로자 3.595%. 장기요양보험 0.4724% 별도.
+              근로자 3.595%. 장기요양보험(보수월액의 0.4724%, 건보의 13.14%) 별도.
               합산 약 4.0% 수준. 지역가입자 대비 유리하므로 직장가입 유지가 이득이다.
             </p>
           </article>
@@ -132,6 +132,9 @@ export default function GuidePayslipPage() {
           </Link>
         </div>
       </section>
+      <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-3, #94a3b8)', margin: '2rem 0 0' }}>
+        마지막 업데이트: 2026-03-23 · 2026년 기준 법령 반영
+      </p>
     </main>
     </>
   );

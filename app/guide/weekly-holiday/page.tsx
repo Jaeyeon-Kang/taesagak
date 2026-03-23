@@ -164,6 +164,9 @@ export default function GuideWeeklyHolidayPage() {
           </Link>
         </div>
       </section>
+      <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-3, #94a3b8)', margin: '2rem 0 0' }}>
+        마지막 업데이트: 2026-03-23 · 2026년 기준 법령 반영
+      </p>
     </main>
     </>
   );
