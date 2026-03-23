@@ -51,7 +51,7 @@ export const BASE_METADATA: Metadata = {
     images: [ogImage],
   },
   verification: {
-    google: '9_r0kRzMrnyqxe9Aft75QHbC5Xx1EKtlbpxLFcYBhK0',
+    google: 'frGbt6ds9c3JPEaY2ttK2KkUDC9LLN0AW2lUZHBg7zg',
   },
   robots: {
     index: true,
