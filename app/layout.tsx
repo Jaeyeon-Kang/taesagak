@@ -6,6 +6,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import AdSenseHead from '@/components/AdSense';
 import { BASE_METADATA } from '@/lib/seo';
 import JsonLd, { organizationJsonLd } from '@/components/JsonLd';
+import KakaoInit from '@/components/KakaoInit';
 
 export const metadata: Metadata = BASE_METADATA;
 
@@ -23,6 +24,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        {process.env.NEXT_PUBLIC_KAKAO_JS_KEY && (
+          <script
+            src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+            integrity="sha384-DKYJZ8NLiK8MN4/C5P2vDkVKR+F0bMOjzg2DnIab2gk4FKQX0u5TJgBcrdU6xz"
+            crossOrigin="anonymous"
+            async
+          />
+        )}
       </head>
       <body>
         <GoogleAnalytics />
@@ -34,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </filter>
         </svg>
         <JsonLd data={organizationJsonLd} />
+        <KakaoInit />
         <Header />
         {children}
         <Footer />

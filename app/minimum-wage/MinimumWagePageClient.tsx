@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { calculateMinimumWage, currency, type MinimumWageResult } from '@/lib/calculators';
 import { RULESET_2026 } from '@/lib/rules';
 import ResultEngagement from '@/components/ResultEngagement';
+import ShareButtons from '@/components/ShareButtons';
+import AnimatedValue from '@/components/AnimatedValue';
 
 export default function MinimumWagePage() {
   const [mwHourly, setMwHourly] = useState('');
@@ -80,7 +82,7 @@ export default function MinimumWagePage() {
                   )}
                 </div>
                 <p className="metric-card__value">
-                  {result.effectiveHourly > 0 ? `${currency(result.effectiveHourly)}원` : '-'}
+                  {result.effectiveHourly > 0 ? <><AnimatedValue value={result.effectiveHourly} suffix="원" /></> : '-'}
                 </p>
                 <p className="metric-card__hint">{result.note}</p>
               </article>
@@ -105,6 +107,7 @@ export default function MinimumWagePage() {
                 </article>
               )}
             </div>
+            <ShareButtons title="최저임금 계산기 — 2026년 기준" description="내 시급이 최저임금 이상인지 확인한 결과입니다." />
             <div style={{ marginTop: '1rem' }}>
               <ResultEngagement topic="minimum-wage" />
             </div>

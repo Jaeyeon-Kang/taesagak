@@ -145,7 +145,7 @@ export default function ResultEngagement({ topic }: { topic: Topic }) {
         </a>
       )}
 
-      <AdUnit slot="" format="horizontal" />
+      {/* AdUnit: 슬롯 ID 설정 후 활성화 */}
 
       <div className="support-card">
         <div>

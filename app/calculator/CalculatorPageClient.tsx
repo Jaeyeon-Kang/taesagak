@@ -10,6 +10,8 @@ import {
 } from '@/lib/calculators';
 import { RULESET_2026, SOURCE_LIST, APP_META } from '@/lib/rules';
 import ResultEngagement from '@/components/ResultEngagement';
+import ShareButtons from '@/components/ShareButtons';
+import AnimatedValue from '@/components/AnimatedValue';
 
 const STORAGE_KEY = 'taesagak:v0.1.0:last-input';
 const HISTORY_KEY = 'taesagak:v0.1.0:history';
@@ -320,7 +322,7 @@ export default function CalculatorPage() {
               {weeklyHoliday.eligible ? '대상 가능성 높음' : '대상 아님/불명'}
             </span>
           </div>
-          <p className="metric-card__value">{currency(weeklyHoliday.monthlyHolidayPay)}원</p>
+          <p className="metric-card__value"><AnimatedValue value={weeklyHoliday.monthlyHolidayPay} suffix="원" /></p>
           <p className="metric-card__hint">{weeklyHoliday.reason}</p>
         </article>
 
@@ -331,7 +333,7 @@ export default function CalculatorPage() {
               {severance.eligible ? '요건 충족' : '요건 미충족 가능'}
             </span>
           </div>
-          <p className="metric-card__value">{currency(severance.severancePay)}원</p>
+          <p className="metric-card__value"><AnimatedValue value={severance.severancePay} suffix="원" /></p>
           <p className="metric-card__hint">{severance.note}</p>
         </article>
 
@@ -340,7 +342,7 @@ export default function CalculatorPage() {
             <h3>월 실수령액 추정</h3>
             <span className="pill pill--muted">간이 추정</span>
           </div>
-          <p className="metric-card__value">{currency(netSalary.monthlyNet)}원</p>
+          <p className="metric-card__value"><AnimatedValue value={netSalary.monthlyNet} suffix="원" /></p>
           <p className="metric-card__hint">{netSalary.note}</p>
         </article>
 
@@ -353,7 +355,7 @@ export default function CalculatorPage() {
           </div>
           <p className="metric-card__value">
             {minimumWage.effectiveHourly > 0
-              ? `${currency(minimumWage.effectiveHourly)}원 / 시`
+              ? <><AnimatedValue value={minimumWage.effectiveHourly} suffix="원 / 시" /></>
               : '-'}
           </p>
           <p className="metric-card__hint">{minimumWage.note}</p>
@@ -862,6 +864,33 @@ export default function CalculatorPage() {
                   ))}
                 </ul>
               </section>
+
+              <div className="panel" style={{ marginTop: '1rem' }}>
+                <div className="panel__head">
+                  <div>
+                    <h3>결과 공유 · 저장</h3>
+                    <p>계산 결과를 공유하거나 저장할 수 있습니다.</p>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <button type="button" className="ghost-button" onClick={handleCopySummary}
+                    style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
+                    결과 텍스트 복사
+                  </button>
+                  <button type="button" className="ghost-button" onClick={handleExportJson}
+                    style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
+                    JSON 내보내기
+                  </button>
+                  <button type="button" className="ghost-button" onClick={handleSaveResult}
+                    style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem' }}>
+                    히스토리 저장
+                  </button>
+                </div>
+                <ShareButtons
+                  title="퇴사각 통합 계산기 — 퇴직금·주휴수당·실수령액·최저임금"
+                  description="퇴직금, 실수령액, 주휴수당, 최저임금을 한 번에 계산한 결과입니다."
+                />
+              </div>
 
               <div style={{ marginTop: '1rem' }}>
                 <ResultEngagement topic="calculator" />

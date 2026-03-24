@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { calculateSeverance, currency, type SeveranceResult } from '@/lib/calculators';
 import ResultEngagement from '@/components/ResultEngagement';
+import ShareButtons from '@/components/ShareButtons';
+import AnimatedValue from '@/components/AnimatedValue';
 
 export default function SeverancePage() {
   const [svStart, setSvStart] = useState('');
@@ -101,7 +103,7 @@ export default function SeverancePage() {
                     {result.eligible ? '요건 충족' : '요건 미충족'}
                   </span>
                 </div>
-                <p className="metric-card__value">{currency(result.severancePay)}원</p>
+                <p className="metric-card__value"><AnimatedValue value={result.severancePay} suffix="원" /></p>
                 <p className="metric-card__hint">{result.note}</p>
               </article>
               <article className="metric-card">
@@ -123,6 +125,7 @@ export default function SeverancePage() {
                 <li>적용 1일 임금: <strong>{currency(result.appliedDailyWage)}원</strong></li>
               </ul>
             </div>
+            <ShareButtons title="퇴직금 계산기 — 2026년 기준" description="입사일·퇴사일·급여 기반으로 법정 퇴직금을 추정한 결과입니다." />
             <div style={{ marginTop: '1rem' }}>
               <ResultEngagement topic="severance" />
             </div>

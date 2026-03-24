@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { calculateNetSalaryEstimate, currency, type NetSalaryResult } from '@/lib/calculators';
 import ResultEngagement from '@/components/ResultEngagement';
+import ShareButtons from '@/components/ShareButtons';
+import AnimatedValue from '@/components/AnimatedValue';
 
 export default function NetSalaryPage() {
   const [nsType, setNsType] = useState<'monthly' | 'yearly'>('monthly');
@@ -88,7 +90,7 @@ export default function NetSalaryPage() {
                   <h3>세후 실수령액</h3>
                   <span className="pill pill--accent">간이 추정</span>
                 </div>
-                <p className="metric-card__value">{currency(result.monthlyNet)}원</p>
+                <p className="metric-card__value"><AnimatedValue value={result.monthlyNet} suffix="원" /></p>
                 <p className="metric-card__hint">{result.note}</p>
               </article>
             </div>
@@ -114,6 +116,7 @@ export default function NetSalaryPage() {
                 })}
               </ul>
             </div>
+            <ShareButtons title="실수령액 계산기 — 2026년 기준" description="세전 급여에서 4대보험·소득세 공제 후 실수령액을 계산한 결과입니다." />
             <div style={{ marginTop: '1rem' }}>
               <ResultEngagement topic="net-salary" />
             </div>

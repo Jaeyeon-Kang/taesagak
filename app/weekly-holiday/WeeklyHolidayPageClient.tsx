@@ -1,8 +1,10 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { calculateWeeklyHolidayPay, currency, type WeeklyHolidayResult } from '@/lib/calculators';
+import { calculateWeeklyHolidayPay, computeMonthlyHours, currency, type WeeklyHolidayResult } from '@/lib/calculators';
 import ResultEngagement from '@/components/ResultEngagement';
+import ShareButtons from '@/components/ShareButtons';
+import AnimatedValue from '@/components/AnimatedValue';
 
 export default function WeeklyHolidayPage() {
   const [inputMode, setInputMode] = useState<'hourly' | 'monthly'>('monthly');
@@ -22,8 +24,7 @@ export default function WeeklyHolidayPage() {
       const monthly = Number(monthlySalary || 0);
       const wh = Number(weeklyHours || 0);
       const wd = Number(workdays || 5);
-      const weeklyPaidHours = wh + (wh / wd);
-      const monthlyPaidHours = weeklyPaidHours * 4.345;
+      const { monthlyPaidHours } = computeMonthlyHours(wh, wd, true);
       effectiveHourly = monthlyPaidHours > 0 ? Math.round(monthly / monthlyPaidHours) : 0;
       setDerivedHourly(effectiveHourly);
     } else {
@@ -175,10 +176,11 @@ export default function WeeklyHolidayPage() {
                     {result.eligible ? '대상' : '비대상'}
                   </span>
                 </div>
-                <p className="metric-card__value">{currency(result.monthlyHolidayPay)}원</p>
+                <p className="metric-card__value"><AnimatedValue value={result.monthlyHolidayPay} suffix="원" /></p>
                 <p className="metric-card__hint">{result.reason}</p>
               </article>
             </div>
+            <ShareButtons title="주휴수당 계산기 — 2026년 기준" description="주휴수당 대상 여부와 월 환산액을 계산한 결과입니다." />
             <div style={{ marginTop: '1rem' }}>
               <ResultEngagement topic="weekly-holiday" />
             </div>
