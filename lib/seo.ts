@@ -72,6 +72,7 @@ interface BuildMetadataOptions {
   description: string;
   path?: string;
   keywords?: string[];
+  type?: 'website' | 'article';
 }
 
 export function buildMetadata({
@@ -79,6 +80,7 @@ export function buildMetadata({
   description,
   path = '/',
   keywords = [],
+  type = 'website',
 }: BuildMetadataOptions): Metadata {
   const mergedKeywords = Array.from(new Set([...SITE_KEYWORDS, ...keywords]));
 
@@ -92,7 +94,7 @@ export function buildMetadata({
       description,
       siteName: SITE_NAME,
       locale: 'ko_KR',
-      type: 'article',
+      type,
       images: [ogImage],
       ...(siteUrl ? { url: new URL(path, siteUrl).toString() } : {}),
     },

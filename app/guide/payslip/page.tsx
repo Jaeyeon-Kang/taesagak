@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { breadcrumbJsonLd } from '@/components/JsonLd';
+import JsonLd, { breadcrumbJsonLd, articleJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '급여명세서 체크 가이드 2026',
   description:
     '급여명세서에서 꼭 확인해야 할 항목, 이상한 공제 찾는 법, 주휴수당·최저임금 반영 확인 방법을 정리했습니다.',
   path: '/guide/payslip',
+  type: 'article',
   keywords: [
     '급여명세서 보는 법',
     '급여명세서 항목 설명',
@@ -23,6 +24,7 @@ export default function GuidePayslipPage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '급여명세서 체크 가이드', path: '/guide/payslip' }])} />
+    <JsonLd data={articleJsonLd({ title: '급여명세서 체크 가이드 2026', description: '급여명세서에서 꼭 확인해야 할 항목, 이상한 공제 찾는 법, 주휴수당·최저임금 반영 확인 방법을 정리했습니다.', path: '/guide/payslip', datePublished: '2026-01-15', dateModified: '2026-03-01' })} />
     <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">

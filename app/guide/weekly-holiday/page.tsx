@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { breadcrumbJsonLd } from '@/components/JsonLd';
+import JsonLd, { breadcrumbJsonLd, articleJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '주휴수당 조건 총정리 2026',
   description:
     '2026년 주휴수당 지급 조건, 계산 방법, 급여명세서 확인법, 미지급 시 대응까지 실용적으로 정리했습니다.',
   path: '/guide/weekly-holiday',
+  type: 'article',
   keywords: [
     '주휴수당 조건 총정리',
     '주휴수당 못 받는 경우',
@@ -23,6 +24,7 @@ export default function GuideWeeklyHolidayPage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '주휴수당 조건 총정리', path: '/guide/weekly-holiday' }])} />
+    <JsonLd data={articleJsonLd({ title: '주휴수당 조건 총정리 2026', description: '2026년 주휴수당 지급 조건, 계산 방법, 급여명세서 확인법, 미지급 시 대응까지 실용적으로 정리했습니다.', path: '/guide/weekly-holiday', datePublished: '2026-01-15', dateModified: '2026-03-01' })} />
     <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">

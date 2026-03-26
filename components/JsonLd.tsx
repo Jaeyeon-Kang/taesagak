@@ -65,6 +65,35 @@ export interface FaqItem {
   answer: string;
 }
 
+export function articleJsonLd(opts: {
+  title: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: opts.title,
+    description: opts.description,
+    url: `${siteUrl}${opts.path}`,
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified,
+    author: {
+      '@type': 'Organization',
+      name: '퇴사각',
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: '퇴사각',
+      url: siteUrl,
+    },
+    inLanguage: 'ko',
+  };
+}
+
 export function faqJsonLd(items: FaqItem[]) {
   return {
     '@context': 'https://schema.org',

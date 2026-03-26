@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { breadcrumbJsonLd } from '@/components/JsonLd';
+import JsonLd, { breadcrumbJsonLd, articleJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '퇴사 전 체크리스트 2026',
   description:
     '퇴사 전에 반드시 확인해야 할 체크리스트입니다. 퇴직금, 미지급 급여, 연차수당, 실업급여까지 놓치기 쉬운 돈과 서류를 한 번에 정리했습니다.',
   path: '/guide/resignation',
+  type: 'article',
   keywords: [
     '퇴사 전 체크리스트',
     '퇴사 전 확인할 것',
@@ -24,6 +25,7 @@ export default function GuideResignationPage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '퇴사 전 체크리스트', path: '/guide/resignation' }])} />
+    <JsonLd data={articleJsonLd({ title: '퇴사 전 체크리스트 2026', description: '퇴사 전에 반드시 확인해야 할 체크리스트입니다. 퇴직금, 미지급 급여, 연차수당, 실업급여까지 놓치기 쉬운 돈과 서류를 한 번에 정리했습니다.', path: '/guide/resignation', datePublished: '2026-01-15', dateModified: '2026-03-01' })} />
     <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">

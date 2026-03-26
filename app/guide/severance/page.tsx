@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
-import JsonLd, { breadcrumbJsonLd } from '@/components/JsonLd';
+import JsonLd, { breadcrumbJsonLd, articleJsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
   title: '퇴직금 상여금·연차수당 반영 방법 2026',
   description:
     '퇴직금 계산 시 상여금과 연차수당을 반영하는 방법을 설명합니다. 평균임금 산정 방식, 산입 범위, 실수 줄이는 계산법을 한 번에 확인할 수 있습니다.',
   path: '/guide/severance',
+  type: 'article',
   keywords: [
     '퇴직금 상여금 포함 여부',
     '퇴직금 연차수당 포함',
@@ -22,6 +23,7 @@ export default function GuideSeverancePage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '퇴직금 상여금·연차수당 반영', path: '/guide/severance' }])} />
+    <JsonLd data={articleJsonLd({ title: '퇴직금 상여금·연차수당 반영 방법 2026', description: '퇴직금 계산 시 상여금과 연차수당을 반영하는 방법을 설명합니다. 평균임금 산정 방식, 산입 범위, 실수 줄이는 계산법을 한 번에 확인할 수 있습니다.', path: '/guide/severance', datePublished: '2026-01-15', dateModified: '2026-03-01' })} />
     <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">
