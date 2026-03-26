@@ -22,7 +22,7 @@ export default function GuideSeverancePage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '퇴직금 상여금·연차수당 반영', path: '/guide/severance' }])} />
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">
           <span className="eyebrow">guide · 2026</span>

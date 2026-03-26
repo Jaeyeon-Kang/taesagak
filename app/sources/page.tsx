@@ -12,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function SourcesPage() {
   return (
-    <main className="page-shell section">
+    <main id="main-content" className="page-shell section">
       <div style={{ maxWidth: '640px', margin: '0 auto' }}>
         <div className="section__header">
           <h1 className="page-title" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)' }}>이 계산기는 어디서 가져왔나요?</h1>

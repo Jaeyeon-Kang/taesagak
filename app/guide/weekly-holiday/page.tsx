@@ -23,7 +23,7 @@ export default function GuideWeeklyHolidayPage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '주휴수당 조건 총정리', path: '/guide/weekly-holiday' }])} />
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">
           <span className="eyebrow">guide · 2026</span>

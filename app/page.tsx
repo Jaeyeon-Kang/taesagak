@@ -21,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function HomePage() {
   return (
-    <>
+    <main id="main-content" className="page-shell">
       <section className="hero">
         <div className="hero__inner">
           <div className="hero__panel">
@@ -57,7 +57,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <main className="page-shell">
+      <div className="page-shell">
         <ScrollReveal>
         <section className="section">
           <div className="section__header">
@@ -119,7 +119,7 @@ export default function HomePage() {
           </div>
         </section>
         </ScrollReveal>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }

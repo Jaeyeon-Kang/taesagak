@@ -41,7 +41,7 @@ export default function WeeklyHolidayPage() {
   };
 
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header" style={{ maxWidth: '640px', margin: '0 auto' }}>
           <h1 className="page-title" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)' }}>주휴수당 계산기</h1>

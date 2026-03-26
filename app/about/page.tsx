@@ -13,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function AboutPage() {
   return (
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">
           <h1 className="page-title">퇴사각 소개</h1>

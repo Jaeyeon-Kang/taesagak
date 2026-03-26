@@ -466,7 +466,7 @@ export default function CalculatorPage() {
   };
 
   return (
-    <main className="page-shell section">
+    <main id="main-content" className="page-shell section">
       <div className="section__header" style={{ maxWidth: '640px', margin: '0 auto 1.5rem' }}>
         <h1 className="page-title" style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)' }}>통합 계산기</h1>
         <p className="page-lead" style={{ marginTop: '0.5rem' }}>
@@ -495,6 +495,8 @@ export default function CalculatorPage() {
                   <button
                     type="button"
                     onClick={() => setCurrentStep(step)}
+                    aria-label={`${step}단계: ${label}`}
+                    aria-current={currentStep === step ? 'step' : undefined}
                     style={{
                       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem',
                       background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem',
@@ -719,7 +721,10 @@ export default function CalculatorPage() {
                       </div>
                     </div>
                   </fieldset>
-                  <div className="action-row" style={{ marginTop: '1.5rem' }}>
+                  <p aria-live="polite" style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.75rem' }}>
+                    {grossPreview}
+                  </p>
+                  <div className="action-row" style={{ marginTop: '1rem' }}>
                     <button type="button" className="secondary-button" onClick={() => setCurrentStep(2)}>이전</button>
                     <button type="button" className="primary-button" onClick={() => setCurrentStep(4)}>다음</button>
                     <button className="ghost-button" type="button" onClick={handleResetForm}>초기화</button>
@@ -890,6 +895,9 @@ export default function CalculatorPage() {
                   title="퇴사각 통합 계산기 — 퇴직금·주휴수당·실수령액·최저임금"
                   description="퇴직금, 실수령액, 주휴수당, 최저임금을 한 번에 계산한 결과입니다."
                 />
+                <p aria-live="polite" aria-atomic="true" style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.5rem' }}>
+                  {statusText}
+                </p>
               </div>
 
               <div style={{ marginTop: '1rem' }}>

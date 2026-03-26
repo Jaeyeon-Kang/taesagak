@@ -44,7 +44,7 @@ export default function GuidePage() {
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '가이드', path: '/guide' }])} />
-      <main className="page-shell">
+      <main id="main-content" className="page-shell">
         <section className="section">
           <div className="section__header">
             <h1 className="page-title">퇴사·근로 가이드</h1>

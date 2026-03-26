@@ -11,7 +11,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function UpdateLogPage() {
   return (
-    <main className="page-shell section">
+    <main id="main-content" className="page-shell section">
       <div className="section__header">
         <span className="eyebrow">update log</span>
         <h1 className="page-title">업데이트 로그</h1>

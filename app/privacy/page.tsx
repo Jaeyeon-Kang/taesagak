@@ -11,7 +11,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PrivacyPage() {
   return (
-    <main className="page-shell section">
+    <main id="main-content" className="page-shell section">
       <div className="section__header">
         <h1 className="page-title">개인정보 처리방침</h1>
         <p className="page-lead">

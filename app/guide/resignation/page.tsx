@@ -24,7 +24,7 @@ export default function GuideResignationPage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '퇴사 전 체크리스트', path: '/guide/resignation' }])} />
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">
           <span className="eyebrow">guide · 2026</span>

@@ -23,7 +23,7 @@ export default function GuidePayslipPage() {
   return (
     <>
     <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '급여명세서 체크 가이드', path: '/guide/payslip' }])} />
-    <main className="page-shell">
+    <main id="main-content" className="page-shell">
       <section className="section">
         <div className="section__header">
           <span className="eyebrow">guide · 2026</span>

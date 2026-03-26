@@ -37,7 +37,7 @@ export default function Header() {
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-controls="main-nav"
-          aria-label="메뉴 열기"
+          aria-label={open ? '메뉴 닫기' : '메뉴 열기'}
         >
           <span className="nav-toggle__bar" />
           <span className="nav-toggle__bar" />
