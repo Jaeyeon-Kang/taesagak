@@ -7,3 +7,4 @@ out
 .codex-dev.log
 .env.local
 .env*.local
+.claude/
