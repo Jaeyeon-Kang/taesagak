@@ -33,6 +33,46 @@ export default function NetSalaryPage() {
       <JsonLd data={calculatorJsonLd({ name: '실수령액 계산기', description: '세전 월급이나 연봉을 입력하면 4대보험과 세금 공제 후 세후 금액을 확인할 수 있습니다.', path: '/net-salary' })} />
       <JsonLd data={faqJsonLd(faqs)} />
       <NetSalaryPageClient />
+
+      <div className="page-shell">
+        <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>2026년 4대보험 공제 기준</h2>
+          </div>
+          <div className="value-grid">
+            <article className="value-card">
+              <h3>국민연금 · 4.75%</h3>
+              <p>근로자 부담분입니다. 기준소득월액 상한은 6,370,000원으로, 그 이상 월급이어도 공제 금액은 상한 기준으로 고정됩니다.</p>
+            </article>
+            <article className="value-card">
+              <h3>건강보험 · 3.595% + 장기요양 0.4724%</h3>
+              <p>건강보험은 보수월액의 3.595%를 근로자가 부담합니다. 장기요양보험은 건강보험료의 13.14%를 추가로 납부합니다.</p>
+            </article>
+            <article className="value-card">
+              <h3>고용보험 · 0.9%</h3>
+              <p>근로자 부담분입니다. 사업주는 별도로 0.9%를 추가 부담합니다. 고용보험 가입 기간은 실업급여 수급 자격과 직접 연결됩니다.</p>
+            </article>
+            <article className="value-card">
+              <h3>소득세는 부양가족 수에 따라 달라집니다</h3>
+              <p>근로소득 간이세액표 기준으로 부양가족이 많을수록 소득세가 줄어듭니다. 지방소득세는 소득세의 10%가 추가로 공제됩니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>자주 묻는 질문</h2>
+          </div>
+          <div className="value-grid">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="value-card">
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
     </>
   );
 }

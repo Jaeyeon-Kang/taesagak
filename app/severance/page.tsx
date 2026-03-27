@@ -33,6 +33,42 @@ export default function SeverancePage() {
       <JsonLd data={calculatorJsonLd({ name: '퇴직금 계산기', description: '입사일, 퇴사일, 최근 3개월 급여를 기준으로 법정 퇴직금을 계산합니다.', path: '/severance' })} />
       <JsonLd data={faqJsonLd(faqs)} />
       <SeverancePageClient />
+
+      <div className="page-shell">
+        <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>퇴직금 계산 방법</h2>
+          </div>
+          <div className="value-grid">
+            <article className="value-card">
+              <h3>계산 공식</h3>
+              <p>퇴직금 = 1일 평균임금 × 30일 × (재직일수 ÷ 365일). 평균임금은 퇴사 전 3개월간 받은 임금 총액을 해당 기간 일수로 나눠 계산합니다.</p>
+            </article>
+            <article className="value-card">
+              <h3>상여금·연차수당도 반영해야 합니다</h3>
+              <p>최근 3개월 급여만 입력하면 상여금과 연차수당이 빠져 퇴직금이 적게 계산됩니다. 연간 상여금 총액의 3/12, 연간 연차수당 총액의 3/12를 추가로 입력해야 정확합니다.</p>
+            </article>
+            <article className="value-card">
+              <h3>지급기한과 미지급 대응</h3>
+              <p>퇴사일로부터 14일 이내에 지급해야 합니다. 기한을 넘기면 연 20% 지연이자가 발생하며, 고용노동부(국번 없이 1350) 또는 가까운 노동청에 신고할 수 있습니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>자주 묻는 질문</h2>
+          </div>
+          <div className="value-grid">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="value-card">
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
     </>
   );
 }

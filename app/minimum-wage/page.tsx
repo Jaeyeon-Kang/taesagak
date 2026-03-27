@@ -33,6 +33,42 @@ export default function MinimumWagePage() {
       <JsonLd data={calculatorJsonLd({ name: '최저임금 계산기', description: '2026년 최저임금 10,320원 기준으로 환산 시급과 월 부족분을 점검합니다.', path: '/minimum-wage' })} />
       <JsonLd data={faqJsonLd(faqs)} />
       <MinimumWagePageClient />
+
+      <div className="page-shell">
+        <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>2026년 최저임금 기준</h2>
+          </div>
+          <div className="value-grid">
+            <article className="value-card">
+              <h3>시급 10,320원</h3>
+              <p>2026년 1월 1일부터 적용되는 법정 최저임금입니다. 주 40시간, 월 209시간 기준으로 환산하면 월 2,156,880원입니다.</p>
+            </article>
+            <article className="value-card">
+              <h3>최저임금 산입 범위</h3>
+              <p>기본급과 고정 수당이 포함됩니다. 연장·야간·휴일 수당, 연차수당, 식비·교통비 등 복리후생비는 최저임금 산입 범위에서 제외됩니다.</p>
+            </article>
+            <article className="value-card">
+              <h3>수습 기간 감액</h3>
+              <p>1년 이상 근로계약 체결 시 수습 3개월은 최저임금의 90%(9,288원)까지 감액 가능합니다. 단, 단순노무직은 감액이 불가능합니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="section" style={{ maxWidth: '640px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>자주 묻는 질문</h2>
+          </div>
+          <div className="value-grid">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="value-card">
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
     </>
   );
 }
