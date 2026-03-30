@@ -20,6 +20,7 @@ export default function Footer() {
               <Link href="/sources">출처</Link>
               <Link href="/update-log">업데이트</Link>
               <Link href="/privacy">개인정보</Link>
+              <Link href="/terms">이용약관</Link>
             </div>
           </section>
         </div>
