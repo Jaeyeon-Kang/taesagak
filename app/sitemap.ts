@@ -27,6 +27,7 @@ const routes: RouteEntry[] = [
   { path: '/sources',                lastModified: '2026-03-01', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/update-log',             lastModified: '2026-03-26', changeFrequency: 'monthly', priority: 0.5 },
   { path: '/privacy',                lastModified: '2026-01-15', changeFrequency: 'yearly',  priority: 0.3 },
+  { path: '/contact',                lastModified: '2026-03-31', changeFrequency: 'yearly',  priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
