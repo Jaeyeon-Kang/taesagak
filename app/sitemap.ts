@@ -4,7 +4,7 @@ import path from 'node:path';
 
 export const dynamic = 'force-static';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.taesagak.co.kr';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://taesagak.co.kr';
 
 /* ── 정적 라우트 (수동 관리) ── */
 const staticRoutes: MetadataRoute.Sitemap = [

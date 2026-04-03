@@ -1,4 +1,4 @@
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.taesagak.co.kr';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://taesagak.co.kr';
 
 interface JsonLdProps {
   data: Record<string, unknown>;
