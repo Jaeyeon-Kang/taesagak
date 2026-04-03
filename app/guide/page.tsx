@@ -38,6 +38,26 @@ const guides = [
     title: '급여명세서 체크 가이드',
     description: '급여명세서에서 꼭 확인해야 할 항목, 이상한 공제 찾는 법, 최저임금 반영 확인 방법입니다.',
   },
+  {
+    href: '/guide/annual-leave',
+    title: '연차 계산법 — 발생 기준과 수당 정산',
+    description: '1년 미만·이상 연차 발생 기준, 연차수당 계산법, 퇴사 시 미사용 연차 처리까지 정리했습니다.',
+  },
+  {
+    href: '/guide/unemployment-benefit',
+    title: '실업급여 조건과 금액 계산',
+    description: '수급 요건(180일, 비자발적 이직), 1일 지급액 계산법, 소정급여일수, 신청 절차를 안내합니다.',
+  },
+  {
+    href: '/guide/health-insurance-after-resignation',
+    title: '퇴직 후 건강보험 처리 방법',
+    description: '지역가입자 전환, 임의계속가입, 피부양자 등록 중 어느 것이 유리한지 비교합니다.',
+  },
+  {
+    href: '/guide/severance-deadline',
+    title: '퇴직금 14일 지급 의무와 미지급 대응',
+    description: '14일 지급 원칙, 지연이자 계산법, 고용노동부 신고 절차를 단계별로 설명합니다.',
+  },
 ];
 
 export default function GuidePage() {
