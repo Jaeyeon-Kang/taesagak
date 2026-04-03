@@ -7,6 +7,7 @@ import AdSenseHead from '@/components/AdSense';
 import { BASE_METADATA } from '@/lib/seo';
 import JsonLd, { organizationJsonLd } from '@/components/JsonLd';
 import KakaoInit from '@/components/KakaoInit';
+import CookieConsent from '@/components/CookieConsent';
 
 export const metadata: Metadata = BASE_METADATA;
 
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
