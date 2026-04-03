@@ -27,11 +27,8 @@ export default function ContactPage() {
             src={GOOGLE_FORM_URL}
             width="100%"
             height="700"
-            frameBorder="0"
-            marginHeight={0}
-            marginWidth={0}
             title="퇴사각 문의하기"
-            style={{ display: 'block' }}
+            style={{ display: 'block', border: 0, margin: 0 }}
           >
             Loading…
           </iframe>

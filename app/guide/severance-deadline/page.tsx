@@ -42,7 +42,7 @@ export default function GuideSeveranceDeadlinePage() {
               <li>근로자퇴직급여보장법 제9조: <strong>퇴직일로부터 14일 이내</strong> 지급</li>
               <li>당사자 합의 시 지급 기일 연장 가능 (서면 합의 권장)</li>
               <li>14일 초과 미지급 시 연 <strong>20% 지연이자</strong> 발생</li>
-              <li>고의적 미지급 시 3년 이하 징역 또는 3,000만 원 이하 벌금</li>
+              <li>고의적 미지급 시 3년 이하 징역 또는 3,000만 원 이하 벌금 (근로자퇴직급여보장법 제44조)</li>
             </ul>
           </div>
         </section>

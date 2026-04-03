@@ -50,7 +50,7 @@ export default function WeeklyHolidayPage() {
             </article>
             <article className="value-card">
               <h3>미지급 시 처벌과 소멸시효</h3>
-              <p>주휴수당 미지급은 임금체불에 해당합니다. 사업주에게 3년 이하 징역 또는 2천만원 이하 벌금이 부과될 수 있습니다. 청구 소멸시효는 3년입니다.</p>
+              <p>주휴수당 미지급은 임금체불에 해당합니다. 사업주에게 3년 이하 징역 또는 2,000만 원 이하 벌금이 부과될 수 있습니다 (근로기준법 제109조). 청구 소멸시효는 3년입니다.</p>
             </article>
           </div>
         </section>

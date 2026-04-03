@@ -81,8 +81,8 @@ export interface SourceItem {
 
 export const APP_META: AppMeta = {
   name: '퇴사각',
-  version: '0.1.0',
-  buildDate: '2026-03-13',
+  version: '0.2.0',
+  buildDate: '2026-04-03',
   tagline: '퇴사 전에 챙길 건, 멘탈이 아니라 돈입니다',
 };
 

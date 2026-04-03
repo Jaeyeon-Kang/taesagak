@@ -130,7 +130,7 @@ export default function MinimumWagePage() {
           <article className="value-card">
             <h3>미달이면 어떻게 하나요?</h3>
             <p>
-              최저임금 미달은 사업주 처벌 대상(3년 이하 징역 또는 2천만원 이하 벌금)입니다.
+              최저임금 미달은 사업주 처벌 대상(3년 이하 징역 또는 2,000만 원 이하 벌금, 최저임금법 제28조)입니다.
               <strong>고용노동부(1350)에 신고</strong>하면 차액을 청구할 수 있습니다.
             </p>
           </article>
@@ -159,7 +159,7 @@ export default function MinimumWagePage() {
           <article className="value-card">
             <h3>최저임금보다 적게 받으면 어떻게 신고하나요?</h3>
             <p>
-              최저임금 미달은 <strong>사업주 처벌 대상</strong>(3년 이하 징역 또는 2천만원 이하 벌금)입니다.
+              최저임금 미달은 <strong>사업주 처벌 대상</strong>(3년 이하 징역 또는 2,000만 원 이하 벌금, 최저임금법 제28조)입니다.
               고용노동부(국번 없이 1350)에 신고하면 차액을 청구할 수 있습니다.
               급여명세서와 근로계약서를 미리 확보해두세요.
             </p>
