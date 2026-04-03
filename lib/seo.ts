@@ -52,7 +52,7 @@ export const BASE_METADATA: Metadata = {
   },
   verification: {
     google: 'frGbt6ds9c3JPEaY2ttK2KkUDC9LLN0AW2lUZHBg7zg',
-    other: { 'naver-site-verification': ['4be57d146acc7795907439a28e39aef36aca5e72'] },
+    other: { 'naver-site-verification': ['c9acd459daa69842a9a93a707493bb528a69a297'] },
   },
   robots: {
     index: true,
