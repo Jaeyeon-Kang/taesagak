@@ -55,28 +55,28 @@ export default function GuideWeeklyHolidayPage() {
             <h3>법적 근거</h3>
             <p>
               근로기준법 제55조. &ldquo;사용자는 근로자에게 1주에 평균 1회 이상의 유급휴일을 보장해야 한다.&rdquo;
-              이 유급휴일에 지급되는 임금이 주휴수당이다.
+              이 유급휴일에 지급되는 임금이 주휴수당입니다.
             </p>
           </article>
           <article className="value-card">
             <h3>누구에게 적용되나?</h3>
             <p>
-              정규직·계약직·아르바이트·단시간 근로자 구분 없이 적용된다.
-              단, 주 15시간 미만 초단시간 근로자는 주휴수당 대상에서 제외된다.
+              정규직·계약직·아르바이트·단시간 근로자 구분 없이 적용됩니다.
+              단, 주 15시간 미만 초단시간 근로자는 주휴수당 대상에서 제외됩니다.
             </p>
           </article>
           <article className="value-card">
             <h3>&ldquo;개근&rdquo;의 기준</h3>
             <p>
-              소정 근로일(계약상 출근하기로 한 날)을 모두 출근하면 개근이다.
-              연차휴가, 공휴일 등 유급휴가로 처리된 결근은 개근으로 인정된다.
-              지각·조퇴는 결근이 아니어서 주휴수당에 영향을 주지 않는다.
+              소정 근로일(계약상 출근하기로 한 날)을 모두 출근하면 개근입니다.
+              연차휴가, 공휴일 등 유급휴가로 처리된 결근은 개근으로 인정됩니다.
+              지각·조퇴는 결근이 아니어서 주휴수당에 영향을 주지 않습니다.
             </p>
           </article>
           <article className="value-card">
             <h3>주 15시간 계산법</h3>
             <p>
-              소정근로시간은 근로계약서에 명시된 근로시간이다.
+              소정근로시간은 근로계약서에 명시된 근로시간입니다.
               실제로 더 일했더라도 계약서에 주 15시간 미만으로 돼 있으면
               주휴수당 대상에서 제외될 수 있습니다. 계약서상 소정근로시간이 기준입니다.
             </p>
@@ -106,11 +106,11 @@ export default function GuideWeeklyHolidayPage() {
         <div className="panel" style={{ marginTop: '1rem' }}>
           <div className="panel__head"><div><h3>월급제라면?</h3></div></div>
           <p>
-            월급제 근로자의 경우 주휴수당이 이미 월급에 포함된 경우가 대부분이다.
-            하지만 급여명세서에 주휴수당 항목이 없다면 포함 여부를 회사에 서면으로 확인해야 한다.
+            월급제 근로자의 경우 주휴수당이 이미 월급에 포함된 경우가 대부분입니다.
+            하지만 급여명세서에 주휴수당 항목이 없다면 포함 여부를 회사에 서면으로 확인해야 합니다.
           </p>
           <p>
-            만약 월급에 주휴수당이 포함됐다는 명시가 없다면, 별도로 청구할 수 있다.
+            만약 월급에 주휴수당이 포함됐다는 명시가 없다면, 별도로 청구할 수 있습니다.
           </p>
         </div>
       </section>
@@ -121,10 +121,10 @@ export default function GuideWeeklyHolidayPage() {
         </div>
         <div className="panel">
           <ul className="plain-list">
-            <li>급여명세서에 &ldquo;주휴수당&rdquo; 항목이 따로 있는지 확인한다.</li>
-            <li>없다면 기본급에 포함됐는지 계산해 본다. (기본급 ÷ 월 유급시간 = 시급 역산)</li>
-            <li>역산한 시급이 최저시급보다 낮다면 주휴수당이 미반영됐을 가능성이 있다.</li>
-            <li>회사에 주휴수당 포함 여부를 이메일이나 메신저로 남겨 증거를 남긴다.</li>
+            <li>급여명세서에 &ldquo;주휴수당&rdquo; 항목이 따로 있는지 확인합니다.</li>
+            <li>없다면 기본급에 포함됐는지 계산해 봅니다. (기본급 ÷ 월 유급시간 = 시급 역산)</li>
+            <li>역산한 시급이 최저시급보다 낮다면 주휴수당이 미반영됐을 가능성이 있습니다.</li>
+            <li>회사에 주휴수당 포함 여부를 이메일이나 메신저로 남겨 증거를 남기세요.</li>
           </ul>
         </div>
       </section>
@@ -158,7 +158,7 @@ export default function GuideWeeklyHolidayPage() {
           </Link>
           <Link className="value-card" href="/minimum-wage" style={{ textDecoration: 'none' }}>
             <h3>최저임금 계산기</h3>
-            <p>2026년 최저임금(10,320원) 기준으로 미달 여부를 점검한다.</p>
+            <p>2026년 최저임금(10,320원) 기준으로 미달 여부를 점검합니다.</p>
           </Link>
           <Link className="value-card" href="/calculator" style={{ textDecoration: 'none' }}>
             <h3>통합 계산기</h3>

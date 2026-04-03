@@ -39,10 +39,10 @@ export default function GuidePayslipPage() {
         <div className="panel">
           <div className="panel__head"><div><h2>지급 항목 확인</h2></div></div>
           <ul className="plain-list">
-            <li><strong>기본급</strong> — 계약서상 월급과 일치하는지 확인한다. 기본급이 낮고 수당이 많은 구조라면 최저임금 산입 범위를 따져야 한다.</li>
-            <li><strong>주휴수당</strong> — 별도 항목이 있는지 확인한다. 없다면 기본급에 포함된 것인지 회사에 문의한다.</li>
-            <li><strong>연장·야간·휴일수당</strong> — 초과근무를 했다면 1.5배 또는 2배 가산임금이 반영됐는지 확인한다.</li>
-            <li><strong>식대·교통비</strong> — 비과세 항목이 명확히 구분됐는지 확인한다. 비과세 적용 한도를 초과하면 과세 처리된다.</li>
+            <li><strong>기본급</strong> — 계약서상 월급과 일치하는지 확인합니다. 기본급이 낮고 수당이 많은 구조라면 최저임금 산입 범위를 따져야 합니다.</li>
+            <li><strong>주휴수당</strong> — 별도 항목이 있는지 확인합니다. 없다면 기본급에 포함된 것인지 회사에 문의합니다.</li>
+            <li><strong>연장·야간·휴일수당</strong> — 초과근무를 했다면 1.5배 또는 2배 가산임금이 반영됐는지 확인합니다.</li>
+            <li><strong>식대·교통비</strong> — 비과세 항목이 명확히 구분됐는지 확인합니다. 비과세 적용 한도를 초과하면 과세 처리됩니다.</li>
           </ul>
         </div>
       </section>
@@ -63,21 +63,21 @@ export default function GuidePayslipPage() {
             <h3>건강보험</h3>
             <p>
               근로자 3.595%. 장기요양보험(보수월액의 0.4724%, 건보의 13.14%) 별도.
-              합산 약 4.0% 수준. 지역가입자 대비 유리하므로 직장가입 유지가 이득이다.
+              합산 약 4.0% 수준. 지역가입자 대비 유리하므로 직장가입 유지가 이득입니다.
             </p>
           </article>
           <article className="value-card">
             <h3>고용보험</h3>
             <p>
-              근로자 0.9%. 실직 시 실업급여 수령의 기반이 된다.
-              고용보험 미가입 근로자는 실업급여를 받을 수 없으니 가입 여부를 확인한다.
+              근로자 0.9%. 실직 시 실업급여 수령의 기반이 됩니다.
+              고용보험 미가입 근로자는 실업급여를 받을 수 없으니 가입 여부를 확인하세요.
             </p>
           </article>
           <article className="value-card">
             <h3>소득세 · 지방소득세</h3>
             <p>
-              간이세액표 기준으로 원천징수된다. 연말정산에서 실제 납부세액과 정산한다.
-              공제대상 가족 수를 회사 HR에 정확히 신고해야 한다.
+              간이세액표 기준으로 원천징수됩니다. 연말정산에서 실제 납부세액과 정산합니다.
+              공제대상 가족 수를 회사 HR에 정확히 신고해야 합니다.
             </p>
           </article>
         </div>
@@ -89,10 +89,10 @@ export default function GuidePayslipPage() {
         </div>
         <div className="panel">
           <ol className="plain-list">
-            <li>급여명세서에서 기본급을 확인한다.</li>
-            <li>시급제라면 기본급 ÷ 실제 근무시간 = 시급. 10,320원(2026 최저시급) 이상인지 확인한다.</li>
-            <li>월급제라면 기본급 ÷ 월 소정근로시간으로 역산한 시급이 최저시급 이상인지 확인한다.</li>
-            <li>식대, 교통비 등 수당은 최저임금 산입 범위 기준을 별도로 확인해야 한다.</li>
+            <li>급여명세서에서 기본급을 확인합니다.</li>
+            <li>시급제라면 기본급 ÷ 실제 근무시간 = 시급. 10,320원(2026 최저시급) 이상인지 확인합니다.</li>
+            <li>월급제라면 기본급 ÷ 월 소정근로시간으로 역산한 시급이 최저시급 이상인지 확인합니다.</li>
+            <li>식대, 교통비 등 수당은 최저임금 산입 범위 기준을 별도로 확인해야 합니다.</li>
           </ol>
         </div>
       </section>
@@ -103,10 +103,10 @@ export default function GuidePayslipPage() {
         </div>
         <div className="panel">
           <ul className="plain-list">
-            <li>회사에 공제 항목과 금액의 근거를 서면으로 요청한다.</li>
-            <li>근로기준법상 임의 공제는 불법이다. 동의 없이 급여에서 빼는 것은 임금체불이다.</li>
-            <li>고용노동부(1350) 또는 고용노동부 온라인 민원을 통해 신고할 수 있다.</li>
-            <li>급여명세서와 이메일·메신저 대화를 증거로 보관해 둔다.</li>
+            <li>회사에 공제 항목과 금액의 근거를 서면으로 요청합니다.</li>
+            <li>근로기준법상 임의 공제는 불법입니다. 동의 없이 급여에서 빼는 것은 임금체불입니다.</li>
+            <li>고용노동부(1350) 또는 고용노동부 온라인 민원을 통해 신고할 수 있습니다.</li>
+            <li>급여명세서와 이메일·메신저 대화를 증거로 보관해 두세요.</li>
           </ul>
         </div>
       </section>
@@ -118,19 +118,19 @@ export default function GuidePayslipPage() {
         <div className="feature-grid">
           <Link className="value-card" href="/net-salary" style={{ textDecoration: 'none' }}>
             <h3>실수령액 계산기</h3>
-            <p>세전 월급에서 공제 후 실수령액을 계산한다.</p>
+            <p>세전 월급에서 공제 후 실수령액을 계산합니다.</p>
           </Link>
           <Link className="value-card" href="/weekly-holiday" style={{ textDecoration: 'none' }}>
             <h3>주휴수당 계산기</h3>
-            <p>급여명세서에 주휴수당이 제대로 반영됐는지 확인한다.</p>
+            <p>급여명세서에 주휴수당이 제대로 반영됐는지 확인합니다.</p>
           </Link>
           <Link className="value-card" href="/minimum-wage" style={{ textDecoration: 'none' }}>
             <h3>최저임금 계산기</h3>
-            <p>내 시급이 2026 최저임금 기준을 충족하는지 확인한다.</p>
+            <p>내 시급이 2026 최저임금 기준을 충족하는지 확인합니다.</p>
           </Link>
           <Link className="value-card" href="/guide/weekly-holiday" style={{ textDecoration: 'none' }}>
             <h3>주휴수당 조건 가이드</h3>
-            <p>주휴수당 조건과 계산 방법을 상세히 정리했다.</p>
+            <p>주휴수당 조건과 계산 방법을 상세히 정리했습니다.</p>
           </Link>
         </div>
       </section>

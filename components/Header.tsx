@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 const links = [
   { href: '/', label: '홈' },
   { href: '/calculator', label: '계산기' },
-  { href: '/guide/resignation', label: '가이드' },
+  { href: '/guide', label: '가이드' },
   { href: '/sources', label: '출처' },
   { href: '/about', label: '소개' },
 ];

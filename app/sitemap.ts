@@ -1,40 +1,55 @@
 import type { MetadataRoute } from 'next';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export const dynamic = 'force-static';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.taesagak.co.kr';
 
-type RouteEntry = {
-  path: string;
-  lastModified: string;
-  changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
-  priority: number;
-};
-
-const routes: RouteEntry[] = [
-  { path: '/',                       lastModified: '2026-03-26', changeFrequency: 'weekly',  priority: 1.0 },
-  { path: '/calculator',             lastModified: '2026-03-26', changeFrequency: 'weekly',  priority: 0.9 },
-  { path: '/weekly-holiday',         lastModified: '2026-03-26', changeFrequency: 'weekly',  priority: 0.9 },
-  { path: '/severance',              lastModified: '2026-03-26', changeFrequency: 'weekly',  priority: 0.9 },
-  { path: '/net-salary',             lastModified: '2026-03-26', changeFrequency: 'weekly',  priority: 0.9 },
-  { path: '/minimum-wage',           lastModified: '2026-03-26', changeFrequency: 'weekly',  priority: 0.9 },
-  { path: '/guide',                  lastModified: '2026-03-26', changeFrequency: 'monthly', priority: 0.8 },
-  { path: '/guide/resignation',      lastModified: '2026-03-01', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/guide/severance',        lastModified: '2026-03-01', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/guide/payslip',          lastModified: '2026-03-01', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/guide/weekly-holiday',   lastModified: '2026-03-01', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/about',                  lastModified: '2026-01-15', changeFrequency: 'monthly', priority: 0.6 },
-  { path: '/sources',                lastModified: '2026-03-01', changeFrequency: 'monthly', priority: 0.6 },
-  { path: '/update-log',             lastModified: '2026-03-26', changeFrequency: 'monthly', priority: 0.5 },
-  { path: '/privacy',                lastModified: '2026-01-15', changeFrequency: 'yearly',  priority: 0.3 },
-  { path: '/contact',                lastModified: '2026-03-31', changeFrequency: 'yearly',  priority: 0.3 },
+/* ── 정적 라우트 (수동 관리) ── */
+const staticRoutes: MetadataRoute.Sitemap = [
+  { url: `${siteUrl}/`,              lastModified: new Date('2026-03-26'), changeFrequency: 'weekly',  priority: 1.0 },
+  { url: `${siteUrl}/calculator`,    lastModified: new Date('2026-03-26'), changeFrequency: 'weekly',  priority: 0.9 },
+  { url: `${siteUrl}/weekly-holiday`, lastModified: new Date('2026-03-26'), changeFrequency: 'weekly', priority: 0.9 },
+  { url: `${siteUrl}/severance`,     lastModified: new Date('2026-03-26'), changeFrequency: 'weekly',  priority: 0.9 },
+  { url: `${siteUrl}/net-salary`,    lastModified: new Date('2026-03-26'), changeFrequency: 'weekly',  priority: 0.9 },
+  { url: `${siteUrl}/minimum-wage`,  lastModified: new Date('2026-03-26'), changeFrequency: 'weekly',  priority: 0.9 },
+  { url: `${siteUrl}/about`,         lastModified: new Date('2026-01-15'), changeFrequency: 'monthly', priority: 0.6 },
+  { url: `${siteUrl}/sources`,       lastModified: new Date('2026-03-01'), changeFrequency: 'monthly', priority: 0.6 },
+  { url: `${siteUrl}/update-log`,    lastModified: new Date('2026-03-26'), changeFrequency: 'monthly', priority: 0.5 },
+  { url: `${siteUrl}/privacy`,       lastModified: new Date('2026-01-15'), changeFrequency: 'yearly',  priority: 0.3 },
+  { url: `${siteUrl}/terms`,         lastModified: new Date('2026-01-15'), changeFrequency: 'yearly',  priority: 0.3 },
+  { url: `${siteUrl}/contact`,       lastModified: new Date('2026-03-31'), changeFrequency: 'yearly',  priority: 0.3 },
 ];
 
+/* ── 가이드 라우트 (폴더 자동 스캔) ── */
+function getGuideRoutes(): MetadataRoute.Sitemap {
+  const guideDir = path.join(process.cwd(), 'app', 'guide');
+  if (!fs.existsSync(guideDir)) return [];
+
+  const entries = fs.readdirSync(guideDir, { withFileTypes: true });
+  const slugs = entries
+    .filter((e) => e.isDirectory() && fs.existsSync(path.join(guideDir, e.name, 'page.tsx')))
+    .map((e) => e.name);
+
+  const guideIndex: MetadataRoute.Sitemap = [
+    { url: `${siteUrl}/guide`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+  ];
+
+  const guidePages: MetadataRoute.Sitemap = slugs.map((slug) => {
+    const pagePath = path.join(guideDir, slug, 'page.tsx');
+    const stat = fs.statSync(pagePath);
+    return {
+      url: `${siteUrl}/guide/${slug}`,
+      lastModified: stat.mtime,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    };
+  });
+
+  return [...guideIndex, ...guidePages];
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((route) => ({
-    url: `${siteUrl}${route.path}`,
-    lastModified: new Date(route.lastModified),
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
+  return [...staticRoutes, ...getGuideRoutes()];
 }

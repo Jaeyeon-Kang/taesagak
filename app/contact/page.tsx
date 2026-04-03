@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: '문의하기 — 퇴사각',
+  title: '문의하기',
   description: '계산 오류 제보, 기능 제안, 기타 문의를 남겨주세요.',
   path: '/contact',
   keywords: ['퇴사각 문의', '계산 오류 제보', '기능 제안'],
