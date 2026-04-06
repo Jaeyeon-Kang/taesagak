@@ -6,7 +6,7 @@ import JsonLd, { breadcrumbJsonLd } from '@/components/JsonLd';
 export const metadata: Metadata = buildMetadata({
   title: '퇴사·근로 가이드 모음',
   description:
-    '퇴사 전 체크리스트, 퇴직금 상여금 반영법, 주휴수당 조건, 급여명세서 확인법까지. 근로자가 놓치기 쉬운 돈과 권리를 정리한 가이드 모음입니다.',
+    '퇴사 전 체크리스트, 퇴직금, 주휴수당, 4대보험, 근로소득세, 수습기간, 알바 권리, 근로계약 유형까지. 근로자가 놓치기 쉬운 돈과 권리를 정리한 가이드 모음입니다.',
   path: '/guide',
   keywords: [
     '퇴사 가이드',
@@ -57,6 +57,31 @@ const guides = [
     href: '/guide/severance-deadline',
     title: '퇴직금 14일 지급 의무와 미지급 대응',
     description: '14일 지급 원칙, 지연이자 계산법, 고용노동부 신고 절차를 단계별로 설명합니다.',
+  },
+  {
+    href: '/guide/4-insurance',
+    title: '4대보험 총정리',
+    description: '국민연금·건강보험·고용보험·산재보험의 2026년 요율, 부담 비율, 가입 의무, 퇴사 후 처리 방법을 정리했습니다.',
+  },
+  {
+    href: '/guide/income-tax',
+    title: '근로소득세 계산법',
+    description: '간이세액표 기준, 부양가족 수에 따른 세금 차이, 연말정산 기본 개념, 원천징수 비율 선택 가이드입니다.',
+  },
+  {
+    href: '/guide/probation',
+    title: '수습기간 급여와 권리',
+    description: '수습 감액 범위(최저임금 90%), 수습 중 해고 조건, 4대보험·연차 적용 여부를 정리했습니다.',
+  },
+  {
+    href: '/guide/part-time-rights',
+    title: '알바생 노동법 권리 총정리',
+    description: '최저임금, 주휴수당, 근로계약서, 부당해고·임금체불 신고 방법, 퇴직금 조건까지 정리했습니다.',
+  },
+  {
+    href: '/guide/contract-types',
+    title: '근로계약 유형별 차이',
+    description: '정규직·계약직·파견직·프리랜서의 4대보험, 퇴직금, 연차 적용 여부와 위장 프리랜서 판별법을 비교합니다.',
   },
 ];
 
