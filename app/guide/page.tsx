@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
 import JsonLd, { breadcrumbJsonLd } from '@/components/JsonLd';
+import { getAllGuides } from '@/lib/guides';
 
 export const metadata: Metadata = buildMetadata({
   title: '퇴사·근로 가이드 모음',
@@ -17,75 +18,9 @@ export const metadata: Metadata = buildMetadata({
   ],
 });
 
-const guides = [
-  {
-    href: '/guide/resignation',
-    title: '퇴사 전 체크리스트',
-    description: '퇴직금, 미지급 급여, 연차수당, 실업급여까지 놓치기 쉬운 돈과 서류를 한 번에 정리했습니다.',
-  },
-  {
-    href: '/guide/severance',
-    title: '퇴직금 상여금·연차수당 반영 방법',
-    description: '퇴직금 계산 시 상여금과 연차수당을 반영하는 방법, 평균임금 산정 방식을 설명합니다.',
-  },
-  {
-    href: '/guide/weekly-holiday',
-    title: '주휴수당 조건 총정리',
-    description: '주휴수당 지급 조건, 계산 방법, 급여명세서 확인법, 미지급 시 대응까지 정리했습니다.',
-  },
-  {
-    href: '/guide/payslip',
-    title: '급여명세서 체크 가이드',
-    description: '급여명세서에서 꼭 확인해야 할 항목, 이상한 공제 찾는 법, 최저임금 반영 확인 방법입니다.',
-  },
-  {
-    href: '/guide/annual-leave',
-    title: '연차 계산법 — 발생 기준과 수당 정산',
-    description: '1년 미만·이상 연차 발생 기준, 연차수당 계산법, 퇴사 시 미사용 연차 처리까지 정리했습니다.',
-  },
-  {
-    href: '/guide/unemployment-benefit',
-    title: '실업급여 조건과 금액 계산',
-    description: '수급 요건(180일, 비자발적 이직), 1일 지급액 계산법, 소정급여일수, 신청 절차를 안내합니다.',
-  },
-  {
-    href: '/guide/health-insurance-after-resignation',
-    title: '퇴직 후 건강보험 처리 방법',
-    description: '지역가입자 전환, 임의계속가입, 피부양자 등록 중 어느 것이 유리한지 비교합니다.',
-  },
-  {
-    href: '/guide/severance-deadline',
-    title: '퇴직금 14일 지급 의무와 미지급 대응',
-    description: '14일 지급 원칙, 지연이자 계산법, 고용노동부 신고 절차를 단계별로 설명합니다.',
-  },
-  {
-    href: '/guide/4-insurance',
-    title: '4대보험 총정리',
-    description: '국민연금·건강보험·고용보험·산재보험의 2026년 요율, 부담 비율, 가입 의무, 퇴사 후 처리 방법을 정리했습니다.',
-  },
-  {
-    href: '/guide/income-tax',
-    title: '근로소득세 계산법',
-    description: '간이세액표 기준, 부양가족 수에 따른 세금 차이, 연말정산 기본 개념, 원천징수 비율 선택 가이드입니다.',
-  },
-  {
-    href: '/guide/probation',
-    title: '수습기간 급여와 권리',
-    description: '수습 감액 범위(최저임금 90%), 수습 중 해고 조건, 4대보험·연차 적용 여부를 정리했습니다.',
-  },
-  {
-    href: '/guide/part-time-rights',
-    title: '알바생 노동법 권리 총정리',
-    description: '최저임금, 주휴수당, 근로계약서, 부당해고·임금체불 신고 방법, 퇴직금 조건까지 정리했습니다.',
-  },
-  {
-    href: '/guide/contract-types',
-    title: '근로계약 유형별 차이',
-    description: '정규직·계약직·파견직·프리랜서의 4대보험, 퇴직금, 연차 적용 여부와 위장 프리랜서 판별법을 비교합니다.',
-  },
-];
-
 export default function GuidePage() {
+  const guides = getAllGuides();
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: '홈', path: '/' }, { name: '가이드', path: '/guide' }])} />
@@ -100,7 +35,7 @@ export default function GuidePage() {
 
           <div className="feature-grid">
             {guides.map((g) => (
-              <Link key={g.href} className="value-card" href={g.href} style={{ textDecoration: 'none' }}>
+              <Link key={g.slug} className="value-card" href={`/guide/${g.slug}`} style={{ textDecoration: 'none' }}>
                 <h2 style={{ fontSize: '1.1rem' }}>{g.title}</h2>
                 <p>{g.description}</p>
               </Link>

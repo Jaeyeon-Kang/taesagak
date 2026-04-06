@@ -617,7 +617,7 @@ a.stat:hover::after {
   overflow: hidden;
 }
 
-/* metric-card top accent handled by sketchy ::before */
+/* metric-card */
 
 .metric-card__head {
   margin-bottom: 0;
@@ -1453,102 +1453,52 @@ hr.divider {
   .pill { white-space: normal; }
 }
 
-/* ── 손그림 border ────────────────────────────── */
+/* ── border ───────────────────────────────────── */
+
+/* 큰 컨테이너 */
 .panel,
+.glass-card,
+.page-card,
+.status-banner {
+  border: 2px solid var(--text);
+  border-radius: var(--radius-md, 8px);
+}
+
+/* 카드 */
 .metric-card,
 .formula-card,
 .timeline__item,
 .value-card,
 .link-card,
-.page-card,
-.status-banner,
-.glass-card,
 .mini-card,
 .stat,
-.radar-item,
-.fieldset,
+.radar-item {
+  border: 1.5px solid var(--text);
+  border-radius: var(--radius-md, 8px);
+}
+
+/* 작은 요소 */
 .choice-button,
 .checkbox,
 .button,
 button.primary-button,
 button.secondary-button,
 button.ghost-button,
-a.button,
-.pill {
-  position: relative;
-  border-color: transparent !important;
-}
-
-/* 큰 컨테이너: 2px */
-.panel::before,
-.glass-card::before,
-.page-card::before,
-.status-banner::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border: 2px solid var(--text);
-  border-radius: 2px;
-  filter: url(#sketchy);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 카드: 1.5px */
-.metric-card::before,
-.formula-card::before,
-.timeline__item::before,
-.value-card::before,
-.link-card::before,
-.mini-card::before,
-.stat::before,
-.radar-item::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border: 1.5px solid var(--text);
-  border-radius: 2px;
-  filter: url(#sketchy);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 작은 요소: 1px */
-.choice-button::before,
-.checkbox::before,
-.button::before,
-button.primary-button::before,
-button.secondary-button::before,
-button.ghost-button::before,
-a.button::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
+a.button {
   border: 1.2px solid var(--text);
-  border-radius: 2px;
-  filter: url(#sketchy);
-  pointer-events: none;
-  z-index: 1;
+  border-radius: var(--radius-md, 8px);
 }
 
-.pill::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
+.pill {
   border: 1px solid var(--text-2);
-  border-radius: 2px;
-  filter: url(#sketchy);
-  pointer-events: none;
-  z-index: 1;
+  border-radius: 999px;
 }
 
 .field input,
 .field select,
 .field textarea {
-  position: relative;
   border: 1.5px solid var(--text);
-  border-radius: 2px;
-  filter: url(#sketchy);
+  border-radius: var(--radius-md, 8px);
 }
 
 /* ── 스크롤 등장 애니메이션 ─────────────────── */
@@ -1570,6 +1520,20 @@ a.button::before {
     transition: none;
   }
 }
+
+/* ── 가이드 아티클 ─────────────────────────── */
+.guide-article { max-width: 720px; margin: 0 auto; padding: 0 var(--space-4); }
+.guide-article > * + * { margin-top: var(--space-5); }
+.guide-article p { line-height: 1.85; color: var(--text-1, #334155); }
+.guide-article h2 { font-size: 1.35rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--border, #e2e8f0); }
+.guide-article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.6rem; }
+.guide-article strong { font-weight: 600; color: var(--text-0, #0f172a); }
+.guide-article blockquote { margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 3px solid var(--brand, #E8573D); background: var(--surface-1, #f8fafc); border-radius: var(--radius-md, 8px); }
+.guide-article blockquote p { margin: 0; }
+.guide-article .panel { margin-top: 1.5rem; }
+.guide-article .value-grid { margin-top: 1.5rem; }
+.guide-article .plain-list { line-height: 1.85; }
+.guide-article .plain-list li + li { margin-top: 0.35rem; }
 
 /* ── 인쇄용 ───────────────────────────────── */
 @media print {

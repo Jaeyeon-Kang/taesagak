@@ -38,12 +38,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="skip-link">본문 바로가기</a>
         <GoogleAnalytics />
         <AdSenseHead />
-        <svg width="0" height="0" aria-hidden="true" style={{ position: 'absolute' }}>
-          <filter id="sketchy" filterUnits="userSpaceOnUse">
-            <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="3" seed="2" result="n" />
-            <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </svg>
         <JsonLd data={organizationJsonLd} />
         <KakaoInit />
         <Header />
