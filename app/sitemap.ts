@@ -50,6 +50,34 @@ function getGuideRoutes(): MetadataRoute.Sitemap {
   return [...guideIndex, ...guidePages];
 }
 
+/* ── 블로그 라우트 (content/blog MDX 스캔) ── */
+function getBlogRoutes(): MetadataRoute.Sitemap {
+  const blogDir = path.join(process.cwd(), 'content', 'blog');
+  if (!fs.existsSync(blogDir)) return [];
+
+  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith('.mdx'));
+  if (files.length === 0) return [];
+
+  const blogIndex: MetadataRoute.Sitemap = [
+    { url: `${siteUrl}/blog/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
+  ];
+
+  const blogPages: MetadataRoute.Sitemap = files.map((file) => {
+    const slug = file.replace(/\.mdx$/, '');
+    const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8');
+    const { data } = matter(raw);
+    const modified = data.dateModified || data.datePublished || '2026-04-10';
+    return {
+      url: `${siteUrl}/blog/${slug}/`,
+      lastModified: new Date(modified),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    };
+  });
+
+  return [...blogIndex, ...blogPages];
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [...staticRoutes, ...getGuideRoutes()];
+  return [...staticRoutes, ...getGuideRoutes(), ...getBlogRoutes()];
 }
