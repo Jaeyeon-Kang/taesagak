@@ -5,6 +5,8 @@ import {
   currency,
   buildShareText,
   computeMonthlyHours,
+  fmtMoney,
+  parseMoney,
   type CalculatorInput,
   type OverviewResult,
 } from '@/lib/calculators';
@@ -232,7 +234,7 @@ export default function CalculatorPage() {
   };
 
   const monthlySalaryLabel = salaryType === 'yearly' ? '세전 연봉' : '세전 월급';
-  const monthlySalaryPlaceholder = salaryType === 'yearly' ? '예: 33600000' : '예: 2800000';
+  const monthlySalaryPlaceholder = salaryType === 'yearly' ? '예: 33,600,000' : '예: 2,800,000';
 
   const renderRadar = () => {
     if (!results) return null;
@@ -658,12 +660,11 @@ export default function CalculatorPage() {
                           <input
                             id="hourlyWage"
                             name="hourlyWage"
-                            type="number"
-                            min="0"
-                            step="10"
-                            placeholder="예: 11000"
-                            value={hourlyWage}
-                            onChange={(e) => setHourlyWage(e.target.value)}
+                            type="text"
+                            inputMode="numeric"
+                            placeholder="예: 11,000"
+                            value={fmtMoney(hourlyWage)}
+                            onChange={(e) => setHourlyWage(parseMoney(e.target.value))}
                           />
                           <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                             근로계약서 또는 급여명세서에서 확인할 수 있습니다.
@@ -676,12 +677,11 @@ export default function CalculatorPage() {
                           <input
                             id="monthlySalary"
                             name="monthlySalary"
-                            type="number"
-                            min="0"
-                            step="1000"
+                            type="text"
+                            inputMode="numeric"
                             placeholder={monthlySalaryPlaceholder}
-                            value={monthlySalary}
-                            onChange={(e) => setMonthlySalary(e.target.value)}
+                            value={fmtMoney(monthlySalary)}
+                            onChange={(e) => setMonthlySalary(parseMoney(e.target.value))}
                           />
                           <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                             급여명세서의 세전 총액 기준입니다.
@@ -745,12 +745,11 @@ export default function CalculatorPage() {
                         <input
                           id="last3MonthsWageTotal"
                           name="last3MonthsWageTotal"
-                          type="number"
-                          min="0"
-                          step="1000"
-                          placeholder="예: 8400000"
-                          value={last3MonthsWageTotal}
-                          onChange={(e) => setLast3MonthsWageTotal(e.target.value)}
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="예: 8,400,000"
+                          value={fmtMoney(last3MonthsWageTotal)}
+                          onChange={(e) => setLast3MonthsWageTotal(parseMoney(e.target.value))}
                         />
                         <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                           최근 3개월치 급여명세서의 세전 총액을 합산하세요.
@@ -761,12 +760,11 @@ export default function CalculatorPage() {
                         <input
                           id="annualBonus"
                           name="annualBonus"
-                          type="number"
-                          min="0"
-                          step="1000"
-                          placeholder="예: 2000000"
-                          value={annualBonus}
-                          onChange={(e) => setAnnualBonus(e.target.value)}
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="예: 2,000,000"
+                          value={fmtMoney(annualBonus)}
+                          onChange={(e) => setAnnualBonus(parseMoney(e.target.value))}
                         />
                       </div>
                       <div className="field">
@@ -774,12 +772,11 @@ export default function CalculatorPage() {
                         <input
                           id="annualLeavePayout"
                           name="annualLeavePayout"
-                          type="number"
-                          min="0"
-                          step="1000"
-                          placeholder="예: 600000"
-                          value={annualLeavePayout}
-                          onChange={(e) => setAnnualLeavePayout(e.target.value)}
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="예: 600,000"
+                          value={fmtMoney(annualLeavePayout)}
+                          onChange={(e) => setAnnualLeavePayout(parseMoney(e.target.value))}
                         />
                       </div>
                       <div className="field">
@@ -787,12 +784,11 @@ export default function CalculatorPage() {
                         <input
                           id="ordinaryHourlyWage"
                           name="ordinaryHourlyWage"
-                          type="number"
-                          min="0"
-                          step="10"
-                          placeholder="예: 13000"
-                          value={ordinaryHourlyWage}
-                          onChange={(e) => setOrdinaryHourlyWage(e.target.value)}
+                          type="text"
+                          inputMode="numeric"
+                          placeholder="예: 13,000"
+                          value={fmtMoney(ordinaryHourlyWage)}
+                          onChange={(e) => setOrdinaryHourlyWage(parseMoney(e.target.value))}
                         />
                         <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                           급여명세서의 통상임금 항목에서 확인할 수 있습니다.

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { calculateNetSalaryEstimate, currency, type NetSalaryResult } from '@/lib/calculators';
+import { calculateNetSalaryEstimate, currency, fmtMoney, parseMoney, type NetSalaryResult } from '@/lib/calculators';
 import ResultEngagement from '@/components/ResultEngagement';
 import ShareButtons from '@/components/ShareButtons';
 import AnimatedValue from '@/components/AnimatedValue';
@@ -13,7 +13,7 @@ export default function NetSalaryPage() {
   const [result, setResult] = useState<NetSalaryResult | null>(null);
 
   const salaryLabel = nsType === 'yearly' ? '세전 연봉' : '세전 월급';
-  const salaryPlaceholder = nsType === 'yearly' ? '예: 33600000' : '예: 2800000';
+  const salaryPlaceholder = nsType === 'yearly' ? '예: 33,600,000' : '예: 2,800,000';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +62,7 @@ export default function NetSalaryPage() {
               </div>
               <div className="field">
                 <label htmlFor="ns-salary">{salaryLabel}</label>
-                <input id="ns-salary" type="number" min="0" step="1000" placeholder={salaryPlaceholder} value={nsSalary} onChange={(e) => setNsSalary(e.target.value)} />
+                <input id="ns-salary" type="text" inputMode="numeric" placeholder={salaryPlaceholder} value={fmtMoney(nsSalary)} onChange={(e) => setNsSalary(parseMoney(e.target.value))} />
               </div>
               <div className="field">
                 <label htmlFor="ns-dependents">공제대상 가족 수 (본인 포함)</label>

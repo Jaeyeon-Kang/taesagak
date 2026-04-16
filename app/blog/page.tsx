@@ -27,22 +27,19 @@ export default function BlogListPage() {
             </p>
           </div>
 
-          <div className="feature-grid">
+          <div className="blog-grid">
             {posts.map((post) => (
               <Link
                 key={post.slug}
-                className="value-card"
+                className="blog-card"
                 href={`/blog/${post.slug}`}
-                style={{ textDecoration: 'none' }}
               >
-                <time
-                  dateTime={post.datePublished}
-                  style={{ fontSize: '0.8rem', color: 'var(--text-3, #94a3b8)' }}
-                >
+                <time className="blog-card__date" dateTime={post.datePublished}>
                   {post.datePublished}
                 </time>
-                <h2 style={{ fontSize: '1.1rem', marginTop: '0.25rem' }}>{post.title}</h2>
-                <p>{post.description}</p>
+                <h2 className="blog-card__title">{post.title}</h2>
+                <p className="blog-card__desc">{post.description}</p>
+                <span className="blog-card__arrow">읽어보기 →</span>
               </Link>
             ))}
           </div>

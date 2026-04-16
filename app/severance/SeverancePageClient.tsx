@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { calculateSeverance, currency, type SeveranceResult } from '@/lib/calculators';
+import { calculateSeverance, currency, fmtMoney, parseMoney, type SeveranceResult } from '@/lib/calculators';
 import ResultEngagement from '@/components/ResultEngagement';
 import ShareButtons from '@/components/ShareButtons';
 import AnimatedValue from '@/components/AnimatedValue';
@@ -69,22 +69,22 @@ export default function SeverancePage() {
               </div>
               <div className="field">
                 <label htmlFor="sv-last3">최근 3개월 급여 총액</label>
-                <input id="sv-last3" type="number" min="0" step="1000" placeholder="예: 8400000" value={svLast3} onChange={(e) => setSvLast3(e.target.value)} />
+                <input id="sv-last3" type="text" inputMode="numeric" placeholder="예: 8,400,000" value={fmtMoney(svLast3)} onChange={(e) => setSvLast3(parseMoney(e.target.value))} />
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                   최근 3개월치 급여명세서의 세전 총액을 합산하세요.
                 </p>
               </div>
               <div className="field">
                 <label htmlFor="sv-bonus">연간 상여금 (선택)</label>
-                <input id="sv-bonus" type="number" min="0" step="1000" placeholder="예: 2000000" value={svBonus} onChange={(e) => setSvBonus(e.target.value)} />
+                <input id="sv-bonus" type="text" inputMode="numeric" placeholder="예: 2,000,000" value={fmtMoney(svBonus)} onChange={(e) => setSvBonus(parseMoney(e.target.value))} />
               </div>
               <div className="field">
                 <label htmlFor="sv-leave">연간 연차수당 (선택)</label>
-                <input id="sv-leave" type="number" min="0" step="1000" placeholder="예: 600000" value={svLeave} onChange={(e) => setSvLeave(e.target.value)} />
+                <input id="sv-leave" type="text" inputMode="numeric" placeholder="예: 600,000" value={fmtMoney(svLeave)} onChange={(e) => setSvLeave(parseMoney(e.target.value))} />
               </div>
               <div className="field">
                 <label htmlFor="sv-ordinary">통상시급 (선택)</label>
-                <input id="sv-ordinary" type="number" min="0" step="10" placeholder="예: 13000" value={svOrdinary} onChange={(e) => setSvOrdinary(e.target.value)} />
+                <input id="sv-ordinary" type="text" inputMode="numeric" placeholder="예: 13,000" value={fmtMoney(svOrdinary)} onChange={(e) => setSvOrdinary(parseMoney(e.target.value))} />
               </div>
             </div>
             <div className="action-row" style={{ marginTop: '1rem' }}>

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { calculateWeeklyHolidayPay, computeMonthlyHours, currency, type WeeklyHolidayResult } from '@/lib/calculators';
+import { calculateWeeklyHolidayPay, computeMonthlyHours, currency, fmtMoney, parseMoney, type WeeklyHolidayResult } from '@/lib/calculators';
 import ResultEngagement from '@/components/ResultEngagement';
 import ShareButtons from '@/components/ShareButtons';
 import AnimatedValue from '@/components/AnimatedValue';
@@ -74,12 +74,11 @@ export default function WeeklyHolidayPage() {
                   <label htmlFor="wh-hourly">시급</label>
                   <input
                     id="wh-hourly"
-                    type="number"
-                    min="0"
-                    step="10"
-                    placeholder="예: 10320"
-                    value={hourlyWage}
-                    onChange={(e) => setHourlyWage(e.target.value)}
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="예: 10,320"
+                    value={fmtMoney(hourlyWage)}
+                    onChange={(e) => setHourlyWage(parseMoney(e.target.value))}
                   />
                   <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                     근로계약서 또는 급여명세서에서 확인할 수 있습니다.
@@ -90,12 +89,11 @@ export default function WeeklyHolidayPage() {
                   <label htmlFor="wh-monthly">세전 월급</label>
                   <input
                     id="wh-monthly"
-                    type="number"
-                    min="0"
-                    step="10000"
-                    placeholder="예: 2800000"
-                    value={monthlySalary}
-                    onChange={(e) => setMonthlySalary(e.target.value)}
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="예: 2,800,000"
+                    value={fmtMoney(monthlySalary)}
+                    onChange={(e) => setMonthlySalary(parseMoney(e.target.value))}
                   />
                   <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                     급여명세서의 &lsquo;지급 총액&rsquo;에서 확인할 수 있습니다. 시급은 자동으로 역산됩니다.

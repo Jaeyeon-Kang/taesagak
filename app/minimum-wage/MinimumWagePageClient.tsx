@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { calculateMinimumWage, currency, type MinimumWageResult } from '@/lib/calculators';
+import { calculateMinimumWage, currency, fmtMoney, parseMoney, type MinimumWageResult } from '@/lib/calculators';
 import { RULESET_2026 } from '@/lib/rules';
 import ResultEngagement from '@/components/ResultEngagement';
 import ShareButtons from '@/components/ShareButtons';
@@ -40,14 +40,14 @@ export default function MinimumWagePage() {
             <div className="form-grid">
               <div className="field">
                 <label htmlFor="mw-hourly">시급</label>
-                <input id="mw-hourly" type="number" min="0" step="10" placeholder="예: 10000" value={mwHourly} onChange={(e) => setMwHourly(e.target.value)} />
+                <input id="mw-hourly" type="text" inputMode="numeric" placeholder="예: 10,000" value={fmtMoney(mwHourly)} onChange={(e) => setMwHourly(parseMoney(e.target.value))} />
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                   시급을 모르면 비워두세요. 월급으로 자동 역산합니다.
                 </p>
               </div>
               <div className="field">
                 <label htmlFor="mw-monthly">세전 월급</label>
-                <input id="mw-monthly" type="number" min="0" step="1000" placeholder="예: 2200000" value={mwMonthly} onChange={(e) => setMwMonthly(e.target.value)} />
+                <input id="mw-monthly" type="text" inputMode="numeric" placeholder="예: 2,200,000" value={fmtMoney(mwMonthly)} onChange={(e) => setMwMonthly(parseMoney(e.target.value))} />
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-3)', marginTop: '0.25rem' }}>
                   급여명세서의 세전 총액 기준입니다.
                 </p>

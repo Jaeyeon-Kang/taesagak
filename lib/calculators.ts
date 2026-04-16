@@ -140,6 +140,18 @@ export function currency(value: number | string): string {
   return new Intl.NumberFormat('ko-KR').format(round(value as number));
 }
 
+/** 입력 필드용: 숫자 문자열을 쉼표 포함 형태로 표시 */
+export function fmtMoney(v: string): string {
+  const n = v.replace(/\D/g, '');
+  if (!n) return '';
+  return Number(n).toLocaleString('ko-KR');
+}
+
+/** 입력 필드용: 쉼표 등 비숫자를 제거하여 순수 숫자 문자열로 변환 */
+export function parseMoney(v: string): string {
+  return v.replace(/\D/g, '');
+}
+
 export function percent(value: number | string | undefined, digits = 1): string {
   return `${(Number(value || 0) * 100).toFixed(digits)}%`;
 }
