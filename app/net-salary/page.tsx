@@ -72,6 +72,31 @@ export default function NetSalaryPage() {
             ))}
           </div>
         </section>
+
+        <section className="section" style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>실수령액과 4대보험을 더 깊게 이해하기</h2>
+            <p>연봉 구간별 비교, 4대보험 요율 변화, 비과세 항목까지 한 번에 정리.</p>
+          </div>
+          <div className="value-grid">
+            <a className="value-card" href="/blog/annual-salary-net-pay-table/" style={{ textDecoration: 'none' }}>
+              <h3>연봉별 실수령액 한눈에 (3000~1억)</h3>
+              <p>구간별 월 실수령액과 비과세 항목 활용법까지 표로 정리했습니다.</p>
+            </a>
+            <a className="value-card" href="/blog/4-major-insurance-rates-2026/" style={{ textDecoration: 'none' }}>
+              <h3>2026년 4대보험 요율 총정리</h3>
+              <p>국민연금·건강보험·장기요양·고용보험·산재보험을 본인/회사 기준으로 정리.</p>
+            </a>
+            <a className="value-card" href="/blog/2026-minimum-wage-increase/" style={{ textDecoration: 'none' }}>
+              <h3>2026년 최저임금 인상 — 시급·월급·주휴수당 변화</h3>
+              <p>10,030원 기준으로 시급·월급·연봉 환산까지 실제 숫자로 정리.</p>
+            </a>
+            <a className="value-card" href="/blog/health-insurance-after-resignation/" style={{ textDecoration: 'none' }}>
+              <h3>퇴사 후 건강보험 — 임의계속가입 가이드</h3>
+              <p>지역가입자 전환 시 보험료 급등 막는 방법, 신청 기한 2개월.</p>
+            </a>
+          </div>
+        </section>
       </div>
     </>
   );

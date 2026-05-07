@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { buildMetadata } from '@/lib/seo';
 import ScrollReveal from '@/components/ScrollReveal';
+import { getAllBlogPosts } from '@/lib/blog';
 
 export const metadata: Metadata = buildMetadata({
   title: '퇴직금 계산기 · 실수령액 계산기 · 주휴수당 계산기',
@@ -20,6 +21,8 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function HomePage() {
+  const latestPosts = getAllBlogPosts().slice(0, 4);
+
   return (
     <main id="main-content" className="page-shell">
       <section className="hero">
@@ -115,6 +118,36 @@ export default function HomePage() {
             <Link className="value-card" href="/sources" style={{ textDecoration: 'none' }}>
               <h3>계산 근거와 공식 출처 한 번에 보기</h3>
               <p>고용노동부, 국세청, 국민연금공단 자료를 기준으로 계산식을 정리했습니다.</p>
+            </Link>
+          </div>
+        </section>
+        </ScrollReveal>
+
+        <ScrollReveal>
+        <section className="section">
+          <div className="section__header">
+            <h2>최신 블로그 글</h2>
+            <p>퇴사·근로 관련 제도 변경, 세금, 실업급여 등 실무에 바로 쓰는 글을 정리합니다.</p>
+          </div>
+          <div className="value-grid">
+            {latestPosts.map((post) => (
+              <Link
+                key={post.slug}
+                className="value-card"
+                href={`/blog/${post.slug}`}
+                style={{ textDecoration: 'none' }}
+              >
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-3, #94a3b8)' }}>
+                  {post.datePublished}
+                </span>
+                <h3 style={{ marginTop: '0.5rem' }}>{post.title}</h3>
+                <p>{post.description}</p>
+              </Link>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Link className="button button--secondary" href="/blog">
+              블로그 전체 글 보기 →
             </Link>
           </div>
         </section>

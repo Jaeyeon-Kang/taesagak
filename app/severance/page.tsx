@@ -68,6 +68,31 @@ export default function SeverancePage() {
             ))}
           </div>
         </section>
+
+        <section className="section" style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>함께 읽으면 좋은 글</h2>
+            <p>퇴직금 계산 후 실제 정산 과정에서 챙겨야 할 내용을 정리했습니다.</p>
+          </div>
+          <div className="value-grid">
+            <a className="value-card" href="/blog/severance-pay-tax/" style={{ textDecoration: 'none' }}>
+              <h3>퇴직금에 세금이 붙나? — 퇴직소득세 계산법</h3>
+              <p>근속연수공제, 환산급여, 세율 적용까지 5단계 계산 과정을 사례로 정리했습니다.</p>
+            </a>
+            <a className="value-card" href="/blog/irp-pension-account/" style={{ textDecoration: 'none' }}>
+              <h3>IRP 계좌로 받기 — 세금 30~40% 절감</h3>
+              <p>IRP로 이체하면 퇴직소득세를 미루고 연금 수령 시 60~70%만 부담합니다.</p>
+            </a>
+            <a className="value-card" href="/blog/unused-annual-leave-payment/" style={{ textDecoration: 'none' }}>
+              <h3>미사용 연차수당 정산 가이드</h3>
+              <p>퇴사 시 남은 연차는 통상임금 100%로 정산. 회계연도/입사일 기준 차이까지.</p>
+            </a>
+            <a className="value-card" href="/blog/resignation-checklist-2026/" style={{ textDecoration: 'none' }}>
+              <h3>퇴사 전 체크리스트 12가지</h3>
+              <p>통보, 인수인계, 4대보험, 연차, 퇴직금까지 시간 순서로 정리.</p>
+            </a>
+          </div>
+        </section>
       </div>
     </>
   );

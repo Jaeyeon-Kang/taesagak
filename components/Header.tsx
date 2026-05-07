@@ -23,7 +23,7 @@ export default function Header() {
         <Link className="brand" href="/">
           <img
             className="brand__mark"
-            src="/icons/logo-icon.svg"
+            src="/icons/logo-icon.png"
             alt="퇴사각 로고"
             width={40}
             height={40}

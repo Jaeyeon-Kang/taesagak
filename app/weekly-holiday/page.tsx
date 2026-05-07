@@ -68,6 +68,30 @@ export default function WeeklyHolidayPage() {
             ))}
           </div>
         </section>
+
+        <section className="section" style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>주휴수당과 함께 알아야 할 것</h2>
+          </div>
+          <div className="value-grid">
+            <a className="value-card" href="/blog/weekly-holiday-allowance-guide/" style={{ textDecoration: 'none' }}>
+              <h3>주휴수당 완벽 가이드</h3>
+              <p>받을 수 있는 조건과 시급제·월급제·아르바이트별 적용 방식.</p>
+            </a>
+            <a className="value-card" href="/blog/2026-minimum-wage-increase/" style={{ textDecoration: 'none' }}>
+              <h3>2026년 최저임금 인상</h3>
+              <p>10,030원 기준 시급·월급·주휴수당 변화 총정리.</p>
+            </a>
+            <a className="value-card" href="/blog/unused-annual-leave-payment/" style={{ textDecoration: 'none' }}>
+              <h3>미사용 연차수당 정산</h3>
+              <p>퇴사 시 연차수당 계산법과 회사가 안 줄 때 대응법.</p>
+            </a>
+            <a className="value-card" href="/blog/4-major-insurance-rates-2026/" style={{ textDecoration: 'none' }}>
+              <h3>2026년 4대보험 요율</h3>
+              <p>본인·회사·자영업자별 부담 비율 정리.</p>
+            </a>
+          </div>
+        </section>
       </div>
     </>
   );

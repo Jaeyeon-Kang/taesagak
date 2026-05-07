@@ -68,6 +68,30 @@ export default function MinimumWagePage() {
             ))}
           </div>
         </section>
+
+        <section className="section" style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <div className="section__header">
+            <h2>최저임금과 관련된 가이드</h2>
+          </div>
+          <div className="value-grid">
+            <a className="value-card" href="/blog/2026-minimum-wage-increase/" style={{ textDecoration: 'none' }}>
+              <h3>2026년 최저임금 인상 총정리</h3>
+              <p>시급 10,030원 기준 시급·월급·주휴수당·연봉 환산까지.</p>
+            </a>
+            <a className="value-card" href="/blog/weekly-holiday-allowance-guide/" style={{ textDecoration: 'none' }}>
+              <h3>주휴수당 완벽 가이드</h3>
+              <p>주 15시간 이상 근무 시 받는 주휴수당, 시급제 별도 지급.</p>
+            </a>
+            <a className="value-card" href="/blog/annual-salary-net-pay-table/" style={{ textDecoration: 'none' }}>
+              <h3>연봉별 실수령액 한눈에</h3>
+              <p>3000~1억 구간별 월 실수령액 비교표.</p>
+            </a>
+            <a className="value-card" href="/blog/4-major-insurance-rates-2026/" style={{ textDecoration: 'none' }}>
+              <h3>2026년 4대보험 요율</h3>
+              <p>월급에서 빠지는 4대보험 부담 비율 정리.</p>
+            </a>
+          </div>
+        </section>
       </div>
     </>
   );
